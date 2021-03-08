@@ -1,4 +1,4 @@
-# FreeSci
+# FreeGearbox
 Clean-room reimplementation of Gunman Chronicles in QuakeC.
 
 ![Preview 1](img/preview1.jpg)
@@ -9,15 +9,15 @@ Clean-room reimplementation of Gunman Chronicles in QuakeC.
 ## Building
 Clone the repository into the Nuclide-SDK:
 
-> git clone REPOURL rewolf
+> git clone REPOURL gearbox
 
 then either run Nuclide's ./build_game.sh shell script, or issue 'make' inside
-./rewolf/src!
+./gearbox/src!
 
 Obviously make sure that Nuclide has fteqw and fteqcc set-up for building.
 
 ## Community
-Join us on #halflife or #gunman via irc.frag-net.com and chat.
+Join us on #halflife or #gearbox via irc.frag-net.com and chat.
 
 ## License
 ISC License
