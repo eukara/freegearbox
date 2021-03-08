@@ -1,5 +1,5 @@
 # FreeGearbox
-Clean-room reimplementation of Gunman Chronicles in QuakeC.
+Clean-room reimplementation of Opposing Force in QuakeC.
 
 ![Preview 1](img/preview1.jpg)
 ![Preview 2](img/preview2.jpg)
