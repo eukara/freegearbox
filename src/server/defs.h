@@ -17,3 +17,5 @@
 #include "../../../valve/src/server/gamerules.h"
 #include "gamerules_ctf.h"
 #include "../../../valve/src/server/items.h"
+#include "../../../valve/src/server/flashlight.h"
+#include "../../../valve/src/server/player.h"

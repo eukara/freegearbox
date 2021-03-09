@@ -17,16 +17,7 @@
 void
 Game_Input(void)
 {
-	if (input_buttons & INPUT_BUTTON0) {
-		Weapons_Primary();
-	} else if (input_buttons & INPUT_BUTTON4) {
-		Weapons_Reload();
-	} else if (input_buttons & INPUT_BUTTON3) {
-		Weapons_Secondary();
-	} else {
-		Weapons_Release();
-	}
-
+#ifdef SERVER
 	if (input_buttons & INPUT_BUTTON5) {
 		Player_UseDown(); 
 	} else {
@@ -68,16 +59,18 @@ Game_Input(void)
 			Weapons_AddItem(pl, WEAPON_SNIPERRIFLE, -1);
 			Weapons_AddItem(pl, WEAPON_DISPLACER, -1);
 		}
-
-		if (self.impulse == 102) {
-			// Respawn all the entities
-			for (entity a = world; (a = findfloat(a, g::identity, 1));) {
-				CBaseEntity caw = (CBaseEntity)a;
-				caw.Respawn();
-			}
-			bprint(PRINT_HIGH, "Respawning all map entities...\n");
-		}
 	}
 
 	self.impulse = 0;
+#endif
+
+	if (input_buttons & INPUT_BUTTON0) {
+		Weapons_Primary();
+	} else if (input_buttons & INPUT_BUTTON4) {
+		Weapons_Reload();
+	} else if (input_buttons & INPUT_BUTTON3) {
+		Weapons_Secondary();
+	} else {
+		Weapons_Release();
+	}
 }
