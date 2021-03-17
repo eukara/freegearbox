@@ -20,6 +20,7 @@
 ../../../src/gs-entbase/shared.src
 ../shared/include.src
 
+../../../base/src/client/draw.qc
 init.qc
 ../../../valve/src/client/player.qc
 ../../../valve/src/client/entities.qc
