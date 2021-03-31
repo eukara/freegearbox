@@ -406,7 +406,7 @@ w_sporelauncher_crosshair(void)
 		[200/256,48/128],
 		[24/256, 24/128],
 		g_hud_color,
-		pSeat->m_flAmmo2Alpha,
+		pSeatLocal->m_flAmmo2Alpha,
 		DRAWFLAG_ADDITIVE
 	);
 #endif

@@ -263,7 +263,7 @@ w_sniperrifle_crosshair(void)
 	HUD_DrawAmmo2();
 
 	vector aicon_pos = g_hudmins + [g_hudres[0] - 48, g_hudres[1] - 42];
-	drawsubpic(aicon_pos, [24,24], "sprites/640hud7.spr_0.tga", [24/256,72/128], [24/256, 24/128], g_hud_color, pSeat->m_flAmmo2Alpha, DRAWFLAG_ADDITIVE);
+	drawsubpic(aicon_pos, [24,24], "sprites/640hud7.spr_0.tga", [24/256,72/128], [24/256, 24/128], g_hud_color, pSeatLocal->m_flAmmo2Alpha, DRAWFLAG_ADDITIVE);
 #endif
 }
 

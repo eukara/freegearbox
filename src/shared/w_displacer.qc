@@ -303,7 +303,7 @@ w_displacer_hud(void)
 		[0,96/128], // was [24/256,72/128]... which makes 0 sense
 		[24/256, 24/128],
 		g_hud_color,
-		pSeat->m_flAmmo2Alpha,
+		pSeatLocal->m_flAmmo2Alpha,
 		DRAWFLAG_ADDITIVE
 	);
 
