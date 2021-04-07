@@ -116,7 +116,6 @@ w_knife_primary(void)
 	}
 	pl.w_idle_next = 2.5f;
 
-#ifdef CLIENT
 	r = (float)input_sequence % 3;
 	switch (r) {
 	case 0:
@@ -129,13 +128,14 @@ w_knife_primary(void)
 		anim = trace_fraction >= 1 ? KNIFE_ATTACK3MISS:KNIFE_ATTACK3HIT;
 	}
 	Weapons_ViewAnimation(anim);
-#else
+
 	if (pl.flags & FL_CROUCHING) {
-		Animation_PlayerTopTemp(ANIM_SHOOTCROWBAR, 0.5f);
+		Animation_PlayerTop(pl, ANIM_SHOOTCROWBAR, 0.5f);
 	} else {
-		Animation_PlayerTopTemp(ANIM_CR_SHOOTCROWBAR, 0.42f);
+		Animation_PlayerTop(pl, ANIM_CR_SHOOTCROWBAR, 0.42f);
 	}
 
+#ifdef SERVER
 	r = (float)input_sequence % 3;
 	switch (r) {
 	case 0:

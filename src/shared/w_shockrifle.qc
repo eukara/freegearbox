@@ -185,7 +185,7 @@ w_shockrifle_primary(void)
 
 #ifdef SERVER
 	w_shockrifle_shoothornet();
-	Weapons_PlaySound(pl, CHAN_WEAPON, "weapons/shock_fire.wav", 1, ATTN_NORM);
+	sound(pl, CHAN_WEAPON, "weapons/shock_fire.wav", 1, ATTN_NORM);
 	
 	pl.ammo_shock--;
 	Weapons_UpdateAmmo(pl, -1, pl.ammo_shock, -1);

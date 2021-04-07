@@ -21,7 +21,6 @@ var int autocvar_sv_playerkeepalive = TRUE;
 void
 HLGameRules::PlayerPostFrame(base_player pp)
 {
-	Animation_PlayerUpdate();
 }
 
 void

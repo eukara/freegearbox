@@ -120,7 +120,7 @@ w_displacer_teleport(entity target)
 #ifdef SERVER
 	player pl = (player)target;
 	/* TODO, 250 damage */
-	Weapons_PlaySound(pl, CHAN_WEAPON, "weapons/displacer_teleport.wav", 1, ATTN_NORM);
+	sound(pl, CHAN_WEAPON, "weapons/displacer_teleport.wav", 1, ATTN_NORM);
 	
 	/* FIXME: This will teleport upon your standard spawn positions
 	 * in other game modes, such as CTF (your team spawns), no clue
@@ -235,7 +235,7 @@ w_displacer_primary(void)
 #ifdef CLIENT
 	Weapons_ViewAnimation(DISP_SPINUP);
 #else
-	Weapons_PlaySound(pl, CHAN_WEAPON, "weapons/displacer_spin.wav", 1, ATTN_NORM);
+	sound(pl, CHAN_WEAPON, "weapons/displacer_spin.wav", 1, ATTN_NORM);
 #endif
 	pl.w_idle_next = pl.w_attack_next = 1.0f;
 }
@@ -264,7 +264,7 @@ w_displacer_secondary(void)
 #ifdef CLIENT
 	Weapons_ViewAnimation(DISP_SPINUP);
 #else
-	Weapons_PlaySound(pl, CHAN_WEAPON, "weapons/displacer_spin2.wav", 1, ATTN_NORM);
+	sound(pl, CHAN_WEAPON, "weapons/displacer_spin2.wav", 1, ATTN_NORM);
 #endif
 	pl.w_idle_next = pl.w_attack_next = 1.0f;
 }

@@ -131,7 +131,7 @@ w_sniperrifle_primary(void)
 	/* Actual firing */
 #ifdef SERVER
 	TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, 40, [0.00873, 0.00873], WEAPON_SNIPERRIFLE);
-	Weapons_PlaySound(pl, CHAN_WEAPON, "weapons/sniper_fire.wav", 1, ATTN_NORM);
+	sound(pl, CHAN_WEAPON, "weapons/sniper_fire.wav", 1, ATTN_NORM);
 
 	pl.sniper_mag--;
 	Weapons_UpdateAmmo(pl, pl.sniper_mag, pl.ammo_762, __NULL__);

@@ -124,7 +124,6 @@ w_pipewrench_primary(void)
 	}
 	pl.w_idle_next = 2.5f;
 
-#ifdef CLIENT
 	int r = (float)input_sequence % 3;
 	switch (r) {
 	case 0:
@@ -137,13 +136,14 @@ w_pipewrench_primary(void)
 		anim = trace_fraction >= 1 ? PIPE_ATTACK3MISS:PIPE_ATTACK3HIT;
 	}
 	Weapons_ViewAnimation(anim);
-#else
+
 	if (pl.flags & FL_CROUCHING) {
-		Animation_PlayerTopTemp(ANIM_SHOOTCROWBAR, 0.5f);
+		Animation_PlayerTop(pl, ANIM_SHOOTCROWBAR, 0.5f);
 	} else {
-		Animation_PlayerTopTemp(ANIM_CR_SHOOTCROWBAR, 0.42f);
+		Animation_PlayerTop(pl, ANIM_CR_SHOOTCROWBAR, 0.42f);
 	}
 
+#ifdef SERVER
 	sound(pl, CHAN_WEAPON, "weapons/pwrench_miss1.wav", 1, ATTN_NORM);
 
 	if (trace_fraction >= 1.0) {
@@ -252,7 +252,7 @@ w_pipewrench_release(void)
 			snd = "weapons/pwrench_big_hit1.wav";
 			break;
 		}
-		Weapons_PlaySound(pl, CHAN_WEAPON, snd, 1.0f, ATTN_NORM);
+		sound(pl, CHAN_WEAPON, snd, 1.0f, ATTN_NORM);
 #endif
 		pl.w_attack_next = 1.0f;
 		pl.w_idle_next = 10.0f;

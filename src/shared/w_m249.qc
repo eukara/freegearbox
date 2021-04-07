@@ -185,13 +185,13 @@ w_m249_primary(void)
 	int r = (float)input_sequence % 3;
 	switch (r) {
 	case 0:
-		Weapons_PlaySound(pl, CHAN_WEAPON, "weapons/saw_fire1.wav", 1, ATTN_NORM);
+		sound(pl, CHAN_WEAPON, "weapons/saw_fire1.wav", 1, ATTN_NORM);
 		break;
 	case 1:
-		Weapons_PlaySound(pl, CHAN_WEAPON, "weapons/saw_fire2.wav", 1, ATTN_NORM);
+		sound(pl, CHAN_WEAPON, "weapons/saw_fire2.wav", 1, ATTN_NORM);
 		break;
 	default:
-		Weapons_PlaySound(pl, CHAN_WEAPON, "weapons/saw_fire3.wav", 1, ATTN_NORM);
+		sound(pl, CHAN_WEAPON, "weapons/saw_fire3.wav", 1, ATTN_NORM);
 	}
 
 	pl.m249_mag--;
