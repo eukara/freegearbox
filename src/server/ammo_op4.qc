@@ -117,7 +117,8 @@ ammo_spore::Death(void)
 	nextthink = time + 10.0f;
 }
 
-void ammo_spore::Respawn(void)
+void
+ammo_spore::Respawn(void)
 {
 	frame = 1;
 	m_iBody = 2;

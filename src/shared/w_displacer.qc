@@ -100,18 +100,14 @@ w_displacer_pickup(int new, int startammo)
 void
 w_displacer_draw(void)
 {
-#ifdef CLIENT
 	Weapons_SetModel("models/v_displacer.mdl");
 	Weapons_ViewAnimation(DISP_DRAW);
-#endif
 }
 
 void
 w_displacer_holster(void)
 {
-#ifdef CLIENT
 	Weapons_ViewAnimation(DISP_HOLSTER);
-#endif
 }
 
 void
@@ -232,9 +228,9 @@ w_displacer_primary(void)
 
 	pl.mode_displacer = 1;
 
-#ifdef CLIENT
 	Weapons_ViewAnimation(DISP_SPINUP);
-#else
+
+#ifdef SERVER
 	sound(pl, CHAN_WEAPON, "weapons/displacer_spin.wav", 1, ATTN_NORM);
 #endif
 	pl.w_idle_next = pl.w_attack_next = 1.0f;
@@ -260,10 +256,9 @@ w_displacer_secondary(void)
 	}
 
 	pl.mode_displacer = 2;
-
-#ifdef CLIENT
 	Weapons_ViewAnimation(DISP_SPINUP);
-#else
+
+#ifdef SERVER
 	sound(pl, CHAN_WEAPON, "weapons/displacer_spin2.wav", 1, ATTN_NORM);
 #endif
 	pl.w_idle_next = pl.w_attack_next = 1.0f;

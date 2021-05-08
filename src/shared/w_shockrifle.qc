@@ -97,10 +97,6 @@ w_shockrifle_draw(void)
 {
 	Weapons_SetModel("models/v_shock.mdl");
 	Weapons_ViewAnimation(SHOCKRIFLE_DRAW);
-#ifdef SERVER
-	player pl = (player)self;
-	Weapons_UpdateAmmo(pl, -1, pl.ammo_shock, -1);
-#endif
 }
 
 void
@@ -159,7 +155,8 @@ w_shockrifle_release(void)
 		return;
 	}
 
-	if (random() < 0.5) {
+	int r = (float)input_sequence % 2;
+	if (r < 1) {
 		Weapons_ViewAnimation(SHOCKRIFLE_IDLE1);
 	} else {
 		Weapons_ViewAnimation(SHOCKRIFLE_IDLE2);
@@ -176,27 +173,23 @@ w_shockrifle_primary(void)
 		return;
 	}
 
-	/* Ammo check */
 	if (pl.ammo_shock <= 0) {
 		w_shockrifle_release();
 		return;
 	}
 
-
+	pl.ammo_shock--;
+	Weapons_ViewAnimation(SHOCKRIFLE_SHOOT);
+	
 #ifdef SERVER
 	w_shockrifle_shoothornet();
 	sound(pl, CHAN_WEAPON, "weapons/shock_fire.wav", 1, ATTN_NORM);
-	
-	pl.ammo_shock--;
-	Weapons_UpdateAmmo(pl, -1, pl.ammo_shock, -1);
 #else
 	Weapons_MakeVectors();
 	vector src = Weapons_GetCameraPos() + (v_forward * 16) + (v_up * -8);
 	pointparticles(PART_SHOCKPIECE, src, v_forward * 1000, 1);
-	pl.ammo_shock--;
 #endif
 
-	Weapons_ViewAnimation(SHOCKRIFLE_SHOOT);
 	pl.w_attack_next = 0.1f;
 	pl.w_idle_next = 0.5f;
 }

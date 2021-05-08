@@ -96,13 +96,8 @@ w_eagle_deathmsg(void)
 void
 w_eagle_draw(void)
 {
-#ifdef CLIENT
 	Weapons_SetModel("models/v_desert_eagle.mdl");
 	Weapons_ViewAnimation(EAGLE_DRAW);
-#else
-	player pl = (player)self;
-	Weapons_UpdateAmmo(pl, pl.eagle_mag, pl.ammo_357, -1);
-#endif
 }
 
 void
@@ -127,16 +122,9 @@ w_eagle_release(void)
 		return;
 	}
 
-	/* these idles don't support the 'empty' animation style */
-#ifdef CLIENT
 	if (pl.eagle_mag <= 0) {
 		return;
 	}
-#else
-	if (pl.eagle_mag <= 0) {
-		return;
-	}
-#endif
 
 	int r = (float)input_sequence % 4;
 	switch (r) {
@@ -166,16 +154,9 @@ w_eagle_primary(void)
 		return;
 	}
 
-	/* Ammo check */
-#ifdef CLIENT
 	if (pl.eagle_mag <= 0) {
 		return;
 	}
-#else
-	if (pl.eagle_mag <= 0) {
-		return;
-	}
-#endif
 
 	/* Actual firing */
 	if (pl.mode_eagle == 1) {
@@ -190,13 +171,7 @@ w_eagle_primary(void)
 		pl.w_attack_next = 0.2f;
 	}
 
-#ifdef SERVER
-	sound(pl, CHAN_WEAPON, "weapons/desert_eagle_fire.wav", 1, ATTN_NORM);
 	pl.eagle_mag--;
-	Weapons_UpdateAmmo(pl, pl.eagle_mag, pl.ammo_357, -1);
-#else
-	pl.eagle_mag--;
-	View_SetMuzzleflash(MUZZLE_SMALL);
 	Weapons_ViewPunchAngle([-10,0,0]);
 
 	if (pl.eagle_mag <= 0) {
@@ -204,6 +179,11 @@ w_eagle_primary(void)
 	} else {
 		Weapons_ViewAnimation(EAGLE_SHOOT);
 	}
+
+#ifdef SERVER
+	sound(pl, CHAN_WEAPON, "weapons/desert_eagle_fire.wav", 1, ATTN_NORM);
+#else
+	View_SetMuzzleflash(MUZZLE_SMALL);
 #endif
 }
 
@@ -235,37 +215,28 @@ void
 w_eagle_reload(void)
 {
 	player pl = (player)self;
+
 	if (pl.w_attack_next > 0.0) {
 		return;
 	}
 
 	/* Ammo check */
-#ifdef CLIENT
 	if (pl.eagle_mag >= 7) {
 		return;
 	}
 	if (pl.ammo_357 <= 0) {
 		return;
 	}
-#else
-	if (pl.eagle_mag >= 7) {
-		return;
-	}
-	if (pl.ammo_357 <= 0) {
-		return;
-	}
-#endif
 
-	/* Audio-Visual bit */
-#ifdef CLIENT
 	if (pl.eagle_mag <= 0) {
 		Weapons_ViewAnimation(EAGLE_RELOAD);
 	} else {
 		Weapons_ViewAnimation(EAGLE_RELOAD_NOSHOT);
 	}
-#else
+
+	/* Audio-Visual bit */
+#ifdef SERVER
 	Weapons_ReloadWeapon(pl, player::eagle_mag, player::ammo_357, 7);
-	Weapons_UpdateAmmo(pl, pl.eagle_mag, pl.ammo_357, -1);
 #endif
 
 	pl.w_attack_next = 1.64f;

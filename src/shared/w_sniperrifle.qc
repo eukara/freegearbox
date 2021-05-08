@@ -97,10 +97,6 @@ w_sniperrifle_draw(void)
 {
 	Weapons_SetModel("models/v_m40a1.mdl");
 	Weapons_ViewAnimation(SNIPER_DRAW);
-#ifdef SERVER
-	player pl = (player)self;
-	Weapons_UpdateAmmo(pl, pl.sniper_mag, pl.ammo_762, -1);
-#endif
 }
 
 void
@@ -113,31 +109,13 @@ void
 w_sniperrifle_primary(void)
 {
 	player pl = (player)self;
-	if (pl.w_attack_next > 0.0) {
-		return;
-	}
 
-	/* Ammo check */
-#ifdef CLIENT
-	if (pl.sniper_mag <= 0) {
+	if (pl.w_attack_next > 0.0)
 		return;
-	}
-#else
-	if (pl.sniper_mag <= 0) {
+	if (pl.sniper_mag <= 0)
 		return;
-	}
-#endif
-
-	/* Actual firing */
-#ifdef SERVER
-	TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, 40, [0.00873, 0.00873], WEAPON_SNIPERRIFLE);
-	sound(pl, CHAN_WEAPON, "weapons/sniper_fire.wav", 1, ATTN_NORM);
 
 	pl.sniper_mag--;
-	Weapons_UpdateAmmo(pl, pl.sniper_mag, pl.ammo_762, __NULL__);
-#else
-	pl.sniper_mag--;
-	View_SetMuzzleflash(MUZZLE_SMALL);
 	Weapons_ViewPunchAngle([-10,0,0]);
 
 	if (pl.sniper_mag) {
@@ -145,6 +123,12 @@ w_sniperrifle_primary(void)
 	} else {
 		Weapons_ViewAnimation(SNIPER_FIRE2);
 	}
+
+#ifdef SERVER
+	TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, 40, [0.00873, 0.00873], WEAPON_SNIPERRIFLE);
+	sound(pl, CHAN_WEAPON, "weapons/sniper_fire.wav", 1, ATTN_NORM);
+#else
+	View_SetMuzzleflash(MUZZLE_SMALL);
 #endif
 
 	pl.w_attack_next = 1.75f;
@@ -175,29 +159,19 @@ w_sniperrifle_reload(void)
 		return;
 	}
 
-	/* Ammo check */
-#ifdef CLIENT
 	if (pl.sniper_mag >= 5) {
 		return;
 	}
 	if (pl.ammo_762 <= 0) {
 		return;
 	}
-#else
-	if (pl.sniper_mag >= 5) {
-		return;
-	}
-	if (pl.ammo_762 <= 0) {
-		return;
-	}
-#endif
 
 	/* Audio-Visual bit */
 	/* TODO has a couple reloading states */
 	Weapons_ViewAnimation(SNIPER_RELOAD1);
+
 #ifdef SERVER
 	Weapons_ReloadWeapon(pl, player::sniper_mag, player::ammo_762, 5);
-	Weapons_UpdateAmmo(pl, pl.sniper_mag, pl.ammo_762, __NULL__);
 #endif
 	pl.w_attack_next = 2.3f;
 	pl.w_idle_next = 10.0f;
@@ -226,6 +200,7 @@ w_sniperrifle_release(void)
 	}
 	pl.w_idle_next = 15.0f;
 }
+
 void
 w_sniperrifle_crosshair(void)
 {
@@ -298,7 +273,7 @@ w_sniperrifle_hudpic(int s, vector pos, float a)
 weapon_t w_sniperrifle =
 {
 	.name		= "sniperrifle",
-	.id			= ITEM_SNIPERRIFLE,
+	.id		= ITEM_SNIPERRIFLE,
 	.slot		= 5,
 	.slot_pos	= 2,
 	.draw		= w_sniperrifle_draw,

@@ -56,7 +56,7 @@ w_knife_precache(void)
 #endif
 }
 
-void 
+void
 w_knife_updateammo(player pl)
 {
 	Weapons_UpdateAmmo(pl, -1, -1, -1);
@@ -246,7 +246,7 @@ w_knife_hudpic(int selected, vector pos, float a)
 weapon_t w_knife =
 {
 	.name		= "knife",
-	.id			= ITEM_KNIFE,
+	.id		= ITEM_KNIFE,
 	.slot		= 0,
 	.slot_pos	= 2,
 	.draw		= w_knife_draw,
@@ -268,7 +268,8 @@ weapon_t w_knife =
 
 /* entity definitions for pickups */
 #ifdef SERVER
-void weapon_knife(void)
+void
+weapon_knife(void)
 {
 	Weapons_InitItem(WEAPON_KNIFE);
 }

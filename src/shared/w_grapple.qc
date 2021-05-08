@@ -101,7 +101,8 @@ w_grapple_holster(void)
 }
 
 /* called once the tongue hits a wall */
-void Grapple_Touch(void)
+void
+Grapple_Touch(void)
 {
 	player pl = (player)self.owner;
 	pl.hook.movetype = MOVETYPE_NONE;

@@ -97,10 +97,8 @@ w_m249_deathmsg(void)
 void
 w_m249_draw(void)
 {
-#ifdef CLIENT
 	Weapons_SetModel("models/v_saw.mdl");
 	Weapons_ViewAnimation(M249_DRAW);
-#endif
 }
 
 void
@@ -133,7 +131,8 @@ w_m249_release(void)
 		return;
 	}
 
-	if (random() < 0.5) {
+	int r = (float)input_sequence % 2;
+	if (r < 1) {
 		Weapons_ViewAnimation(M249_IDLE1);
 	} else {
 		Weapons_ViewAnimation(M249_IDLE2);
@@ -158,27 +157,21 @@ w_m249_primary(void)
 	}
 
 	/* ammo check */
-#ifdef CLIENT
 	if (pl.m249_mag <= 0) {
 		return;
 	}
-#else
-	if (pl.m249_mag <= 0) {
-		return;
-	}
-#endif
 
+	Weapons_ViewPunchAngle([-5,0,0]);
 	Weapons_ViewAnimation(M249_FIRE);
 
 	push = v_forward * -64;
 	push[2] *= 0.25f; /* gravity duh */
 	pl.velocity += push;
+	pl.m249_mag--;
 
 	/* actual firing */
 #ifdef CLIENT
-	pl.m249_mag--;
 	View_SetMuzzleflash(MUZZLE_RIFLE);
-	Weapons_ViewPunchAngle([-5,0,0]);
 #else
 	TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, 8, [0.052,0.052], WEAPON_M249);
 
@@ -193,8 +186,6 @@ w_m249_primary(void)
 	default:
 		sound(pl, CHAN_WEAPON, "weapons/saw_fire3.wav", 1, ATTN_NORM);
 	}
-
-	pl.m249_mag--;
 #endif
 
 	pl.w_attack_next = 0.075f;
@@ -211,23 +202,15 @@ w_m249_reload(void)
 		return;
 	}
 
-#ifdef CLIENT
-	if (pl.m249_mag >= 50) {
+	if (pl.m249_mag >= 50)
 		return;
-	}
-	if (pl.ammo_556 <= 0) {
+	if (pl.ammo_556 <= 0)
 		return;
-	}
+
 	Weapons_ViewAnimation(M249_RELOAD1);
-#else
-	if (pl.m249_mag >= 50) {
-		return;
-	}
-	if (pl.ammo_556 <= 0) {
-		return;
-	}
+
+#ifdef SERVER
 	Weapons_ReloadWeapon(pl, player::m249_mag, player::ammo_556, 50);
-	Weapons_UpdateAmmo(pl, pl.m249_mag, pl.ammo_556, __NULL__);
 #endif
 
 	pl.mode_m249 = 1;
@@ -322,7 +305,7 @@ w_m249_hudpic(int selected, vector pos, float a)
 weapon_t w_m249 =
 {
 	.name		= "m249",
-	.id			= ITEM_M249,
+	.id		= ITEM_M249,
 	.slot		= 5,
 	.slot_pos	= 0,
 	.draw		= w_m249_draw,
@@ -349,4 +332,3 @@ weapon_m249(void)
 	Weapons_InitItem(WEAPON_M249);
 }
 #endif
-

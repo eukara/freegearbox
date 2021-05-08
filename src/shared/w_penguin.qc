@@ -62,7 +62,8 @@ w_penguin_holster(void)
 }
 
 #ifdef SERVER
-void penguin_squeak(entity p)
+void
+penguin_squeak(entity p)
 {
 	int r = floor(random(1,4));
 
@@ -186,30 +187,21 @@ void
 w_penguin_primary(void)
 {
 	player pl = (player)self;
+
 	if (pl.w_attack_next > 0.0) {
 		return;
 	}
 
-	/* Ammo check */
-#ifdef CLIENT
 	if (pl.ammo_penguin <= 0) {
 		return;
 	}
-#else
-	if (pl.ammo_penguin <= 0) {
-		return;
-	}
-#endif
 
+	pl.ammo_penguin--;
 	Weapons_ViewAnimation(PENGUIN_THROW);
 
 	/* Audio-Visual Bit */
-#ifdef CLIENT
-	pl.ammo_penguin--;
-#else
+#ifdef SERVER
 	w_penguin_deploy();
-	pl.ammo_penguin--;
-	Weapons_UpdateAmmo(pl, __NULL__, pl.ammo_penguin, __NULL__);
 
 	if (pl.ammo_penguin <= 0) {
 		Weapons_RemoveItem(pl, WEAPON_SNARK);
@@ -346,7 +338,7 @@ w_penguin_hudpic(int s, vector pos, float a)
 weapon_t w_penguin =
 {
 	.name		= "penguin",
-	.id			= ITEM_PENGUIN,
+	.id		= ITEM_PENGUIN,
 	.slot		= 4,
 	.slot_pos	= 4,
 	.draw		= w_penguin_draw,
