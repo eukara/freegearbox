@@ -61,11 +61,11 @@ w_sniperrifle_pickup(int new, int startammo)
 		if (pl.ammo_762 < MAX_A_762) {
 			pl.ammo_762 = bound(0, pl.ammo_762 + 5, MAX_A_762);
 		} else {
-			return FALSE;
+			return (0);
 		}
 	}
 #endif
-	return TRUE;
+	return (1);
 }
 
 void

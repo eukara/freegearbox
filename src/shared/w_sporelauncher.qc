@@ -197,11 +197,11 @@ w_sporelauncher_pickup(int new, int startammo)
 		if (pl.ammo_spore < MAX_A_SPORE) {
 			pl.ammo_spore = bound(0, pl.ammo_spore + 5, MAX_A_SPORE);
 		} else {
-			return FALSE;
+			return (0);
 		}
 	}
 #endif
-	return TRUE;
+	return (1);
 }
 
 void

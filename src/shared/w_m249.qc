@@ -63,11 +63,11 @@ w_m249_pickup(int new, int startammo)
 		if (pl.ammo_556 < MAX_A_556) {
 			pl.ammo_556 = bound(0, pl.ammo_556 + 50, MAX_A_556);
 		} else {
-			return FALSE;
+			return (0);
 		}
 	}
 #endif
-	return TRUE;
+	return (1);
 }
 
 void

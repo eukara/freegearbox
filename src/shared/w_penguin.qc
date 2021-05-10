@@ -42,10 +42,10 @@ w_penguin_pickup(int new, int startammo)
 	if (pl.ammo_penguin < MAX_A_PENGUIN) {
 		pl.ammo_penguin = bound(0, pl.ammo_penguin + 3, MAX_A_PENGUIN);
 	} else {
-		return FALSE;
+		return (0);
 	}
 #endif
-	return TRUE;
+	return (1);
 }
 
 void

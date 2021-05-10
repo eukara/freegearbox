@@ -64,11 +64,11 @@ w_eagle_pickup(int new, int startammo)
 		if (pl.ammo_357 < MAX_A_357) {
 			pl.ammo_357 = bound(0, pl.ammo_357 + 7, MAX_A_357);
 		} else {
-			return FALSE;
+			return (0);
 		}
 	}
 #endif
-	return TRUE;
+	return (1);
 }
 
 void

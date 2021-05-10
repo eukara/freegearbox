@@ -2,7 +2,7 @@
 ../../../valve/src/shared/entities.h
 ../../../valve/src/shared/flags.h
 player.qc
-../../../valve/src/shared/weapon_common.h
+../../../base/src/shared/weapon_common.h
 ../../../valve/src/shared/animations.h
 ../../../valve/src/shared/animations.qc
 ../../../valve/src/shared/pmove.qc
@@ -42,6 +42,6 @@ w_sporelauncher.qc
 w_penguin.qc
 w_shockrifle.qc
 weapons.qc
-../../../valve/src/shared/weapon_common.qc
-input.qc
+../../../base/src/shared/weapon_common.qc
+../../../valve/src/shared/input.qc
 #endlist

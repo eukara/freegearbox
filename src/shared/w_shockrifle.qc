@@ -62,10 +62,10 @@ w_shockrifle_pickup(int new, int startammo)
 	/* only pick it up once */
 	if (new) {
 		pl.ammo_shock = MAX_A_SHOCK;
-		return TRUE;
+		return (1);
 	}
 #endif
-	return FALSE;
+	return (0);
 }
 
 void
