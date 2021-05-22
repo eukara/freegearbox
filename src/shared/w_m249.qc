@@ -114,7 +114,7 @@ w_m249_release(void)
 
 	/* auto-reload if need be */
 	if (pl.w_attack_next <= 0.0)
-	if (pl.m249_mag == 0 && pl.ammo_556 > 0) {
+	if (pl.mode_m249 == 0 && pl.m249_mag == 0 && pl.ammo_556 > 0) {
 		Weapons_Reload();
 		return;
 	}
@@ -210,7 +210,13 @@ w_m249_reload(void)
 	Weapons_ViewAnimation(M249_RELOAD1);
 
 #ifdef SERVER
-	Weapons_ReloadWeapon(pl, player::m249_mag, player::ammo_556, 50);
+	static void w_m249_reload_done(void) {
+		player pl = (player)self;
+		Weapons_ReloadWeapon(pl, player::m249_mag, player::ammo_556, 50);
+	}
+
+	pl.think = w_m249_reload_done;
+	pl.nextthink = time +  3.95f;
 #endif
 
 	pl.mode_m249 = 1;
