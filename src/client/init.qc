@@ -38,6 +38,7 @@ ClientGame_InitDone(void)
 void
 ClientGame_RendererRestart(string rstr)
 {
+	Nightvision_Init();
 	Obituary_Precache();
 
 	FX_Blood_Init();
@@ -47,12 +48,6 @@ ClientGame_RendererRestart(string rstr)
 	FX_Spark_Init();
 	FX_Impact_Init();
 
-	precache_model("sprites/640hud1.spr");
-	precache_model("sprites/640hud2.spr");
-	precache_model("sprites/640hud3.spr");
-	precache_model("sprites/640hud4.spr");
-	precache_model("sprites/640hud5.spr");
-	precache_model("sprites/640hud6.spr");
 	precache_model("sprites/640hudof01.spr");
 	precache_model("sprites/640hudof02.spr");
 	precache_model("sprites/640hudof03.spr");
