@@ -168,10 +168,15 @@ w_sniperrifle_reload(void)
 
 	/* Audio-Visual bit */
 	/* TODO has a couple reloading states */
-	Weapons_ViewAnimation(SNIPER_RELOAD1);
-
+	Weapons_ViewAnimation(SNIPER_RELOAD3);
 #ifdef SERVER
-	Weapons_ReloadWeapon(pl, player::sniper_mag, player::ammo_762, 5);
+	static void w_sniperrifle_reload_done(void) {
+		player pl = (player)self;
+		Weapons_ReloadWeapon(pl, player::sniper_mag, player::ammo_762, 5);
+	}
+
+	pl.think = w_sniperrifle_reload_done;
+	pl.nextthink = time + 2.3f;
 #endif
 	pl.w_attack_next = 2.3f;
 	pl.w_idle_next = 10.0f;

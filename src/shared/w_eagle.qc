@@ -236,7 +236,13 @@ w_eagle_reload(void)
 
 	/* Audio-Visual bit */
 #ifdef SERVER
-	Weapons_ReloadWeapon(pl, player::eagle_mag, player::ammo_357, 7);
+	static void w_eagle_reload_done(void) {
+		player pl = (player)self;
+		Weapons_ReloadWeapon(pl, player::eagle_mag, player::ammo_357, 7);
+	}
+
+	pl.think = w_eagle_reload_done;
+	pl.nextthink = time + 1.64f;
 #endif
 
 	pl.w_attack_next = 1.64f;
