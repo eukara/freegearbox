@@ -268,6 +268,17 @@ w_m249_aimanim(void)
 	return self.flags & ANIM_CR_AIMMP5 ? ANIM_CR_AIMCROWBAR : ANIM_AIMMP5;
 }
 
+int
+w_m249_isempty(void)
+{
+	player pl = (player)self;
+
+	if (pl.m249_mag <= 0 && pl.ammo_556 <= 0)
+		return 1;
+
+	return 0;
+}
+
 void
 w_m249_hudpic(int selected, vector pos, float a)
 {
@@ -275,7 +286,7 @@ w_m249_hudpic(int selected, vector pos, float a)
 	player pl = (player)self;
 	vector hud_col;
 
-	if (pl.m249_mag == 0 && pl.ammo_556 == 0)
+	if (w_m249_isempty())
 		hud_col = [1,0,0];
 	else
 		hud_col = g_hud_color;
@@ -328,7 +339,8 @@ weapon_t w_m249 =
 	.pmodel		= w_m249_pmodel,
 	.deathmsg	= w_m249_deathmsg,
 	.aimanim	= w_m249_aimanim,
-	.hudpic		= w_m249_hudpic
+	.hudpic		= w_m249_hudpic,
+	.isempty	= w_m249_isempty
 };
 
 #ifdef SERVER

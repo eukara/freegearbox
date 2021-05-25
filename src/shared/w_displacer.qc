@@ -306,6 +306,17 @@ w_displacer_hud(void)
 #endif
 }
 
+int
+w_displacer_isempty(void)
+{
+	player pl = (player)self;
+
+	if (pl.ammo_uranium <= 0)
+		return 1;
+
+	return 0;
+}
+
 void
 w_displacer_hudpic(int selected, vector pos, float a)
 {
@@ -313,7 +324,7 @@ w_displacer_hudpic(int selected, vector pos, float a)
 	player pl = (player)self;
 	vector hud_col;
 
-	if (pl.ammo_uranium == 0)
+	if (w_displacer_isempty())
 		hud_col = [1,0,0];
 	else
 		hud_col = g_hud_color;
@@ -366,7 +377,8 @@ weapon_t w_displacer =
 	.pmodel		= w_displacer_pmodel,
 	.deathmsg	= w_displacer_deathmsg,
 	.aimanim	= w_displacer_aimanim,
-	.hudpic		= w_displacer_hudpic
+	.hudpic		= w_displacer_hudpic,
+	.isempty	= w_displacer_isempty
 };
 
 /* entity definitions for pickups */

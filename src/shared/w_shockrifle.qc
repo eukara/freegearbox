@@ -238,6 +238,17 @@ w_shockrifle_aimanim(void)
 	return self.flags & FL_CROUCHING ? ANIM_CR_AIMHIVE : ANIM_AIMHIVE;
 }
 
+int
+w_shockrifle_isempty(void)
+{
+	player pl = (player)self;
+
+	if (pl.ammo_shock <= 0)
+		return 1;
+
+	return 0;
+}
+
 void
 w_shockrifle_hudpic(int selected, vector pos, float a)
 {
@@ -245,7 +256,7 @@ w_shockrifle_hudpic(int selected, vector pos, float a)
 	player pl = (player)self;
 	vector hud_col;
 
-	if (pl.ammo_shock == 0)
+	if (w_shockrifle_isempty())
 		hud_col = [1,0,0];
 	else
 		hud_col = g_hud_color;
@@ -298,7 +309,8 @@ weapon_t w_shockrifle =
 	.pmodel		= w_shockrifle_pmodel,
 	.deathmsg	= w_shockrifle_deathmsg,
 	.aimanim	= w_shockrifle_aimanim,
-	.hudpic		= w_shockrifle_hudpic
+	.hudpic		= w_shockrifle_hudpic,
+	.isempty	= w_shockrifle_isempty
 };
 
 #ifdef SERVER

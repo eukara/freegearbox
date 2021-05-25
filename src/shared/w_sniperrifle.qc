@@ -125,7 +125,11 @@ w_sniperrifle_primary(void)
 	}
 
 #ifdef SERVER
-	TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, 40, [0.00873, 0.00873], WEAPON_SNIPERRIFLE);
+	if (pl.viewzoom != 1.0)
+		TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, 65, [0, 0], WEAPON_SNIPERRIFLE);
+	else
+		TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, 65, [0.05, 0.05], WEAPON_SNIPERRIFLE);
+
 	sound(pl, CHAN_WEAPON, "weapons/sniper_fire.wav", 1, ATTN_NORM);
 #else
 	View_SetMuzzleflash(MUZZLE_SMALL);
@@ -253,6 +257,17 @@ w_sniperrifle_aimanim(void)
 	return self.flags & FL_CROUCHING ? ANIM_CR_AIMPYTHON : ANIM_AIMPYTHON;
 }
 
+int
+w_sniperrifle_isempty(void)
+{
+	player pl = (player)self;
+
+	if (pl.sniper_mag <= 0 && pl.ammo_762 <= 0)
+		return 1;
+
+	return 0;
+}
+
 void
 w_sniperrifle_hudpic(int s, vector pos, float a)
 {
@@ -260,7 +275,7 @@ w_sniperrifle_hudpic(int s, vector pos, float a)
 	player pl = (player)self;
 	vector hud_col;
 
-	if (pl.sniper_mag == 0 && pl.ammo_762 == 0)
+	if (w_sniperrifle_isempty())
 		hud_col = [1,0,0];
 	else
 		hud_col = g_hud_color;
@@ -295,7 +310,8 @@ weapon_t w_sniperrifle =
 	.pmodel		= w_sniperrifle_pmodel,
 	.deathmsg	= w_sniperrifle_deathmsg,
 	.aimanim	= w_sniperrifle_aimanim,
-	.hudpic		= w_sniperrifle_hudpic
+	.hudpic		= w_sniperrifle_hudpic,
+	.isempty	= w_sniperrifle_isempty
 };
 
 #ifdef SERVER

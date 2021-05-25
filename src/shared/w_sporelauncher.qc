@@ -381,6 +381,17 @@ w_sporelauncher_aimanim(void)
 	return self.flags & FL_CROUCHING ? ANIM_CR_AIMBOW : ANIM_AIMBOW;
 }
 
+int
+w_sporelauncher_isempty(void)
+{
+	player pl = (player)self;
+
+	if (pl.sporelauncher_mag <= 0 && pl.ammo_spore <= 0)
+		return 1;
+
+	return 0;
+}
+
 void
 w_sporelauncher_hudpic(int selected, vector pos, float a)
 {
@@ -388,7 +399,7 @@ w_sporelauncher_hudpic(int selected, vector pos, float a)
 	player pl = (player)self;
 	vector hud_col;
 
-	if (pl.sporelauncher_mag == 0 && pl.ammo_spore == 0)
+	if (w_sporelauncher_isempty())
 		hud_col = [1,0,0];
 	else
 		hud_col = g_hud_color;
@@ -441,7 +452,8 @@ weapon_t w_sporelauncher =
 	.pmodel		= w_sporelauncher_pmodel,
 	.deathmsg	= w_sporelauncher_deathmsg,
 	.aimanim	= w_sporelauncher_aimanim,
-	.hudpic		= w_sporelauncher_hudpic
+	.hudpic		= w_sporelauncher_hudpic,
+	.isempty	= w_sporelauncher_isempty
 };
 
 #ifdef SERVER

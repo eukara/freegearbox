@@ -185,6 +185,7 @@ w_eagle_primary(void)
 #else
 	View_SetMuzzleflash(MUZZLE_SMALL);
 #endif
+	pl.w_idle_next = 10.0f;
 }
 
 void
@@ -317,6 +318,17 @@ w_eagle_aimanim(void)
 	return self.flags & FL_CROUCHING ? ANIM_CR_AIMPYTHON : ANIM_AIMPYTHON;
 }
 
+int
+w_eagle_isempty(void)
+{
+	player pl = (player)self;
+
+	if (pl.eagle_mag <= 0 && pl.ammo_357 <= 0)
+		return 1;
+
+	return 0;
+}
+
 void
 w_eagle_hudpic(int selected, vector pos, float a)
 {
@@ -324,7 +336,7 @@ w_eagle_hudpic(int selected, vector pos, float a)
 	player pl = (player)self;
 	vector hud_col;
 
-	if (pl.eagle_mag == 0 && pl.ammo_357 == 0)
+	if (w_eagle_isempty())
 		hud_col = [1,0,0];
 	else
 		hud_col = g_hud_color;
@@ -336,7 +348,7 @@ w_eagle_hudpic(int selected, vector pos, float a)
 			"sprites/640hudof02.spr_0.tga",
 			[0,90/256],
 			[170/256,45/256],
-			g_hud_color,
+			hud_col,
 			a,
 			DRAWFLAG_ADDITIVE
 		);
@@ -347,7 +359,7 @@ w_eagle_hudpic(int selected, vector pos, float a)
 			"sprites/640hudof01.spr_0.tga",
 			[0,90/256],
 			[170/256,45/256],
-			g_hud_color,
+			hud_col,
 			a,
 			DRAWFLAG_ADDITIVE
 		);
@@ -377,7 +389,8 @@ weapon_t w_eagle =
 	.pmodel		= w_eagle_pmodel,
 	.deathmsg	= w_eagle_deathmsg,
 	.aimanim	= w_eagle_aimanim,
-	.hudpic		= w_eagle_hudpic
+	.hudpic		= w_eagle_hudpic,
+	.isempty	= w_eagle_isempty
 };
 
 #ifdef SERVER
