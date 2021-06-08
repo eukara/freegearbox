@@ -96,6 +96,9 @@ class player:base_player
 	PREDICTED_INT(mode_sporelauncher);
 	PREDICTED_INT(mode_m249);
 
+	virtual void(void) Physics_Jump;
+	virtual void(void) Physics_WaterMove;
+
 #ifdef CLIENT
 	/* External model */
 	entity p_model;
