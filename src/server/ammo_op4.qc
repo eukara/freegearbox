@@ -108,7 +108,7 @@ ammo_spore::ammo_spore(void)
 void
 ammo_spore::Death(void)
 {
-	makevectors(m_oldAngle);
+	makevectors(GetSpawnAngles());
 	Sporelauncher_AltFire(this, origin, v_forward);
 	frame = 2;
 	m_iBody = 0;
@@ -126,15 +126,15 @@ ammo_spore::Respawn(void)
 	takedamage = DAMAGE_YES;
 	health = 1;
 
-	if (m_oldModel) {
-		SetModel(m_oldModel);
+	if (GetSpawnModel()) {
+		SetModel(GetSpawnModel());
 	}
 
 	solid = SOLID_NOT;
 	setsize(this, [0,0,0], [0,0,0]);
-	SetOrigin(m_oldOrigin);
+	SetOrigin(GetSpawnOrigin());
 
-	decal_pickwall(this, m_oldOrigin);
+	decal_pickwall(this, GetSpawnOrigin());
 
 	/* we never hit any wall. */
 	if (g_tracedDecal.fraction == 1.0f) {
