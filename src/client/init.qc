@@ -40,6 +40,7 @@ ClientGame_RendererRestart(string rstr)
 {
 	Nightvision_Init();
 	Obituary_Precache();
+	Damage_Precache();
 
 	FX_Blood_Init();
 	FX_BreakModel_Init();

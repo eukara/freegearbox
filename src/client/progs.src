@@ -21,6 +21,7 @@
 
 flashlight.qc
 nightvision.qc
+../../../valve/src/client/damage.qc
 draw.qc
 init.qc
 ../../../valve/src/client/player.qc
