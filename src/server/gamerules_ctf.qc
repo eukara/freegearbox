@@ -27,6 +27,7 @@ void
 OP4CTFRules::PlayerDeath(base_player pp)
 {
 	player pl = (player)pp;
+	FX_Corpse_Spawn((player)g_dmg_eAttacker, ANIM_DIESIMPLE);
 
 	/* obituary networking */
 	WriteByte(MSG_MULTICAST, SVC_CGAMEPACKET);
@@ -78,19 +79,6 @@ OP4CTFRules::PlayerDeath(base_player pp)
 	}
 
 	pl.health = 0;
-
-	/* Let's handle corpses on the clientside */
-	entity corpse = spawn();
-	setorigin(corpse, pl.origin + [0,0,32]);
-	setmodel(corpse, pl.model);
-	setsize(corpse, VEC_HULL_MIN, VEC_HULL_MAX);
-	corpse.movetype = MOVETYPE_TOSS;
-	corpse.solid = SOLID_TRIGGER;
-	corpse.modelindex = pl.modelindex;
-	corpse.frame = ANIM_DIESIMPLE;
-	corpse.angles = pl.angles;
-	corpse.velocity = pl.velocity;
-	corpse.colormap = pl.colormap;
 }
 
 void
