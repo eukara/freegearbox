@@ -174,7 +174,7 @@ w_sporelauncher_wmodel(void)
 }
 
 string
-w_sporelauncher_pmodel(void)
+w_sporelauncher_pmodel(player pl)
 {
 	return "models/p_spore_launcher.mdl";
 }
@@ -186,10 +186,9 @@ w_sporelauncher_deathmsg(void)
 }
 
 int
-w_sporelauncher_pickup(int new, int startammo)
+w_sporelauncher_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
-	player pl = (player)self;
 
 	if (new) {
 		pl.sporelauncher_mag = 5;
@@ -205,22 +204,21 @@ w_sporelauncher_pickup(int new, int startammo)
 }
 
 void
-w_sporelauncher_draw(void)
+w_sporelauncher_draw(player pl)
 {
 	Weapons_SetModel("models/v_spore_launcher.mdl");
-	Weapons_ViewAnimation(SPORE_DRAW);
+	Weapons_ViewAnimation(pl, SPORE_DRAW);
 }
 
 void
-w_sporelauncher_holster(void)
+w_sporelauncher_holster(player pl)
 {
-	Weapons_ViewAnimation(SPORE_HOLSTER);
+	Weapons_ViewAnimation(pl, SPORE_HOLSTER);
 }
 
 void
-w_sporelauncher_primary(void)
+w_sporelauncher_primary(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0.0)
 		return;
@@ -228,12 +226,12 @@ w_sporelauncher_primary(void)
 		return;
 
 	pl.sporelauncher_mag--;
-	Weapons_ViewPunchAngle([-2,0,0]);
-	Weapons_ViewAnimation(SPORE_FIRE);
+	Weapons_ViewPunchAngle(pl, [-2,0,0]);
+	Weapons_ViewAnimation(pl, SPORE_FIRE);
 
 #ifdef SERVER
-	Weapons_MakeVectors();
-	Sporelauncher_Fire(self, Weapons_GetCameraPos() + (v_forward * 16), v_forward);
+	Weapons_MakeVectors(pl);
+	Sporelauncher_Fire(self, Weapons_GetCameraPos(pl) + (v_forward * 16), v_forward);
 #endif
 
 	pl.w_attack_next = 0.75f;
@@ -241,9 +239,8 @@ w_sporelauncher_primary(void)
 }
 
 void
-w_sporelauncher_secondary(void)
+w_sporelauncher_secondary(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0.0)
 		return;
@@ -252,12 +249,12 @@ w_sporelauncher_secondary(void)
 
 	pl.sporelauncher_mag--;
 
-	Weapons_ViewPunchAngle([-2,0,0]);
-	Weapons_ViewAnimation(SPORE_FIRE);
+	Weapons_ViewPunchAngle(pl, [-2,0,0]);
+	Weapons_ViewAnimation(pl, SPORE_FIRE);
 
 #ifdef SERVER
-	Weapons_MakeVectors();
-	Sporelauncher_AltFire(self, Weapons_GetCameraPos() + (v_forward * 16), v_forward);
+	Weapons_MakeVectors(pl);
+	Sporelauncher_AltFire(self, Weapons_GetCameraPos(pl) + (v_forward * 16), v_forward);
 #endif
 
 	pl.w_attack_next = 0.75f;
@@ -265,14 +262,13 @@ w_sporelauncher_secondary(void)
 }
 
 void
-w_sporelauncher_release(void)
+w_sporelauncher_release(player pl)
 {
-	player pl = (player)self;
 
 	/* auto-reload if need be */
 	if (pl.w_attack_next <= 0.0)
 	if (pl.mode_sporelauncher == SLSTATE_IDLE && pl.sporelauncher_mag == 0 && pl.ammo_spore > 0) {
-		Weapons_Reload();
+		Weapons_Reload(pl);
 		return;
 	}
 
@@ -284,24 +280,24 @@ w_sporelauncher_release(void)
 		int r = (float)input_sequence % 3;
 		switch (r) {
 		case 0:
-			Weapons_ViewAnimation(SPORE_IDLE1);
+			Weapons_ViewAnimation(pl, SPORE_IDLE1);
 			pl.w_idle_next = 2.0f;
 			break;
 		case 1:
-			Weapons_ViewAnimation(SPORE_FIDGET);
+			Weapons_ViewAnimation(pl, SPORE_FIDGET);
 			pl.w_idle_next = 4.0f;
 			break;
 		case 2:
-			Weapons_ViewAnimation(SPORE_IDLE2);
+			Weapons_ViewAnimation(pl, SPORE_IDLE2);
 			pl.w_idle_next = 4.0f;
 			break;
 		}
 	} else if (pl.mode_sporelauncher == SLSTATE_RELOAD_START) {
-		Weapons_ViewAnimation(SPORE_RELOAD1);
+		Weapons_ViewAnimation(pl, SPORE_RELOAD1);
 		pl.mode_sporelauncher = SLSTATE_RELOAD;
 		pl.w_idle_next = 0.65f;
 	} else if (pl.mode_sporelauncher == SLSTATE_RELOAD) {
-		Weapons_ViewAnimation(SPORE_RELOAD2);
+		Weapons_ViewAnimation(pl, SPORE_RELOAD2);
 
 		pl.sporelauncher_mag++;
 		pl.ammo_spore--;
@@ -312,7 +308,7 @@ w_sporelauncher_release(void)
 
 		pl.w_idle_next = 1.0f;
 	} else if (pl.mode_sporelauncher == SLSTATE_RELOAD_END) {
-		Weapons_ViewAnimation(SPORE_RELOAD3);
+		Weapons_ViewAnimation(pl, SPORE_RELOAD3);
 
 		pl.mode_sporelauncher = SLSTATE_IDLE;
 		pl.w_idle_next = 10.0f;
@@ -321,9 +317,8 @@ w_sporelauncher_release(void)
 }
 
 void
-w_sporelauncher_reload(void)
+w_sporelauncher_reload(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.sporelauncher_mag >= 5)
 		return;
@@ -337,7 +332,7 @@ w_sporelauncher_reload(void)
 }
 
 void
-w_sporelauncher_crosshair(void)
+w_sporelauncher_crosshair(player pl)
 {
 #ifdef CLIENT
 	vector cross_pos;
@@ -376,15 +371,14 @@ w_sporelauncher_crosshair(void)
 }
 
 float
-w_sporelauncher_aimanim(void)
+w_sporelauncher_aimanim(player pl)
 {
 	return self.flags & FL_CROUCHING ? ANIM_CR_AIMBOW : ANIM_AIMBOW;
 }
 
 int
-w_sporelauncher_isempty(void)
+w_sporelauncher_isempty(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.sporelauncher_mag <= 0 && pl.ammo_spore <= 0)
 		return 1;
@@ -393,13 +387,12 @@ w_sporelauncher_isempty(void)
 }
 
 void
-w_sporelauncher_hudpic(int selected, vector pos, float a)
+w_sporelauncher_hudpic(player pl, int selected, vector pos, float a)
 {
 #ifdef CLIENT
-	player pl = (player)self;
 	vector hud_col;
 
-	if (w_sporelauncher_isempty())
+	if (w_sporelauncher_isempty(pl))
 		hud_col = [1,0,0];
 	else
 		hud_col = g_hud_color;
@@ -444,7 +437,7 @@ weapon_t w_sporelauncher =
 	.secondary	= w_sporelauncher_secondary,
 	.reload		= w_sporelauncher_reload,
 	.release	= w_sporelauncher_release,
-	.crosshair	= w_sporelauncher_crosshair,
+	.postdraw	= w_sporelauncher_crosshair,
 	.precache	= w_sporelauncher_precache,
 	.pickup		= w_sporelauncher_pickup,
 	.updateammo	= w_sporelauncher_updateammo,

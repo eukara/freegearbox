@@ -53,10 +53,9 @@ w_eagle_precache(void)
 }
 
 int
-w_eagle_pickup(int new, int startammo)
+w_eagle_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
-	player pl = (player)self;
 
 	if (new) {
 		pl.eagle_mag = 7;
@@ -83,7 +82,7 @@ w_eagle_wmodel(void)
 	return "models/w_desert_eagle.mdl";
 }
 string
-w_eagle_pmodel(void)
+w_eagle_pmodel(player pl)
 {
 	return "models/p_desert_eagle.mdl";
 }
@@ -94,27 +93,26 @@ w_eagle_deathmsg(void)
 }
 
 void
-w_eagle_draw(void)
+w_eagle_draw(player pl)
 {
 	Weapons_SetModel("models/v_desert_eagle.mdl");
-	Weapons_ViewAnimation(EAGLE_DRAW);
+	Weapons_ViewAnimation(pl, EAGLE_DRAW);
 }
 
 void
-w_eagle_holster(void)
+w_eagle_holster(player pl)
 {
-	Weapons_ViewAnimation(EAGLE_HOLSTER);
+	Weapons_ViewAnimation(pl, EAGLE_HOLSTER);
 }
 
 void
-w_eagle_release(void)
+w_eagle_release(player pl)
 {
-	player pl = (player)self;
 
 	/* auto-reload if need be */
 	if (pl.w_attack_next <= 0.0)
 	if (pl.eagle_mag == 0 && pl.ammo_357 > 0) {
-		Weapons_Reload();
+		Weapons_Reload(pl);
 		return;
 	}
 
@@ -129,27 +127,26 @@ w_eagle_release(void)
 	int r = (float)input_sequence % 4;
 	switch (r) {
 	case 0:
-		Weapons_ViewAnimation(EAGLE_IDLE1);
+		Weapons_ViewAnimation(pl, EAGLE_IDLE1);
 		pl.w_idle_next = 2.5f;
 		break;
 	case 1:
-		Weapons_ViewAnimation(EAGLE_IDLE2);
+		Weapons_ViewAnimation(pl, EAGLE_IDLE2);
 		pl.w_idle_next = 2.5f;
 		break;
 	case 2:
-		Weapons_ViewAnimation(EAGLE_IDLE3);
+		Weapons_ViewAnimation(pl, EAGLE_IDLE3);
 		pl.w_idle_next = 1.633333f;
 		break;
 	default:
-		Weapons_ViewAnimation(EAGLE_IDLE4);
+		Weapons_ViewAnimation(pl, EAGLE_IDLE4);
 		pl.w_idle_next = 2.5f;
 	}
 }
 
 void
-w_eagle_primary(void)
+w_eagle_primary(player pl)
 {
-	player pl = (player)self;
 	if (pl.w_attack_next > 0.0) {
 		return;
 	}
@@ -172,12 +169,12 @@ w_eagle_primary(void)
 	}
 
 	pl.eagle_mag--;
-	Weapons_ViewPunchAngle([-10,0,0]);
+	Weapons_ViewPunchAngle(pl, [-10,0,0]);
 
 	if (pl.eagle_mag <= 0) {
-		Weapons_ViewAnimation(EAGLE_SHOOT_EMPTY);
+		Weapons_ViewAnimation(pl, EAGLE_SHOOT_EMPTY);
 	} else {
-		Weapons_ViewAnimation(EAGLE_SHOOT);
+		Weapons_ViewAnimation(pl, EAGLE_SHOOT);
 	}
 
 #ifdef SERVER
@@ -189,9 +186,8 @@ w_eagle_primary(void)
 }
 
 void
-w_eagle_secondary(void)
+w_eagle_secondary(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0.0) {
 		return;
@@ -209,13 +205,12 @@ w_eagle_secondary(void)
 #endif
 
 	pl.w_attack_next = 1.0f;
-	w_eagle_release();
+	w_eagle_release(pl);
 }
 
 void
-w_eagle_reload(void)
+w_eagle_reload(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0.0) {
 		return;
@@ -230,9 +225,9 @@ w_eagle_reload(void)
 	}
 
 	if (pl.eagle_mag <= 0) {
-		Weapons_ViewAnimation(EAGLE_RELOAD);
+		Weapons_ViewAnimation(pl, EAGLE_RELOAD);
 	} else {
-		Weapons_ViewAnimation(EAGLE_RELOAD_NOSHOT);
+		Weapons_ViewAnimation(pl, EAGLE_RELOAD_NOSHOT);
 	}
 
 	/* Audio-Visual bit */
@@ -251,10 +246,9 @@ w_eagle_reload(void)
 }
 
 void
-w_eagle_crosshair(void)
+w_eagle_crosshair(player pl)
 {
 #ifdef CLIENT
-	player pl = (player)self;
 	vector cross_pos;
 	vector aicon_pos;
 
@@ -262,7 +256,7 @@ w_eagle_crosshair(void)
 	if (pl.mode_eagle == 1) {
 		float lerp;
 		vector jitter;
-		Weapons_MakeVectors();
+		Weapons_MakeVectors(pl);
 		vector src = pl.origin + pl.view_ofs;
 		traceline(src, src + (v_forward * 256), FALSE, pl);
 		lerp = Math_Lerp(18,6, trace_fraction);
@@ -313,15 +307,14 @@ w_eagle_crosshair(void)
 }
 
 float
-w_eagle_aimanim(void)
+w_eagle_aimanim(player pl)
 {
 	return self.flags & FL_CROUCHING ? ANIM_CR_AIMPYTHON : ANIM_AIMPYTHON;
 }
 
 int
-w_eagle_isempty(void)
+w_eagle_isempty(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.eagle_mag <= 0 && pl.ammo_357 <= 0)
 		return 1;
@@ -330,13 +323,12 @@ w_eagle_isempty(void)
 }
 
 void
-w_eagle_hudpic(int selected, vector pos, float a)
+w_eagle_hudpic(player pl, int selected, vector pos, float a)
 {
 #ifdef CLIENT
-	player pl = (player)self;
 	vector hud_col;
 
-	if (w_eagle_isempty())
+	if (w_eagle_isempty(pl))
 		hud_col = [1,0,0];
 	else
 		hud_col = g_hud_color;
@@ -381,7 +373,7 @@ weapon_t w_eagle =
 	.secondary	= w_eagle_secondary,
 	.reload		= w_eagle_reload,
 	.release	= w_eagle_release,
-	.crosshair	= w_eagle_crosshair,
+	.postdraw	= w_eagle_crosshair,
 	.precache	= w_eagle_precache,
 	.pickup		= w_eagle_pickup,
 	.updateammo	= w_eagle_updateammo,

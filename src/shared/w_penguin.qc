@@ -34,10 +34,9 @@ enum
 };
 
 int
-w_penguin_pickup(int new, int startammo)
+w_penguin_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
-	player pl = (player)self;
 
 	if (pl.ammo_penguin < MAX_A_PENGUIN) {
 		pl.ammo_penguin = bound(0, pl.ammo_penguin + 3, MAX_A_PENGUIN);
@@ -49,14 +48,14 @@ w_penguin_pickup(int new, int startammo)
 }
 
 void
-w_penguin_draw(void)
+w_penguin_draw(player pl)
 {
 	Weapons_SetModel("models/v_penguin.mdl");
-	Weapons_ViewAnimation(PENGUIN_DRAW);
+	Weapons_ViewAnimation(pl, PENGUIN_DRAW);
 }
 
 void
-w_penguin_holster(void)
+w_penguin_holster(player pl)
 {
 	
 }
@@ -184,9 +183,8 @@ w_penguin_deploy(void)
 #endif
 
 void
-w_penguin_primary(void)
+w_penguin_primary(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0.0) {
 		return;
@@ -197,7 +195,7 @@ w_penguin_primary(void)
 	}
 
 	pl.ammo_penguin--;
-	Weapons_ViewAnimation(PENGUIN_THROW);
+	Weapons_ViewAnimation(pl, PENGUIN_THROW);
 
 	/* Audio-Visual Bit */
 #ifdef SERVER
@@ -214,22 +212,21 @@ w_penguin_primary(void)
 }
 
 void
-w_penguin_secondary(void)
+w_penguin_secondary(player pl)
 {
 	
 }
 
 void
-w_penguin_reload(void)
+w_penguin_reload(player pl)
 {
 	
 }
 
 void
-w_penguin_release(void)
+w_penguin_release(player pl)
 {
 	int r;
-	player pl = (player)self;
 	if (pl.w_idle_next > 0.0) {
 		return;
 	}
@@ -237,15 +234,15 @@ w_penguin_release(void)
 	r = (float)input_sequence % 3;
 	switch (r) {
 	case 0:
-		Weapons_ViewAnimation(PENGUIN_IDLE);
+		Weapons_ViewAnimation(pl, PENGUIN_IDLE);
 		pl.w_idle_next = 1.875f;
 		break;
 	case 1:
-		Weapons_ViewAnimation(PENGUIN_FIDGET1);
+		Weapons_ViewAnimation(pl, PENGUIN_FIDGET1);
 		pl.w_idle_next = 4.375f;
 		break;
 	default:
-		Weapons_ViewAnimation(PENGUIN_FIDGET2);
+		Weapons_ViewAnimation(pl, PENGUIN_FIDGET2);
 		pl.w_idle_next = 5.0f;
 		break;
 	}
@@ -281,7 +278,7 @@ w_penguin_wmodel(void)
 }
 
 string
-w_penguin_pmodel(void)
+w_penguin_pmodel(player pl)
 {
 	return "models/p_penguin.mdl";
 }
@@ -294,13 +291,13 @@ w_penguin_deathmsg(void)
 
 
 float
-w_penguin_aimanim(void)
+w_penguin_aimanim(player pl)
 {
 	return self.flags & FL_CROUCHING ? ANIM_CR_AIMSQUEAK : ANIM_AIMSQUEAK;
 }
 
 void
-w_penguin_hud(void)
+w_penguin_hud(player pl)
 {
 #ifdef CLIENT
 	HUD_DrawAmmo2();
@@ -310,10 +307,9 @@ w_penguin_hud(void)
 }
 
 void
-w_penguin_hudpic(int s, vector pos, float a)
+w_penguin_hudpic(player pl, int s, vector pos, float a)
 {
 #ifdef CLIENT
-	player pl = (player)self;
 	vector hud_col;
 
 	if (pl.ammo_penguin == 0)
@@ -347,7 +343,7 @@ weapon_t w_penguin =
 	.secondary	= w_penguin_secondary,
 	.reload		= w_penguin_reload,
 	.release	= w_penguin_release,
-	.crosshair	= w_penguin_hud,
+	.postdraw	= w_penguin_hud,
 	.precache	= w_penguin_precache,
 	.pickup		= w_penguin_pickup,
 	.updateammo	= w_penguin_updateammo,

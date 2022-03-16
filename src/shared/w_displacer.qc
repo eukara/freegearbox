@@ -71,7 +71,7 @@ w_displacer_wmodel(void)
 }
 
 string
-w_displacer_pmodel(void)
+w_displacer_pmodel(player pl)
 {
 	return "models/p_displacer.mdl";
 }
@@ -83,10 +83,9 @@ w_displacer_deathmsg(void)
 }
 
 int
-w_displacer_pickup(int new, int startammo)
+w_displacer_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
-	player pl = (player)self;
 
 	if (pl.ammo_uranium < MAX_A_URANIUM) {
 		pl.ammo_uranium = bound(0, pl.ammo_uranium + 40, MAX_A_URANIUM);
@@ -98,16 +97,16 @@ w_displacer_pickup(int new, int startammo)
 }
 
 void
-w_displacer_draw(void)
+w_displacer_draw(player pl)
 {
 	Weapons_SetModel("models/v_displacer.mdl");
-	Weapons_ViewAnimation(DISP_DRAW);
+	Weapons_ViewAnimation(pl, DISP_DRAW);
 }
 
 void
-w_displacer_holster(void)
+w_displacer_holster(player pl)
 {
-	Weapons_ViewAnimation(DISP_HOLSTER);
+	Weapons_ViewAnimation(pl, DISP_HOLSTER);
 }
 
 void
@@ -127,10 +126,9 @@ w_displacer_teleport(entity target)
 }
 
 void
-w_displacer_fireball(void)
+w_displacer_fireball(player pl)
 {
 #ifdef SERVER
-	player pl = (player)self;
 
 	static void displacerball_touch(void)
 	{
@@ -152,11 +150,11 @@ w_displacer_fireball(void)
 		self.nextthink = time + 0.1f;
 	}
 
-	Weapons_MakeVectors();
+	Weapons_MakeVectors(pl);
 	entity ball = spawn();
 
 	setmodel(ball, "sprites/exit1.spr");
-	setorigin(ball, Weapons_GetCameraPos() + (v_forward * 16));
+	setorigin(ball, Weapons_GetCameraPos(pl) + (v_forward * 16));
 	ball.owner = self;
 	ball.velocity = v_forward * 500;
 	ball.movetype = MOVETYPE_FLYMISSILE;
@@ -172,23 +170,22 @@ w_displacer_fireball(void)
 }
 
 void
-w_displacer_release(void)
+w_displacer_release(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_idle_next > 0.0) {
 		return;
 	}
 
 	if (pl.mode_displacer == 1) {
-		Weapons_ViewAnimation(DISP_FIRE);
-		w_displacer_fireball();
+		Weapons_ViewAnimation(pl, DISP_FIRE);
+		w_displacer_fireball(pl);
 		pl.mode_displacer = 0;
 		pl.w_idle_next = pl.w_attack_next = 1.0f;
 		pl.ammo_uranium -= 20;
 		return;
 	} else if (pl.mode_displacer == 2) {
-		Weapons_ViewAnimation(DISP_FIRE);
+		Weapons_ViewAnimation(pl, DISP_FIRE);
 		w_displacer_teleport(pl);
 		pl.mode_displacer = 0;
 		pl.w_idle_next = pl.w_attack_next = 1.0f;
@@ -198,19 +195,17 @@ w_displacer_release(void)
 
 	int r = (float)input_sequence % 3;
 	if (r == 1) {
-		Weapons_ViewAnimation(DISP_IDLE1);
+		Weapons_ViewAnimation(pl, DISP_IDLE1);
 	} else {
-		Weapons_ViewAnimation(DISP_IDLE2);
+		Weapons_ViewAnimation(pl, DISP_IDLE2);
 	}
 
 	pl.w_idle_next = 3.0f;
 }
 
 void
-w_displacer_primary(void)
+w_displacer_primary(player pl)
 {
-	player pl = (player)self;
-
 	if (pl.w_attack_next > 0.0) {
 		return;
 	}
@@ -222,13 +217,13 @@ w_displacer_primary(void)
 
 	/* we're already in spinning mode */
 	if (pl.mode_displacer > 0) {
-		w_displacer_release();
+		w_displacer_release(pl);
 		return;
 	}
 
 	pl.mode_displacer = 1;
 
-	Weapons_ViewAnimation(DISP_SPINUP);
+	Weapons_ViewAnimation(pl, DISP_SPINUP);
 
 #ifdef SERVER
 	sound(pl, CHAN_WEAPON, "weapons/displacer_spin.wav", 1, ATTN_NORM);
@@ -237,9 +232,8 @@ w_displacer_primary(void)
 }
 
 void
-w_displacer_secondary(void)
+w_displacer_secondary(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0.0) {
 		return;
@@ -251,12 +245,12 @@ w_displacer_secondary(void)
 
 	/* we're already in spinning mode */
 	if (pl.mode_displacer > 0) {
-		w_displacer_release();
+		w_displacer_release(pl);
 		return;
 	}
 
 	pl.mode_displacer = 2;
-	Weapons_ViewAnimation(DISP_SPINUP);
+	Weapons_ViewAnimation(pl, DISP_SPINUP);
 
 #ifdef SERVER
 	sound(pl, CHAN_WEAPON, "weapons/displacer_spin2.wav", 1, ATTN_NORM);
@@ -265,13 +259,13 @@ w_displacer_secondary(void)
 }
 
 float
-w_displacer_aimanim(void)
+w_displacer_aimanim(player pl)
 {
 	return self.flags & FL_CROUCHING ? ANIM_CR_AIMSQUEAK : ANIM_AIMSQUEAK;
 }
 
 void
-w_displacer_hud(void)
+w_displacer_hud(player pl)
 {
 #ifdef CLIENT
 	vector cross_pos;
@@ -307,9 +301,8 @@ w_displacer_hud(void)
 }
 
 int
-w_displacer_isempty(void)
+w_displacer_isempty(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.ammo_uranium <= 0)
 		return 1;
@@ -318,13 +311,12 @@ w_displacer_isempty(void)
 }
 
 void
-w_displacer_hudpic(int selected, vector pos, float a)
+w_displacer_hudpic(player pl, int selected, vector pos, float a)
 {
 #ifdef CLIENT
-	player pl = (player)self;
 	vector hud_col;
 
-	if (w_displacer_isempty())
+	if (w_displacer_isempty(pl))
 		hud_col = [1,0,0];
 	else
 		hud_col = g_hud_color;
@@ -369,7 +361,7 @@ weapon_t w_displacer =
 	.secondary	= w_displacer_secondary,
 	.reload		= __NULL__,
 	.release	= w_displacer_release,
-	.crosshair	= w_displacer_hud,
+	.postdraw	= w_displacer_hud,
 	.precache	= w_displacer_precache,
 	.pickup		= w_displacer_pickup,
 	.updateammo	= w_displacer_updateammo,

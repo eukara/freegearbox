@@ -52,10 +52,9 @@ w_m249_precache(void)
 }
 
 int 
-w_m249_pickup(int new, int startammo)
+w_m249_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
-	player pl = (player)self;
 
 	if (new) {
 		pl.m249_mag = 50;
@@ -83,7 +82,7 @@ w_m249_wmodel(void)
 }
 
 string
-w_m249_pmodel(void)
+w_m249_pmodel(player pl)
 {
 	return "models/p_saw.mdl";
 }
@@ -95,27 +94,26 @@ w_m249_deathmsg(void)
 }
 
 void
-w_m249_draw(void)
+w_m249_draw(player pl)
 {
 	Weapons_SetModel("models/v_saw.mdl");
-	Weapons_ViewAnimation(M249_DRAW);
+	Weapons_ViewAnimation(pl, M249_DRAW);
 }
 
 void
-w_m249_holster(void)
+w_m249_holster(player pl)
 {
-	Weapons_ViewAnimation(M249_DRAW);
+	Weapons_ViewAnimation(pl, M249_DRAW);
 }
 
 void
-w_m249_release(void)
+w_m249_release(player pl)
 {
-	player pl = (player)self;
 
 	/* auto-reload if need be */
 	if (pl.w_attack_next <= 0.0)
 	if (pl.mode_m249 == 0 && pl.m249_mag == 0 && pl.ammo_556 > 0) {
-		Weapons_Reload();
+		Weapons_Reload(pl);
 		return;
 	}
 
@@ -124,7 +122,7 @@ w_m249_release(void)
 	}
 
 	if (pl.mode_m249 == 1) {
-		Weapons_ViewAnimation(M249_RELOAD2);
+		Weapons_ViewAnimation(pl, M249_RELOAD2);
 		pl.mode_m249 = 0;
 		pl.w_attack_next = 2.45f;
 		pl.w_idle_next = 15.0f;
@@ -133,22 +131,21 @@ w_m249_release(void)
 
 	int r = (float)input_sequence % 2;
 	if (r < 1) {
-		Weapons_ViewAnimation(M249_IDLE1);
+		Weapons_ViewAnimation(pl, M249_IDLE1);
 	} else {
-		Weapons_ViewAnimation(M249_IDLE2);
+		Weapons_ViewAnimation(pl, M249_IDLE2);
 	}
 
 	pl.w_idle_next = 15.0f;
 }
 
 void
-w_m249_primary(void)
+w_m249_primary(player pl)
 {
-	player pl = (player)self;
 	vector push;
 
 	if (pl.mode_m249 == 1) {
-		w_m249_release();
+		w_m249_release(pl);
 		return;
 	}
 
@@ -161,8 +158,8 @@ w_m249_primary(void)
 		return;
 	}
 
-	Weapons_ViewPunchAngle([-5,0,0]);
-	Weapons_ViewAnimation(M249_FIRE);
+	Weapons_ViewPunchAngle(pl, [-5,0,0]);
+	Weapons_ViewAnimation(pl, M249_FIRE);
 
 	push = v_forward * -64;
 	push[2] *= 0.25f; /* gravity duh */
@@ -193,12 +190,11 @@ w_m249_primary(void)
 }
 
 void
-w_m249_reload(void)
+w_m249_reload(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0.0) {
-		w_m249_release();
+		w_m249_release(pl);
 		return;
 	}
 
@@ -207,7 +203,7 @@ w_m249_reload(void)
 	if (pl.ammo_556 <= 0)
 		return;
 
-	Weapons_ViewAnimation(M249_RELOAD1);
+	Weapons_ViewAnimation(pl, M249_RELOAD1);
 
 #ifdef SERVER
 	static void w_m249_reload_done(void) {
@@ -224,7 +220,7 @@ w_m249_reload(void)
 }
 
 void
-w_m249_crosshair(void)
+w_m249_crosshair(player pl)
 {
 #ifdef CLIENT
 	vector cross_pos;
@@ -263,15 +259,14 @@ w_m249_crosshair(void)
 }
 
 float
-w_m249_aimanim(void)
+w_m249_aimanim(player pl)
 {
 	return self.flags & ANIM_CR_AIMMP5 ? ANIM_CR_AIMCROWBAR : ANIM_AIMMP5;
 }
 
 int
-w_m249_isempty(void)
+w_m249_isempty(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.m249_mag <= 0 && pl.ammo_556 <= 0)
 		return 1;
@@ -280,13 +275,12 @@ w_m249_isempty(void)
 }
 
 void
-w_m249_hudpic(int selected, vector pos, float a)
+w_m249_hudpic(player pl, int selected, vector pos, float a)
 {
 #ifdef CLIENT
-	player pl = (player)self;
 	vector hud_col;
 
-	if (w_m249_isempty())
+	if (w_m249_isempty(pl))
 		hud_col = [1,0,0];
 	else
 		hud_col = g_hud_color;
@@ -331,7 +325,7 @@ weapon_t w_m249 =
 	.secondary	= __NULL__,
 	.reload		= w_m249_reload,
 	.release	= w_m249_release,
-	.crosshair	= w_m249_crosshair,
+	.postdraw	= w_m249_crosshair,
 	.precache	= w_m249_precache,
 	.pickup		= w_m249_pickup,
 	.updateammo	= w_m249_updateammo,

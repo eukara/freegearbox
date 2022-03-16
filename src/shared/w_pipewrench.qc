@@ -78,7 +78,7 @@ w_pipewrench_wmodel(void)
 }
 
 string
-w_pipewrench_pmodel(void)
+w_pipewrench_pmodel(player pl)
 {
 	return "models/p_pipe_wrench.mdl";
 }
@@ -90,31 +90,30 @@ w_pipewrench_deathmsg(void)
 }
 
 void
-w_pipewrench_draw(void)
+w_pipewrench_draw(player pl)
 {
 	Weapons_SetModel("models/v_pipe_wrench.mdl");
-	Weapons_ViewAnimation(PIPE_DRAW);
+	Weapons_ViewAnimation(pl, PIPE_DRAW);
 }
 
 void
-w_pipewrench_holster(void)
+w_pipewrench_holster(player pl)
 {
-	Weapons_ViewAnimation(PIPE_HOLSTER);
+	Weapons_ViewAnimation(pl, PIPE_HOLSTER);
 }
 
 void
-w_pipewrench_primary(void)
+w_pipewrench_primary(player pl)
 {
 	int anim = 0;
 	vector src;
-	player pl = (player)self;
 
 	if (pl.w_attack_next) {
 		return;
 	}
 
-	Weapons_MakeVectors();
-	src = Weapons_GetCameraPos();
+	Weapons_MakeVectors(pl);
+	src = Weapons_GetCameraPos(pl);
 	traceline(src, src + (v_forward * 32), FALSE, pl);
 
 	if (trace_fraction >= 1.0) {
@@ -135,7 +134,7 @@ w_pipewrench_primary(void)
 	default:
 		anim = trace_fraction >= 1 ? PIPE_ATTACK3MISS:PIPE_ATTACK3HIT;
 	}
-	Weapons_ViewAnimation(anim);
+	Weapons_ViewAnimation(pl, anim);
 
 	if (pl.flags & FL_CROUCHING) {
 		Animation_PlayerTop(pl, ANIM_SHOOTCROWBAR, 0.5f);
@@ -182,14 +181,13 @@ w_pipewrench_primary(void)
 }
 
 void
-w_pipewrench_secondary(void)
+w_pipewrench_secondary(player pl)
 {
-	player pl = (player)self;
 
 	if (!pl.w_attack_next) {
 		/* Hack */
 		if (pl.mode_wrench != 1) {
-			Weapons_ViewAnimation(PIPE_ATTACKBIGWIND);
+			Weapons_ViewAnimation(pl, PIPE_ATTACKBIGWIND);
 			pl.mode_wrench = 1;
 			pl.w_attack_next = 0.75f;
 		}
@@ -198,10 +196,9 @@ w_pipewrench_secondary(void)
 }
 
 void
-w_pipewrench_release(void)
+w_pipewrench_release(player pl)
 {
 	vector src;
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0.0) {
 		return;
@@ -213,8 +210,8 @@ w_pipewrench_release(void)
 		string snd;
 	#endif
 		/* attack! */
-		Weapons_MakeVectors();
-		src = Weapons_GetCameraPos();
+		Weapons_MakeVectors(pl);
+		src = Weapons_GetCameraPos(pl);
 		traceline(src, src + (v_forward * 64), FALSE, pl);
 
 		if (trace_fraction < 1.0) {
@@ -234,10 +231,10 @@ w_pipewrench_release(void)
 				FX_Impact(IMPACT_MELEE, trace_endpos, trace_plane_normal);
 			}
 		#endif
-			Weapons_ViewAnimation(PIPE_ATTACKBIGHIT);
-			Weapons_ViewPunchAngle([-10,0,0]);
+			Weapons_ViewAnimation(pl, PIPE_ATTACKBIGHIT);
+			Weapons_ViewPunchAngle(pl, [-10,0,0]);
 		} else {
-			Weapons_ViewAnimation(PIPE_ATTACKBIGMISS);
+			Weapons_ViewAnimation(pl, PIPE_ATTACKBIGMISS);
 		}
 #ifdef SERVER
 		snd = "weapons/pwrench_big_miss.wav";
@@ -267,28 +264,28 @@ w_pipewrench_release(void)
 	int r = floor(random(0,3));
 	switch (r) {
 	case 0:
-		Weapons_ViewAnimation(PIPE_IDLE1);
+		Weapons_ViewAnimation(pl, PIPE_IDLE1);
 		pl.w_idle_next = 2.0f;
 		break;
 	case 1:
-		Weapons_ViewAnimation(PIPE_IDLE2);
+		Weapons_ViewAnimation(pl, PIPE_IDLE2);
 		pl.w_idle_next = 3.0f;
 		break;
 	case 2:
-		Weapons_ViewAnimation(PIPE_IDLE3);
+		Weapons_ViewAnimation(pl, PIPE_IDLE3);
 		pl.w_idle_next = 3.0f;
 		break;
 	}
 }
 
 float
-w_pipewrench_aimanim(void)
+w_pipewrench_aimanim(player pl)
 {
 	return self.flags & FL_CROUCHING ? ANIM_CR_AIMCROWBAR : ANIM_AIMCROWBAR;
 }
 
 void
-w_pipewrench_hudpic(int selected, vector pos, float a)
+w_pipewrench_hudpic(player pl, int selected, vector pos, float a)
 {
 #ifdef CLIENT
 	if (selected) {
@@ -329,7 +326,7 @@ weapon_t w_pipewrench =
 	.secondary	= w_pipewrench_secondary,
 	.reload		= w_pipewrench_release,
 	.release	= w_pipewrench_release,
-	.crosshair	= __NULL__,
+	.postdraw	= __NULL__,
 	.precache	= w_pipewrench_precache,
 	.pickup		= __NULL__,
 	.updateammo	= w_pipewrench_updateammo,

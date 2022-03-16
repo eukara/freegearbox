@@ -54,10 +54,9 @@ w_shockrifle_precache(void)
 }
 
 int
-w_shockrifle_pickup(int new, int startammo)
+w_shockrifle_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
-	player pl = (player)self;
 
 	/* only pick it up once */
 	if (new) {
@@ -81,7 +80,7 @@ w_shockrifle_wmodel(void)
 }
 
 string
-w_shockrifle_pmodel(void)
+w_shockrifle_pmodel(player pl)
 {
 	return "models/p_shock.mdl";
 }
@@ -93,21 +92,21 @@ w_shockrifle_deathmsg(void)
 }
 
 void
-w_shockrifle_draw(void)
+w_shockrifle_draw(player pl)
 {
 	Weapons_SetModel("models/v_shock.mdl");
-	Weapons_ViewAnimation(SHOCKRIFLE_DRAW);
+	Weapons_ViewAnimation(pl, SHOCKRIFLE_DRAW);
 }
 
 void
-w_shockrifle_holster(void)
+w_shockrifle_holster(player pl)
 {
 	
 }
 
 #ifdef SERVER
 void
-w_shockrifle_shoothornet(void)
+w_shockrifle_shoothornet(player pl)
 {
 	static void Hornet_Touch(void) {
 		if (other.takedamage == DAMAGE_YES) {
@@ -121,10 +120,10 @@ w_shockrifle_shoothornet(void)
 		}
 		remove(self);
 	}
-	Weapons_MakeVectors();
+	Weapons_MakeVectors(pl);
 	entity bolt = spawn();
 	//setmodel(bolt, "models/hornet.mdl");
-	setorigin(bolt, Weapons_GetCameraPos() + (v_forward * 16) + (v_up * -8));
+	setorigin(bolt, Weapons_GetCameraPos(pl) + (v_forward * 16) + (v_up * -8));
 	bolt.owner = self;
 	bolt.velocity = v_forward * 1000;
 	bolt.movetype = MOVETYPE_FLY;
@@ -138,9 +137,8 @@ w_shockrifle_shoothornet(void)
 #endif
 
 void
-w_shockrifle_release(void)
+w_shockrifle_release(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_idle_next > 0.0) {
 		return;
@@ -157,36 +155,35 @@ w_shockrifle_release(void)
 
 	int r = (float)input_sequence % 2;
 	if (r < 1) {
-		Weapons_ViewAnimation(SHOCKRIFLE_IDLE1);
+		Weapons_ViewAnimation(pl, SHOCKRIFLE_IDLE1);
 	} else {
-		Weapons_ViewAnimation(SHOCKRIFLE_IDLE2);
+		Weapons_ViewAnimation(pl, SHOCKRIFLE_IDLE2);
 	}
 
 	pl.w_idle_next = 3.333333f;
 }
 
 void
-w_shockrifle_primary(void)
+w_shockrifle_primary(player pl)
 {
-	player pl = (player)self;
 	if (pl.w_attack_next > 0.0) {
 		return;
 	}
 
 	if (pl.ammo_shock <= 0) {
-		w_shockrifle_release();
+		w_shockrifle_release(pl);
 		return;
 	}
 
 	pl.ammo_shock--;
-	Weapons_ViewAnimation(SHOCKRIFLE_SHOOT);
+	Weapons_ViewAnimation(pl, SHOCKRIFLE_SHOOT);
 	
 #ifdef SERVER
-	w_shockrifle_shoothornet();
+	w_shockrifle_shoothornet(pl);
 	sound(pl, CHAN_WEAPON, "weapons/shock_fire.wav", 1, ATTN_NORM);
 #else
-	Weapons_MakeVectors();
-	vector src = Weapons_GetCameraPos() + (v_forward * 16) + (v_up * -8);
+	Weapons_MakeVectors(pl);
+	vector src = Weapons_GetCameraPos(pl) + (v_forward * 16) + (v_up * -8);
 	pointparticles(PART_SHOCKPIECE, src, v_forward * 1000, 1);
 #endif
 
@@ -195,7 +192,7 @@ w_shockrifle_primary(void)
 }
 
 void
-w_shockrifle_crosshair(void)
+w_shockrifle_crosshair(player pl)
 {
 #ifdef CLIENT
 	vector cross_pos;
@@ -233,15 +230,14 @@ w_shockrifle_crosshair(void)
 }
 
 float
-w_shockrifle_aimanim(void)
+w_shockrifle_aimanim(player pl)
 {
 	return self.flags & FL_CROUCHING ? ANIM_CR_AIMHIVE : ANIM_AIMHIVE;
 }
 
 int
-w_shockrifle_isempty(void)
+w_shockrifle_isempty(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.ammo_shock <= 0)
 		return 1;
@@ -250,13 +246,12 @@ w_shockrifle_isempty(void)
 }
 
 void
-w_shockrifle_hudpic(int selected, vector pos, float a)
+w_shockrifle_hudpic(player pl, int selected, vector pos, float a)
 {
 #ifdef CLIENT
-	player pl = (player)self;
 	vector hud_col;
 
-	if (w_shockrifle_isempty())
+	if (w_shockrifle_isempty(pl))
 		hud_col = [1,0,0];
 	else
 		hud_col = g_hud_color;
@@ -301,7 +296,7 @@ weapon_t w_shockrifle =
 	.secondary	= w_shockrifle_release,
 	.reload		= w_shockrifle_release,
 	.release	= w_shockrifle_release,
-	.crosshair	= w_shockrifle_crosshair,
+	.postdraw	= w_shockrifle_crosshair,
 	.precache	= w_shockrifle_precache,
 	.pickup		= w_shockrifle_pickup,
 	.updateammo	= w_shockrifle_updateammo,

@@ -50,10 +50,9 @@ w_sniperrifle_precache(void)
 }
 
 int
-w_sniperrifle_pickup(int new, int startammo)
+w_sniperrifle_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
-	player pl = (player)self;
 
 	if (new) {
 		pl.sniper_mag = 5;
@@ -81,7 +80,7 @@ w_sniperrifle_wmodel(void)
 }
 
 string
-w_sniperrifle_pmodel(void)
+w_sniperrifle_pmodel(player pl)
 {
 	return "models/p_m40a1.mdl";
 }
@@ -93,22 +92,21 @@ w_sniperrifle_deathmsg(void)
 }
 
 void
-w_sniperrifle_draw(void)
+w_sniperrifle_draw(player pl)
 {
 	Weapons_SetModel("models/v_m40a1.mdl");
-	Weapons_ViewAnimation(SNIPER_DRAW);
+	Weapons_ViewAnimation(pl, SNIPER_DRAW);
 }
 
 void
-w_sniperrifle_holster(void)
+w_sniperrifle_holster(player pl)
 {
-	Weapons_ViewAnimation(SNIPER_HOLSTER);
+	Weapons_ViewAnimation(pl, SNIPER_HOLSTER);
 }
 
 void
-w_sniperrifle_primary(void)
+w_sniperrifle_primary(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0.0)
 		return;
@@ -116,12 +114,12 @@ w_sniperrifle_primary(void)
 		return;
 
 	pl.sniper_mag--;
-	Weapons_ViewPunchAngle([-10,0,0]);
+	Weapons_ViewPunchAngle(pl, [-10,0,0]);
 
 	if (pl.sniper_mag) {
-		Weapons_ViewAnimation(SNIPER_FIRE1);
+		Weapons_ViewAnimation(pl, SNIPER_FIRE1);
 	} else {
-		Weapons_ViewAnimation(SNIPER_FIRE2);
+		Weapons_ViewAnimation(pl, SNIPER_FIRE2);
 	}
 
 #ifdef SERVER
@@ -140,9 +138,8 @@ w_sniperrifle_primary(void)
 }
 
 void
-w_sniperrifle_secondary(void)
+w_sniperrifle_secondary(player pl)
 {
-	player pl = (player)self;
 	if (pl.w_attack_next > 0.0) {
 		return;
 	}
@@ -156,9 +153,8 @@ w_sniperrifle_secondary(void)
 }
 
 void
-w_sniperrifle_reload(void)
+w_sniperrifle_reload(player pl)
 {
-	player pl = (player)self;
 	if (pl.w_attack_next > 0.0) {
 		return;
 	}
@@ -172,7 +168,7 @@ w_sniperrifle_reload(void)
 
 	/* Audio-Visual bit */
 	/* TODO has a couple reloading states */
-	Weapons_ViewAnimation(SNIPER_RELOAD3);
+	Weapons_ViewAnimation(pl, SNIPER_RELOAD3);
 #ifdef SERVER
 	static void w_sniperrifle_reload_done(void) {
 		player pl = (player)self;
@@ -186,14 +182,13 @@ w_sniperrifle_reload(void)
 	pl.w_idle_next = 10.0f;
 }
 void
-w_sniperrifle_release(void)
+w_sniperrifle_release(player pl)
 {
-	player pl = (player)self;
 
 	/* auto-reload if need be */
 	if (pl.w_attack_next <= 0.0)
 	if (pl.sniper_mag == 0 && pl.ammo_762 > 0) {
-		Weapons_Reload();
+		Weapons_Reload(pl);
 		return;
 	}
 
@@ -203,18 +198,17 @@ w_sniperrifle_release(void)
 
 	int r = (float)input_sequence % 2;
 	if (r == 1) {
-		Weapons_ViewAnimation(SNIPER_IDLE1);
+		Weapons_ViewAnimation(pl, SNIPER_IDLE1);
 	} else {
-		Weapons_ViewAnimation(SNIPER_IDLE2);
+		Weapons_ViewAnimation(pl, SNIPER_IDLE2);
 	}
 	pl.w_idle_next = 15.0f;
 }
 
 void
-w_sniperrifle_crosshair(void)
+w_sniperrifle_crosshair(player pl)
 {
 #ifdef CLIENT
-	player pl = (player)self;
 	static vector cross_pos;
 
 	if (pl.viewzoom == 1.0f) {
@@ -252,15 +246,14 @@ w_sniperrifle_crosshair(void)
 }
 
 float
-w_sniperrifle_aimanim(void)
+w_sniperrifle_aimanim(player pl)
 {
 	return self.flags & FL_CROUCHING ? ANIM_CR_AIMPYTHON : ANIM_AIMPYTHON;
 }
 
 int
-w_sniperrifle_isempty(void)
+w_sniperrifle_isempty(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.sniper_mag <= 0 && pl.ammo_762 <= 0)
 		return 1;
@@ -269,13 +262,12 @@ w_sniperrifle_isempty(void)
 }
 
 void
-w_sniperrifle_hudpic(int s, vector pos, float a)
+w_sniperrifle_hudpic(player pl, int s, vector pos, float a)
 {
 #ifdef CLIENT
-	player pl = (player)self;
 	vector hud_col;
 
-	if (w_sniperrifle_isempty())
+	if (w_sniperrifle_isempty(pl))
 		hud_col = [1,0,0];
 	else
 		hud_col = g_hud_color;
@@ -302,7 +294,7 @@ weapon_t w_sniperrifle =
 	.secondary	= w_sniperrifle_secondary,
 	.reload		= w_sniperrifle_reload,
 	.release	= w_sniperrifle_release,
-	.crosshair	= w_sniperrifle_crosshair,
+	.postdraw	= w_sniperrifle_crosshair,
 	.precache	= w_sniperrifle_precache,
 	.pickup		= w_sniperrifle_pickup,
 	.updateammo	= w_sniperrifle_updateammo,
