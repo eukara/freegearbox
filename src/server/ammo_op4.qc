@@ -25,7 +25,7 @@ A single ammo_556 will provide 50 bullets.
 class ammo_556:item_ammo
 {
 	void(void) ammo_556;
-	virtual void(void) touch;
+	virtual void(entity) Touch;
 };
 
 void
@@ -35,13 +35,13 @@ ammo_556::ammo_556(void)
 	item_ammo::item_ammo();
 }
 void
-ammo_556::touch(void)
+ammo_556::Touch(entity eToucher)
 {
 	if (other.classname == "player") {
 		player pl = (player)other;
 		if (pl.ammo_556 < 200) {
 			pl.ammo_556 = bound(0, pl.ammo_556 + 50, 200);
-			item_ammo::touch();
+			item_ammo::Touch(eToucher);
 		}
 	}
 }
@@ -57,7 +57,7 @@ A single ammo_762 will provide 5 bullets.
 class ammo_762:item_ammo
 {
 	void(void) ammo_762;
-	virtual void(void) touch;
+	virtual void(entity) Touch;
 };
 
 void
@@ -67,13 +67,13 @@ ammo_762::ammo_762(void)
 	item_ammo::item_ammo();
 }
 void
-ammo_762::touch(void)
+ammo_762::Touch(entity eToucher)
 {
 	if (other.classname == "player") {
 		player pl = (player)other;
 		if (pl.ammo_762 < 15) {
 			pl.ammo_762 = bound(0, pl.ammo_762 + 5, 15);
-			item_ammo::touch();
+			item_ammo::Touch(eToucher);
 		}
 	}
 }
@@ -92,7 +92,7 @@ the direction the model is aiming.
 class ammo_spore:item_ammo
 {
 	void(void) ammo_spore;
-	virtual void(void) touch;
+	virtual void(entity) Touch;
 	virtual void(void) Respawn;
 	virtual void(void) Death;
 };
@@ -158,7 +158,7 @@ ammo_spore::Respawn(void)
 }
 
 void
-ammo_spore::touch(void)
+ammo_spore::Touch(entity eToucher)
 {
 	if not (other.flags & FL_CLIENT) {
 		return;
