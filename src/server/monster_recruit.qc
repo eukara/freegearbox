@@ -35,7 +35,7 @@ enum
 	RECRUIT_SALUTE
 };
 
-class monster_recruit:CBaseNPC
+class monster_recruit:NSTalkMonster
 {
 	void(void) monster_recruit;
 	virtual void(void) Respawn;
@@ -65,7 +65,7 @@ monster_recruit::AnimRun(void)
 void
 monster_recruit::Respawn(void)
 {
-	CBaseNPC::Respawn();
+	NSTalkMonster::Respawn();
 	takedamage = DAMAGE_NO;
 	iBleeds = FALSE;
 }
@@ -77,5 +77,5 @@ monster_recruit::monster_recruit(void)
 	model = "models/recruit.mdl";
 	base_mins = [-16,-16,0];
 	base_maxs = [16,16,72];
-	CBaseNPC::CBaseNPC();
+	NSTalkMonster::NSTalkMonster();
 }

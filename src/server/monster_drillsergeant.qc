@@ -48,7 +48,7 @@ enum
 	DRILL_BINOCULARS
 };
 
-class monster_drillsergeant:CBaseNPC
+class monster_drillsergeant:NSTalkMonster
 {
 	void(void) monster_drillsergeant;
 	virtual void(void) Respawn;
@@ -78,7 +78,7 @@ monster_drillsergeant::AnimRun(void)
 void
 monster_drillsergeant::Respawn(void)
 {
-	CBaseNPC::Respawn();
+	NSTalkMonster::Respawn();
 	takedamage = DAMAGE_NO;
 	iBleeds = FALSE;
 }
@@ -90,5 +90,5 @@ monster_drillsergeant::monster_drillsergeant(void)
 	model = "models/drill.mdl";
 	base_mins = [-16,-16,0];
 	base_maxs = [16,16,72];
-	CBaseNPC::CBaseNPC();
+	NSTalkMonster::NSTalkMonster();
 }

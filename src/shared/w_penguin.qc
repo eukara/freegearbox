@@ -159,7 +159,7 @@ penguin_pain(void)
 void
 w_penguin_deploy(void)
 {
-	CBaseEntity pingu = spawn(CBaseEntity);
+	NSSurfacePropEntity pingu = spawn(NSSurfacePropEntity);
 	pingu.owner = self;
 	pingu.goalentity = self;
 	pingu.netname = "Penguin";
