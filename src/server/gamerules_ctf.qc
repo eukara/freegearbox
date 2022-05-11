@@ -24,7 +24,7 @@ OP4CTFRules::FrameStart(void)
 }
 
 void
-OP4CTFRules::PlayerDeath(base_player pp)
+OP4CTFRules::PlayerDeath(NSClientPlayer pp)
 {
 	player pl = (player)pp;
 	FX_Corpse_Spawn((player)g_dmg_eAttacker, ANIM_DIESIMPLE);
@@ -82,7 +82,7 @@ OP4CTFRules::PlayerDeath(base_player pp)
 }
 
 void
-OP4CTFRules::PlayerSpawn(base_player pp)
+OP4CTFRules::PlayerSpawn(NSClientPlayer pp)
 {
 	player pl = (player)pp;
 

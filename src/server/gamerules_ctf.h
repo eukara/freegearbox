@@ -22,6 +22,6 @@ class OP4CTFRules:HLGameRules
 	virtual void(void) FrameStart;
 
 	/* client */
-	virtual void(base_player) PlayerSpawn;
-	virtual void(base_player) PlayerDeath;
+	virtual void(NSClientPlayer) PlayerSpawn;
+	virtual void(NSClientPlayer) PlayerDeath;
 };
