@@ -4,7 +4,6 @@
 #define CSQC
 #define CLIENT
 #define GEARBOX
-#define GS_RENDERFX
 #define CLASSIC_VGUI
 
 #includelist
