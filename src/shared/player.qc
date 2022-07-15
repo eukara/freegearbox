@@ -96,7 +96,6 @@ class player:NSClientPlayer
 	PREDICTED_INT(mode_m249);
 
 	virtual void(void) Physics_Jump;
-	virtual void(void) Physics_WaterMove;
 
 #ifdef CLIENT
 	virtual void(void) draw;
