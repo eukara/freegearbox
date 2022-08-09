@@ -457,54 +457,32 @@ player::SendEntity
 =================
 */
 float
-player::SendEntity(entity ePEnt, float fChanged)
+player::SendEntity(entity ePEnt, float flChanged)
 {
-	bool is_spec = false;
-	bool spectarget = false;
-
 	/* don't broadcast invisible players */
 	if (IsFakeSpectator() && ePEnt != this)
 		return (0);
 	if (!GetModelindex() && ePEnt != this)
 		return (0);
 
-	/* figure out if we should optimise this player */
-	if (ePEnt.flags & FL_CLIENT && ePEnt != this) {
-		NSClientSpectator sp = (NSClientSpectator)ePEnt;
-		is_spec = (sp.IsFakeSpectator() || sp.IsRealSpectator());
-		spectarget = (is_spec == true && edict_num(sp.spec_ent) == this);
-	}
-
-	/* if we're a spectator of any type and spectate this player */
-	if (ePEnt != this && spectarget == false) {
-		fChanged &= ~PLAYER_ITEMS;
-		fChanged &= ~PLAYER_HEALTH;
-		fChanged &= ~PLAYER_TIMINGS;
-		fChanged &= ~PLAYER_AMMO1;
-		fChanged &= ~PLAYER_AMMO2;
-		fChanged &= ~PLAYER_AMMO3;
-		fChanged &= ~PLAYER_FLAGS;
-		fChanged &= ~PLAYER_PUNCHANGLE;
-		fChanged &= ~PLAYER_VIEWZOOM;
-		fChanged &= ~PLAYER_SPECTATE;
-	}
+	flChanged = OptimiseChangedFlags(ePEnt, flChanged);
 
 	WriteByte(MSG_ENTITY, ENT_PLAYER);
-	WriteFloat(MSG_ENTITY, fChanged);
+	WriteFloat(MSG_ENTITY, flChanged);
 
-	NSClientPlayer::SendEntity(ePEnt, fChanged);
+	NSClientPlayer::SendEntity(ePEnt, flChanged);
 
-	if (fChanged & PLAYER_TOPFRAME) {
+	if (flChanged & PLAYER_TOPFRAME) {
 		WriteByte(MSG_ENTITY, anim_top);
 		WriteFloat(MSG_ENTITY, anim_top_time);
 		WriteFloat(MSG_ENTITY, anim_top_delay);
 	}
-	if (fChanged & PLAYER_BOTTOMFRAME) {
+	if (flChanged & PLAYER_BOTTOMFRAME) {
 		WriteByte(MSG_ENTITY, anim_bottom);
 		WriteFloat(MSG_ENTITY, anim_bottom_time);
 	}
 
-	if (fChanged & PLAYER_AMMO1) {
+	if (flChanged & PLAYER_AMMO1) {
 		WriteByte(MSG_ENTITY, glock_mag);
 		WriteByte(MSG_ENTITY, mp5_mag);
 		WriteByte(MSG_ENTITY, python_mag);
@@ -520,7 +498,7 @@ player::SendEntity(entity ePEnt, float fChanged)
 		WriteByte(MSG_ENTITY, sporelauncher_mag);
 	}
 
-	if (fChanged & PLAYER_AMMO2) {
+	if (flChanged & PLAYER_AMMO2) {
 		WriteByte(MSG_ENTITY, ammo_9mm);
 		WriteByte(MSG_ENTITY, ammo_357);
 		WriteByte(MSG_ENTITY, ammo_buckshot);
@@ -541,7 +519,7 @@ player::SendEntity(entity ePEnt, float fChanged)
 		WriteByte(MSG_ENTITY, ammo_penguin);
 	}
 
-	if (fChanged & PLAYER_AMMO3) {
+	if (flChanged & PLAYER_AMMO3) {
 		WriteByte(MSG_ENTITY, ammo_m203_grenade);
 		WriteByte(MSG_ENTITY, ammo_gauss_volume);
 		WriteByte(MSG_ENTITY, ammo_rpg_state);
