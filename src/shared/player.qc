@@ -30,62 +30,59 @@ enumflags
 class player:NSClientPlayer
 {
 	/* animation */
-	PREDICTED_INT(anim_top);
-	PREDICTED_FLOAT(anim_top_time);
-	PREDICTED_FLOAT(anim_top_delay);
-	PREDICTED_INT(anim_bottom);
-	PREDICTED_FLOAT(anim_bottom_time);
+	PREDICTED_INT(anim_top)
+	PREDICTED_FLOAT(anim_top_time)
+	PREDICTED_FLOAT(anim_top_delay)
+	PREDICTED_INT(anim_bottom)
+	PREDICTED_FLOAT(anim_bottom_time)
 
 	/* ammo 1 */
-	PREDICTED_INT(glock_mag);
-	PREDICTED_INT(mp5_mag);
-	PREDICTED_INT(python_mag);
-	PREDICTED_INT(shotgun_mag);
-	PREDICTED_INT(crossbow_mag);
-	PREDICTED_INT(rpg_mag);
-	PREDICTED_INT(satchel_chg);
+	PREDICTED_INT(glock_mag)
+	PREDICTED_INT(mp5_mag)
+	PREDICTED_INT(python_mag)
+	PREDICTED_INT(shotgun_mag)
+	PREDICTED_INT(crossbow_mag)
+	PREDICTED_INT(rpg_mag)
+	PREDICTED_INT(satchel_chg)
 
 	/* ammo 2 */
-	PREDICTED_INT(ammo_9mm);
-	PREDICTED_INT(ammo_357);
-	PREDICTED_INT(ammo_buckshot);
-	PREDICTED_INT(ammo_bolt);
-	PREDICTED_INT(ammo_rocket);
-	PREDICTED_INT(ammo_uranium);
-	PREDICTED_INT(ammo_handgrenade);
-	PREDICTED_INT(ammo_satchel);
-	PREDICTED_INT(ammo_tripmine);
-	PREDICTED_INT(ammo_snark);
-	PREDICTED_INT(ammo_hornet);
+	PREDICTED_INT(ammo_9mm)
+	PREDICTED_INT(ammo_357)
+	PREDICTED_INT(ammo_buckshot)
+	PREDICTED_INT(ammo_bolt)
+	PREDICTED_INT(ammo_rocket)
+	PREDICTED_INT(ammo_uranium)
+	PREDICTED_INT(ammo_handgrenade)
+	PREDICTED_INT(ammo_satchel)
+	PREDICTED_INT(ammo_tripmine)
+	PREDICTED_INT(ammo_snark)
+	PREDICTED_INT(ammo_hornet)
 
 	/* ammo 3 */
-	PREDICTED_INT(ammo_m203_grenade);
-	PREDICTED_INT(ammo_gauss_volume);
-	PREDICTED_INT(ammo_rpg_state);
-	PREDICTED_INT(mode_tempstate);
+	PREDICTED_INT(ammo_m203_grenade)
+	PREDICTED_INT(ammo_gauss_volume)
+	PREDICTED_INT(ammo_rpg_state)
+	PREDICTED_INT(mode_tempstate)
 
 	/* gearbox */
-	PREDICTED_INT(eagle_mag);
-	PREDICTED_INT(sniper_mag);
-	PREDICTED_INT(m249_mag);
-	PREDICTED_INT(sporelauncher_mag);
-	PREDICTED_INT(ammo_556);
-	PREDICTED_INT(ammo_762);
-	PREDICTED_INT(ammo_spore);
-	PREDICTED_INT(ammo_shock);
-	PREDICTED_INT(ammo_penguin);
-	PREDICTED_INT(mode_displacer);
-	PREDICTED_INT(mode_eagle);
-	PREDICTED_INT(mode_wrench);
-	PREDICTED_INT(mode_sporelauncher);
-	PREDICTED_INT(mode_m249);
+	PREDICTED_INT(eagle_mag)
+	PREDICTED_INT(sniper_mag)
+	PREDICTED_INT(m249_mag)
+	PREDICTED_INT(sporelauncher_mag)
+	PREDICTED_INT(ammo_556)
+	PREDICTED_INT(ammo_762)
+	PREDICTED_INT(ammo_spore)
+	PREDICTED_INT(ammo_shock)
+	PREDICTED_INT(ammo_penguin)
+	PREDICTED_INT(mode_displacer)
+	PREDICTED_INT(mode_eagle)
+	PREDICTED_INT(mode_wrench)
+	PREDICTED_INT(mode_sporelauncher)
+	PREDICTED_INT(mode_m249)
 
 	virtual void(void) Physics_Jump;
 
 #ifdef CLIENT
-	virtual void(void) draw;
-	virtual float() predraw;
-	virtual void(void) postdraw;
 	virtual void(float,float) ReceiveEntity;
 	virtual void(void) PredictPreFrame;
 	virtual void(void) PredictPostFrame;
