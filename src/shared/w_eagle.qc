@@ -249,7 +249,6 @@ void
 w_eagle_crosshair(player pl)
 {
 #ifdef CLIENT
-	vector cross_pos;
 	vector aicon_pos;
 
 	/* crosshair/laser */
@@ -258,6 +257,7 @@ w_eagle_crosshair(player pl)
 		vector jitter;
 		Weapons_MakeVectors(pl);
 		vector src = pl.origin + pl.view_ofs;
+		vector cross_pos;
 		traceline(src, src + (v_forward * 256), FALSE, pl);
 		lerp = Math_Lerp(18,6, trace_fraction);
 		jitter[0] = (random(0,2) - 2) * (1 - trace_fraction);
@@ -274,16 +274,11 @@ w_eagle_crosshair(player pl)
 			DRAWFLAG_ADDITIVE
 		);
 	} else {
-		cross_pos = g_hudmins + (g_hudres / 2) + [-12,-12];
-		drawsubpic(
-			cross_pos,
-			[24,24],
+		Cross_DrawSub(
 			"sprites/ofch1.spr_0.tga",
+			[24,24],
 			[0,0],
-			[24/72, 24/72],
-			[1,1,1],
-			1,
-			DRAWFLAG_NORMAL
+			[24/72, 24/72]
 		);
 	}
 

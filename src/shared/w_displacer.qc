@@ -268,21 +268,15 @@ void
 w_displacer_hud(player pl)
 {
 #ifdef CLIENT
-	vector cross_pos;
 	vector aicon_pos;
 
-	cross_pos = g_hudmins + (g_hudres / 2) + [-12,-12];
 	aicon_pos = g_hudmins + [g_hudres[0] - 48, g_hudres[1] - 42];
 
-	drawsubpic(
-		cross_pos,
-		[24,24],
+	Cross_DrawSub(
 		"sprites/ofch1.spr_0.tga",
+		[24,24],
 		[48/72,0],
-		[24/72,24/72],
-		[1,1,1],
-		1,
-		DRAWFLAG_NORMAL
+		[24/72,24/72]
 	);
 
 	drawsubpic(

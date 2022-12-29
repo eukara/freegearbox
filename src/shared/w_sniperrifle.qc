@@ -209,31 +209,17 @@ void
 w_sniperrifle_crosshair(player pl)
 {
 #ifdef CLIENT
-	static vector cross_pos;
-
 	if (pl.viewzoom == 1.0f) {
-		cross_pos = g_hudmins + (g_hudres / 2) + [-12,-12];
-		drawsubpic(
-			cross_pos,
-			[24,24],
+		Cross_DrawSub(
 			"sprites/ofch1.spr_0.tga",
+			[24,24],
 			[0,48/72],
-			[24/72, 24/72],
-			[1,1,1],
-			1,
-			DRAWFLAG_NORMAL
+			[24/72, 24/72]
 		);
 	} else {
-		cross_pos = g_hudmins + (g_hudres / 2) + [-128,-128];
-		drawsubpic(
-			cross_pos,
-			[256,256],
+		Cross_Draw(
 			"sprites/ofch2.spr_0.tga",
-			[0,0],
-			[1, 1],
-			[1,1,1],
-			1,
-			DRAWFLAG_NORMAL
+			[256,256]
 		);
 	}
 
