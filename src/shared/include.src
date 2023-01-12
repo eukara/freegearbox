@@ -45,5 +45,4 @@ w_penguin.qc
 w_shockrifle.qc
 weapons.qc
 ../../../base/src/shared/weapon_common.qc
-../../../valve/src/shared/input.qc
 #endlist
