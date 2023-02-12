@@ -3,7 +3,7 @@
 ../../../valve/src/shared/events.h
 ../../../valve/src/shared/flags.h
 player.qc
-../../../base/src/shared/weapon_common.h
+../../../valve/src/shared/weapon_common.h
 ../../../valve/src/shared/animations.h
 ../../../valve/src/shared/animations.qc
 ../../../valve/src/shared/pmove.qc
@@ -13,9 +13,9 @@ player.qc
 ../../../valve/src/shared/fx_breakmodel.qc
 ../../../valve/src/shared/fx_explosion.qc
 ../../../valve/src/shared/fx_gibhuman.qc
-../../../base/src/shared/fx_spark.qc
+../../../valve/src/shared/fx_spark.qc
 ../../../valve/src/shared/fx_impact.qc
-../../../base/src/shared/fx_corpse.qc
+../../../valve/src/shared/fx_corpse.qc
 
 items.h
 weapons.h
@@ -44,5 +44,5 @@ w_sporelauncher.qc
 w_penguin.qc
 w_shockrifle.qc
 weapons.qc
-../../../base/src/shared/weapon_common.qc
+../../../valve/src/shared/weapon_common.qc
 #endlist
