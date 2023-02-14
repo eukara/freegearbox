@@ -254,7 +254,7 @@ w_eagle_crosshair(player pl)
 	/* crosshair/laser */
 	if (pl.mode_eagle == 1) {
 		float lerp;
-		vector jitter;
+		vector jitter = g_vec_null;
 		Weapons_MakeVectors(pl);
 		vector src = pl.origin + pl.view_ofs;
 		vector cross_pos;

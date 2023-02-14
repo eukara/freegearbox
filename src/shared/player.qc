@@ -416,52 +416,52 @@ player::PredictPreFrame(void)
 {
 	NSClientPlayer::PredictPreFrame();
 
-	SAVE_STATE(anim_top);
-	SAVE_STATE(anim_top_delay);
-	SAVE_STATE(anim_top_time);
-	SAVE_STATE(anim_bottom);
-	SAVE_STATE(anim_bottom_time);
+	SAVE_STATE(anim_top)
+	SAVE_STATE(anim_top_delay)
+	SAVE_STATE(anim_top_time)
+	SAVE_STATE(anim_bottom)
+	SAVE_STATE(anim_bottom_time)
 
-	SAVE_STATE(glock_mag);
-	SAVE_STATE(mp5_mag);
-	SAVE_STATE(python_mag);
-	SAVE_STATE(shotgun_mag);
-	SAVE_STATE(crossbow_mag);
-	SAVE_STATE(rpg_mag);
-	SAVE_STATE(satchel_chg);
+	SAVE_STATE(glock_mag)
+	SAVE_STATE(mp5_mag)
+	SAVE_STATE(python_mag)
+	SAVE_STATE(shotgun_mag)
+	SAVE_STATE(crossbow_mag)
+	SAVE_STATE(rpg_mag)
+	SAVE_STATE(satchel_chg)
 
-	SAVE_STATE(ammo_9mm);
-	SAVE_STATE(ammo_357);
-	SAVE_STATE(ammo_buckshot);
-	SAVE_STATE(ammo_bolt);
-	SAVE_STATE(ammo_rocket);
-	SAVE_STATE(ammo_uranium);
-	SAVE_STATE(ammo_handgrenade);
-	SAVE_STATE(ammo_satchel);
-	SAVE_STATE(ammo_tripmine);
-	SAVE_STATE(ammo_snark);
-	SAVE_STATE(ammo_hornet);
+	SAVE_STATE(ammo_9mm)
+	SAVE_STATE(ammo_357)
+	SAVE_STATE(ammo_buckshot)
+	SAVE_STATE(ammo_bolt)
+	SAVE_STATE(ammo_rocket)
+	SAVE_STATE(ammo_uranium)
+	SAVE_STATE(ammo_handgrenade)
+	SAVE_STATE(ammo_satchel)
+	SAVE_STATE(ammo_tripmine)
+	SAVE_STATE(ammo_snark)
+	SAVE_STATE(ammo_hornet)
 
-	SAVE_STATE(ammo_m203_grenade);
-	SAVE_STATE(ammo_gauss_volume);
-	SAVE_STATE(ammo_rpg_state);
-	SAVE_STATE(mode_tempstate);
+	SAVE_STATE(ammo_m203_grenade)
+	SAVE_STATE(ammo_gauss_volume)
+	SAVE_STATE(ammo_rpg_state)
+	SAVE_STATE(mode_tempstate)
 
 	/* gearbox */
-	SAVE_STATE(eagle_mag);
-	SAVE_STATE(sniper_mag);
-	SAVE_STATE(m249_mag);
-	SAVE_STATE(sporelauncher_mag);
-	SAVE_STATE(ammo_556);
-	SAVE_STATE(ammo_762);
-	SAVE_STATE(ammo_spore);
-	SAVE_STATE(ammo_shock);
-	SAVE_STATE(ammo_penguin);
-	SAVE_STATE(mode_displacer);
-	SAVE_STATE(mode_eagle);
-	SAVE_STATE(mode_wrench);
-	SAVE_STATE(mode_sporelauncher);
-	SAVE_STATE(mode_m249);
+	SAVE_STATE(eagle_mag)
+	SAVE_STATE(sniper_mag)
+	SAVE_STATE(m249_mag)
+	SAVE_STATE(sporelauncher_mag)
+	SAVE_STATE(ammo_556)
+	SAVE_STATE(ammo_762)
+	SAVE_STATE(ammo_spore)
+	SAVE_STATE(ammo_shock)
+	SAVE_STATE(ammo_penguin)
+	SAVE_STATE(mode_displacer)
+	SAVE_STATE(mode_eagle)
+	SAVE_STATE(mode_wrench)
+	SAVE_STATE(mode_sporelauncher)
+	SAVE_STATE(mode_m249)
 }
 
 /*
@@ -476,52 +476,52 @@ player::PredictPostFrame(void)
 {
 	NSClientPlayer::PredictPostFrame();
 
-	ROLL_BACK(anim_top);
-	ROLL_BACK(anim_top_delay);
-	ROLL_BACK(anim_top_time);
-	ROLL_BACK(anim_bottom);
-	ROLL_BACK(anim_bottom_time);
+	ROLL_BACK(anim_top)
+	ROLL_BACK(anim_top_delay)
+	ROLL_BACK(anim_top_time)
+	ROLL_BACK(anim_bottom)
+	ROLL_BACK(anim_bottom_time)
 
-	ROLL_BACK(glock_mag);
-	ROLL_BACK(mp5_mag);
-	ROLL_BACK(python_mag);
-	ROLL_BACK(shotgun_mag);
-	ROLL_BACK(crossbow_mag);
-	ROLL_BACK(rpg_mag);
-	ROLL_BACK(satchel_chg);
+	ROLL_BACK(glock_mag)
+	ROLL_BACK(mp5_mag)
+	ROLL_BACK(python_mag)
+	ROLL_BACK(shotgun_mag)
+	ROLL_BACK(crossbow_mag)
+	ROLL_BACK(rpg_mag)
+	ROLL_BACK(satchel_chg)
 
-	ROLL_BACK(ammo_9mm);
-	ROLL_BACK(ammo_357);
-	ROLL_BACK(ammo_buckshot);
-	ROLL_BACK(ammo_bolt);
-	ROLL_BACK(ammo_rocket);
-	ROLL_BACK(ammo_uranium);
-	ROLL_BACK(ammo_handgrenade);
-	ROLL_BACK(ammo_satchel);
-	ROLL_BACK(ammo_tripmine);
-	ROLL_BACK(ammo_snark);
-	ROLL_BACK(ammo_hornet);
+	ROLL_BACK(ammo_9mm)
+	ROLL_BACK(ammo_357)
+	ROLL_BACK(ammo_buckshot)
+	ROLL_BACK(ammo_bolt)
+	ROLL_BACK(ammo_rocket)
+	ROLL_BACK(ammo_uranium)
+	ROLL_BACK(ammo_handgrenade)
+	ROLL_BACK(ammo_satchel)
+	ROLL_BACK(ammo_tripmine)
+	ROLL_BACK(ammo_snark)
+	ROLL_BACK(ammo_hornet)
 
-	ROLL_BACK(ammo_m203_grenade);
-	ROLL_BACK(ammo_gauss_volume);
-	ROLL_BACK(ammo_rpg_state);
-	ROLL_BACK(mode_tempstate);
+	ROLL_BACK(ammo_m203_grenade)
+	ROLL_BACK(ammo_gauss_volume)
+	ROLL_BACK(ammo_rpg_state)
+	ROLL_BACK(mode_tempstate)
 
 	/* gearbox */
-	ROLL_BACK(eagle_mag);
-	ROLL_BACK(sniper_mag);
-	ROLL_BACK(m249_mag);
-	ROLL_BACK(sporelauncher_mag);
-	ROLL_BACK(ammo_556);
-	ROLL_BACK(ammo_762);
-	ROLL_BACK(ammo_spore);
-	ROLL_BACK(ammo_shock);
-	ROLL_BACK(ammo_penguin);
-	ROLL_BACK(mode_displacer);
-	ROLL_BACK(mode_eagle);
-	ROLL_BACK(mode_wrench);
-	ROLL_BACK(mode_sporelauncher);
-	ROLL_BACK(mode_m249);
+	ROLL_BACK(eagle_mag)
+	ROLL_BACK(sniper_mag)
+	ROLL_BACK(m249_mag)
+	ROLL_BACK(sporelauncher_mag)
+	ROLL_BACK(ammo_556)
+	ROLL_BACK(ammo_762)
+	ROLL_BACK(ammo_spore)
+	ROLL_BACK(ammo_shock)
+	ROLL_BACK(ammo_penguin)
+	ROLL_BACK(mode_displacer)
+	ROLL_BACK(mode_eagle)
+	ROLL_BACK(mode_wrench)
+	ROLL_BACK(mode_sporelauncher)
+	ROLL_BACK(mode_m249)
 }
 
 #else
@@ -585,35 +585,35 @@ player::EvaluateEntity(void)
 	if (ATTR_CHANGED(mode_tempstate))
 		SendFlags |= PLAYER_AMMO3;
 
-	SAVE_STATE(glock_mag);
-	SAVE_STATE(mp5_mag);
-	SAVE_STATE(python_mag);
-	SAVE_STATE(shotgun_mag);
-	SAVE_STATE(crossbow_mag);
-	SAVE_STATE(rpg_mag);
-	SAVE_STATE(satchel_chg);
-	SAVE_STATE(ammo_9mm);
-	SAVE_STATE(ammo_357);
-	SAVE_STATE(ammo_buckshot);
-	SAVE_STATE(ammo_bolt);
-	SAVE_STATE(ammo_rocket);
-	SAVE_STATE(ammo_uranium);
-	SAVE_STATE(ammo_handgrenade);
-	SAVE_STATE(ammo_satchel);
-	SAVE_STATE(ammo_tripmine);
-	SAVE_STATE(ammo_snark);
-	SAVE_STATE(ammo_hornet);
+	SAVE_STATE(glock_mag)
+	SAVE_STATE(mp5_mag)
+	SAVE_STATE(python_mag)
+	SAVE_STATE(shotgun_mag)
+	SAVE_STATE(crossbow_mag)
+	SAVE_STATE(rpg_mag)
+	SAVE_STATE(satchel_chg)
+	SAVE_STATE(ammo_9mm)
+	SAVE_STATE(ammo_357)
+	SAVE_STATE(ammo_buckshot)
+	SAVE_STATE(ammo_bolt)
+	SAVE_STATE(ammo_rocket)
+	SAVE_STATE(ammo_uranium)
+	SAVE_STATE(ammo_handgrenade)
+	SAVE_STATE(ammo_satchel)
+	SAVE_STATE(ammo_tripmine)
+	SAVE_STATE(ammo_snark)
+	SAVE_STATE(ammo_hornet)
 
-	SAVE_STATE(ammo_m203_grenade);
-	SAVE_STATE(ammo_gauss_volume);
-	SAVE_STATE(ammo_rpg_state);
-	SAVE_STATE(mode_tempstate);
+	SAVE_STATE(ammo_m203_grenade)
+	SAVE_STATE(ammo_gauss_volume)
+	SAVE_STATE(ammo_rpg_state)
+	SAVE_STATE(mode_tempstate)
 
-	SAVE_STATE(anim_top);
-	SAVE_STATE(anim_top_delay);
-	SAVE_STATE(anim_top_time);
-	SAVE_STATE(anim_bottom);
-	SAVE_STATE(anim_bottom_time);
+	SAVE_STATE(anim_top)
+	SAVE_STATE(anim_top_delay)
+	SAVE_STATE(anim_top_time)
+	SAVE_STATE(anim_bottom)
+	SAVE_STATE(anim_bottom_time)
 
 	/* gearbox */
 	if (eagle_mag_net != eagle_mag)
@@ -646,20 +646,20 @@ player::EvaluateEntity(void)
 		SendFlags |= PLAYER_AMMO3;
 
 	/* gearbox */
-	SAVE_STATE(eagle_mag);
-	SAVE_STATE(sniper_mag);
-	SAVE_STATE(m249_mag);
-	SAVE_STATE(sporelauncher_mag);
-	SAVE_STATE(ammo_556);
-	SAVE_STATE(ammo_762);
-	SAVE_STATE(ammo_spore);
-	SAVE_STATE(ammo_shock);
-	SAVE_STATE(ammo_penguin);
-	SAVE_STATE(mode_displacer);
-	SAVE_STATE(mode_eagle);
-	SAVE_STATE(mode_wrench);
-	SAVE_STATE(mode_sporelauncher);
-	SAVE_STATE(mode_m249);
+	SAVE_STATE(eagle_mag)
+	SAVE_STATE(sniper_mag)
+	SAVE_STATE(m249_mag)
+	SAVE_STATE(sporelauncher_mag)
+	SAVE_STATE(ammo_556)
+	SAVE_STATE(ammo_762)
+	SAVE_STATE(ammo_spore)
+	SAVE_STATE(ammo_shock)
+	SAVE_STATE(ammo_penguin)
+	SAVE_STATE(mode_displacer)
+	SAVE_STATE(mode_eagle)
+	SAVE_STATE(mode_wrench)
+	SAVE_STATE(mode_sporelauncher)
+	SAVE_STATE(mode_m249)
 }
 
 /*
