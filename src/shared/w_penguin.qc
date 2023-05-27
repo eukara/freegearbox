@@ -353,11 +353,3 @@ weapon_t w_penguin =
 	.aimanim	= w_penguin_aimanim,
 	.hudpic		= w_penguin_hudpic
 };
-
-#ifdef SERVER
-void
-weapon_penguin(void)
-{
-	Weapons_InitItem(WEAPON_PENGUIN);
-}
-#endif

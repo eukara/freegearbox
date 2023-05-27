@@ -300,11 +300,3 @@ weapon_t w_shockrifle =
 	.hudpic		= w_shockrifle_hudpic,
 	.isempty	= w_shockrifle_isempty
 };
-
-#ifdef SERVER
-void
-weapon_shockrifle(void)
-{
-	Weapons_InitItem(WEAPON_SHOCKRIFLE);
-}
-#endif

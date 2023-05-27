@@ -336,12 +336,3 @@ weapon_t w_pipewrench =
 	.aimanim	= w_pipewrench_aimanim,
 	.hudpic		= w_pipewrench_hudpic
 };
-
-/* entity definitions for pickups */
-#ifdef SERVER
-void
-weapon_pipewrench(void)
-{
-	Weapons_InitItem(WEAPON_PIPEWRENCH);
-}
-#endif

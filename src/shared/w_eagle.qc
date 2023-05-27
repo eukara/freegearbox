@@ -379,11 +379,3 @@ weapon_t w_eagle =
 	.hudpic		= w_eagle_hudpic,
 	.isempty	= w_eagle_isempty
 };
-
-#ifdef SERVER
-void
-weapon_eagle(void)
-{
-	Weapons_InitItem(WEAPON_EAGLE);
-}
-#endif

@@ -441,11 +441,3 @@ weapon_t w_sporelauncher =
 	.hudpic		= w_sporelauncher_hudpic,
 	.isempty	= w_sporelauncher_isempty
 };
-
-#ifdef SERVER
-void
-weapon_sporelauncher(void)
-{
-	Weapons_InitItem(WEAPON_SPORELAUNCHER);
-}
-#endif

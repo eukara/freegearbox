@@ -301,12 +301,3 @@ weapon_t w_grapple =
 	.aimanim	= w_grapple_aimanim,
 	.hudpic		= w_grapple_hudpic
 };
-
-/* entity definitions for pickups */
-#ifdef SERVER
-void
-weapon_grapple(void)
-{
-	Weapons_InitItem(WEAPON_GRAPPLE);
-}
-#endif

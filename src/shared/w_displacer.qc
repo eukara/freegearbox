@@ -366,12 +366,3 @@ weapon_t w_displacer =
 	.hudpic		= w_displacer_hudpic,
 	.isempty	= w_displacer_isempty
 };
-
-/* entity definitions for pickups */
-#ifdef SERVER
-void
-weapon_displacer(void)
-{
-	Weapons_InitItem(WEAPON_DISPLACER);
-}
-#endif

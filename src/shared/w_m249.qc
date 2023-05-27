@@ -330,11 +330,3 @@ weapon_t w_m249 =
 	.hudpic		= w_m249_hudpic,
 	.isempty	= w_m249_isempty
 };
-
-#ifdef SERVER
-void
-weapon_m249(void)
-{
-	Weapons_InitItem(WEAPON_M249);
-}
-#endif

@@ -263,12 +263,3 @@ weapon_t w_knife =
 	.aimanim	= w_knife_aimanim,
 	.hudpic		= w_knife_hudpic
 };
-
-/* entity definitions for pickups */
-#ifdef SERVER
-void
-weapon_knife(void)
-{
-	Weapons_InitItem(WEAPON_KNIFE);
-}
-#endif

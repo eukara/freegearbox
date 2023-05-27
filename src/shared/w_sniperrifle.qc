@@ -291,11 +291,3 @@ weapon_t w_sniperrifle =
 	.hudpic		= w_sniperrifle_hudpic,
 	.isempty	= w_sniperrifle_isempty
 };
-
-#ifdef SERVER
-void
-weapon_sniperrifle(void)
-{
-	Weapons_InitItem(WEAPON_SNIPERRIFLE);
-}
-#endif
