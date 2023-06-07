@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2023 Marco Cawthorne <marco@icculus.org>
+ * Copyright (c) 2016-2020 Marco Cawthorne <marco@icculus.org>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,15 +14,21 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-class OP4CTFRules:HLMultiplayerRules
+var string g_ctfhud1_spr;
+var string g_ctfhud2_spr;
+
+var string g_ofhud1_spr;
+var string g_ofhud2_spr;
+var string g_ofhud3_spr;
+var string g_ofhud4_spr;
+var string g_ofhud5_spr;
+var string g_ofhud6_spr;
+
+var string g_ofch1_spr;
+var string g_ofch2_spr;
+
+bool
+OP4_IsCTF(void)
 {
-	void OP4CTFRules(void);
-
-	virtual void InitPostEnts(void);
-	virtual void PlayerSpawn(NSClientPlayer);
-	virtual void PlayerDeath(NSClientPlayer);
-
-	nonvirtual void CharacterSpawn(NSClientPlayer, string);
-	nonvirtual void CaptureFlag(NSClientPlayer);
-	nonvirtual void DropFlag(NSClientPlayer);
-};
+	return serverkeyfloat("ctf") == 0 ? false : true;
+}

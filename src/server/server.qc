@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2020 Marco Cawthorne <marco@icculus.org>
+ * Copyright (c) 2016-2023 Marco Cawthorne <marco@icculus.org>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -16,11 +16,18 @@
 
 void
 Game_InitRules(void)
-{
+{	
+	forceinfokey(world, "ctf", "0");
+
 	if (cvar("sv_playerslots") == 1 || cvar("coop") == 1) {
 		g_grMode = spawn(HLSingleplayerRules);
 	} else {
-		g_grMode = spawn(HLMultiplayerRules);
+		/* we have an info_ctfdetect entity */
+		if (substring(mapname, 0, 7) == "op4ctf_") {
+			g_grMode = spawn(OP4CTFRules);
+			forceinfokey(world, "ctf", "1");
+		} else
+			g_grMode = spawn(HLMultiplayerRules);
 	}
 }
 

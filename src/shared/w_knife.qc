@@ -14,15 +14,6 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*QUAKED weapon_knife (0 0 1) (-16 -16 0) (16 16 32)
-"model" "models/w_knife.mdl"
-
-HALF-LIFE: OPPOSING FORCE (1999) ENTITY
-
-Knife Weapon
-
-*/
-
 enum
 {
 	KNIFE_IDLE1,
@@ -219,7 +210,7 @@ w_knife_hudpic(player pl, int selected, vector pos, float a)
 		drawsubpic(
 			pos,
 			[170,45],
-			"sprites/640hudof04.spr_0.tga",
+			g_ofhud4_spr,
 			[0,90/256],
 			[170/256,45/256],
 			g_hud_color,
@@ -230,7 +221,7 @@ w_knife_hudpic(player pl, int selected, vector pos, float a)
 		drawsubpic(
 			pos,
 			[170,45],
-			"sprites/640hudof03.spr_0.tga",
+			g_ofhud3_spr,
 			[0,90/256],
 			[170/256,45/256],
 			g_hud_color,

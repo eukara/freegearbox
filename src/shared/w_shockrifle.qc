@@ -14,15 +14,6 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*QUAKED weapon_shockrifle (0 0 1) (-16 -16 0) (16 16 32)
-"model" "models/w_shock.mdl"
-
-HALF-LIFE: OPPOSING FORCE (1999) ENTITY
-
-Shockrifle Weapon
-
-*/
-
 #ifdef CLIENT
 var int PART_SHOCKPIECE;
 #endif
@@ -198,7 +189,7 @@ w_shockrifle_crosshair(player pl)
 	vector aicon_pos;
 
 	Cross_DrawSub(
-		"sprites/ofch1.spr_0.tga",
+		g_ofch1_spr,
 		[24,24],
 		[0,24/72],
 		[24/72, 24/72]
@@ -255,7 +246,7 @@ w_shockrifle_hudpic(player pl, int selected, vector pos, float a)
 		drawsubpic(
 			pos,
 			[170,45],
-			"sprites/640hudof04.spr_0.tga",
+			g_ofhud4_spr,
 			[0,45/256],
 			[170/256,45/256],
 			hud_col,
@@ -266,7 +257,7 @@ w_shockrifle_hudpic(player pl, int selected, vector pos, float a)
 		drawsubpic(
 			pos,
 			[170,45],
-			"sprites/640hudof03.spr_0.tga",
+			g_ofhud3_spr,
 			[0,45/256],
 			[170/256,45/256],
 			hud_col,

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2023 Marco Cawthorne <marco@icculus.org>
+ * Copyright (c) 2023 Marco Cawthorne <marco@icculus.org>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,15 +14,37 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-class OP4CTFRules:HLMultiplayerRules
+/*QUAKED item_ctfaccelerator (0 0.8 0.8) (-16 -16 0) (16 16 36) x x CTFITEM_RANDOM
+# OVERVIEW
+CTF Double Damage Powerup
+
+# KEYS
+- "team_no" : Team
+
+# TRIVIA
+This entity was introduced in Half-Life: Opposing Force (1999)
+
+-------- MODEL FOR RADIANT ONLY - DO NOT SET THIS AS A KEY --------
+model="models/w_accelerator.mdl"
+*/
+
+class item_ctfaccelerator:OP4CTFItem
 {
-	void OP4CTFRules(void);
+	void item_ctfaccelerator(void);
 
-	virtual void InitPostEnts(void);
-	virtual void PlayerSpawn(NSClientPlayer);
-	virtual void PlayerDeath(NSClientPlayer);
-
-	nonvirtual void CharacterSpawn(NSClientPlayer, string);
-	nonvirtual void CaptureFlag(NSClientPlayer);
-	nonvirtual void DropFlag(NSClientPlayer);
+	virtual void Spawned(void);
 };
+
+void
+item_ctfaccelerator::item_ctfaccelerator(void)
+{
+
+}
+
+void
+item_ctfaccelerator::Spawned(void)
+{
+	m_iItemID = ITEM_CTF_DEATH;
+	model = "models/w_accelerator.mdl";
+	super::Spawned();
+}

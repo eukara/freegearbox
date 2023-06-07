@@ -12,6 +12,7 @@
 ../../../src/shared/defs.h
 ../../../valve/src/client/defs.h
 ../../../src/client/defs.h
+defs_op4.h
 
 ../../../src/vgui/include.src
 
@@ -25,7 +26,7 @@ nightvision.qc
 draw.qc
 init.qc
 ../../../valve/src/client/entities.qc
-../../../valve/src/client/cmds.qc
+cmds.qc
 ../../../valve/src/client/game_event.qc
 ../../../valve/src/client/camera.qc
 ../../../valve/src/client/viewmodel.qc
@@ -40,5 +41,7 @@ hud_weaponselect.qc
 ../../../valve/src/client/modelevent.qc
 
 ../../../src/client/include.src
+vgui_changechar.qc
+vgui_chooseteam.qc
 ../../../src/shared/include.src
 #endlist

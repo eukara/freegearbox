@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2023 Marco Cawthorne <marco@icculus.org>
+ * Copyright (c) 2023 Marco Cawthorne <marco@icculus.org>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,15 +14,13 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-class OP4CTFRules:HLMultiplayerRules
-{
-	void OP4CTFRules(void);
+/*QUAKED info_ctfspawn_powerup (0 0.8 0.8) (-16 -16 0) (16 16 36)
+# OVERVIEW
+CTF Powerup Spawn
 
-	virtual void InitPostEnts(void);
-	virtual void PlayerSpawn(NSClientPlayer);
-	virtual void PlayerDeath(NSClientPlayer);
+# KEYS
+- "team_no" : Team
 
-	nonvirtual void CharacterSpawn(NSClientPlayer, string);
-	nonvirtual void CaptureFlag(NSClientPlayer);
-	nonvirtual void DropFlag(NSClientPlayer);
-};
+# TRIVIA
+This entity was introduced in Half-Life: Opposing Force (1999)
+*/

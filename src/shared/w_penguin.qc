@@ -14,15 +14,6 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*QUAKED weapon_penguin (0 0 1) (-16 -16 0) (16 16 32)
-"model" "models/w_penguin.mdl"
-
-HALF-LIFE: OPPOSING FORCE (1999) ENTITY
-
-Penguin Weapon
-
-*/
-
 enum
 {
 	PENGUIN_IDLE,
@@ -320,11 +311,11 @@ w_penguin_hudpic(player pl, int s, vector pos, float a)
 	HUD_DrawAmmoBar(pos, pl.ammo_penguin, MAX_A_PENGUIN, a);
 
 	if (s) {
-		drawsubpic(pos, [170,45], "sprites/640hudof04.spr_0.tga",
+		drawsubpic(pos, [170,45], g_ofhud4_spr,
 			[0,180/256], [170/256,45/256],
 			hud_col, a, DRAWFLAG_ADDITIVE);
 	} else {
-		drawsubpic(pos, [170,45], "sprites/640hudof03.spr_0.tga",
+		drawsubpic(pos, [170,45], g_ofhud3_spr,
 			[0,180/256], [170/256,45/256],
 			hud_col, a, DRAWFLAG_ADDITIVE);
 	}

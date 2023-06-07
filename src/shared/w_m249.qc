@@ -14,16 +14,6 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*QUAKED weapon_m249 (0 0 1) (-16 -16 0) (16 16 32)
-"model" "models/w_saw.mdl"
-
-HALF-LIFE: OPPOSING FORCE (1999) ENTITY
-
-M249 Weapon
-
-*/
-
-/* Animations */
 enum
 {
 	M249_IDLE1,
@@ -227,7 +217,7 @@ w_m249_crosshair(player pl)
 
 	/* crosshair */
 	Cross_DrawSub(
-		"sprites/ofch1.spr_0.tga",
+		g_ofch1_spr,
 		[24,24],
 		[24/72,0],
 		[24/72, 24/72]
@@ -285,7 +275,7 @@ w_m249_hudpic(player pl, int selected, vector pos, float a)
 		drawsubpic(
 			pos,
 			[170,45],
-			"sprites/640hudof02.spr_0.tga",
+			g_ofhud2_spr,
 			[0,135/256],
 			[170/256,45/256],
 			hud_col,
@@ -296,7 +286,7 @@ w_m249_hudpic(player pl, int selected, vector pos, float a)
 		drawsubpic(
 			pos,
 			[170,45],
-			"sprites/640hudof01.spr_0.tga",
+			g_ofhud1_spr,
 			[0,135/256],
 			[170/256,45/256],
 			hud_col,

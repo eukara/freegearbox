@@ -14,15 +14,6 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*QUAKED weapon_sporelauncher (0 0 1) (-16 -16 0) (16 16 32)
-"model" "models/w_spore_launcher.mdl"
-
-HALF-LIFE: OPPOSING FORCE (1999) ENTITY
-
-Sporelauncher Weapon
-
-*/
-
 enum
 {
 	SPORE_IDLE1,
@@ -338,7 +329,7 @@ w_sporelauncher_crosshair(player pl)
 	vector aicon_pos;
 
 	Cross_DrawSub(
-		"sprites/ofch1.spr_0.tga",
+		g_ofch1_spr,
 		[24,24],
 		[24/72,24/72],
 		[24/72,24/72]
@@ -396,7 +387,7 @@ w_sporelauncher_hudpic(player pl, int selected, vector pos, float a)
 		drawsubpic(
 			pos,
 			[170,45],
-			"sprites/640hudof04.spr_0.tga",
+			g_ofhud4_spr,
 			[0,0],
 			[170/256,45/256],
 			hud_col,
@@ -407,7 +398,7 @@ w_sporelauncher_hudpic(player pl, int selected, vector pos, float a)
 		drawsubpic(
 			pos,
 			[170,45],
-			"sprites/640hudof03.spr_0.tga",
+			g_ofhud3_spr,
 			[0,0],
 			[170/256,45/256],
 			hud_col,

@@ -14,15 +14,6 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*QUAKED weapon_sniperrifle (0 0 1) (-16 -16 0) (16 16 32)
-"model" "models/w_m40a1.mdl"
-
-HALF-LIFE: OPPOSING FORCE (1999) ENTITY
-
-Sniper-Rifle Weapon
-
-*/
-
 enum
 {
 	SNIPER_DRAW,
@@ -211,14 +202,14 @@ w_sniperrifle_crosshair(player pl)
 #ifdef CLIENT
 	if (pl.viewzoom == 1.0f) {
 		Cross_DrawSub(
-			"sprites/ofch1.spr_0.tga",
+			g_ofch1_spr,
 			[24,24],
 			[0,48/72],
 			[24/72, 24/72]
 		);
 	} else {
 		Cross_Draw(
-			"sprites/ofch2.spr_0.tga",
+			g_ofch1_spr,
 			[256,256]
 		);
 	}
@@ -261,9 +252,9 @@ w_sniperrifle_hudpic(player pl, int s, vector pos, float a)
 	HUD_DrawAmmoBar(pos, pl.ammo_762, MAX_A_762, a);
 
 	if (s) {
-		drawsubpic(pos, [170,45], "sprites/640hudof04.spr_0.tga", [0,135/256], [170/256,45/256], hud_col, a, DRAWFLAG_ADDITIVE);
+		drawsubpic(pos, [170,45], g_ofhud4_spr, [0,135/256], [170/256,45/256], hud_col, a, DRAWFLAG_ADDITIVE);
 	} else {
-		drawsubpic(pos, [170,45], "sprites/640hudof03.spr_0.tga", [0,135/256], [170/256,45/256], hud_col, a, DRAWFLAG_ADDITIVE);
+		drawsubpic(pos, [170,45], g_ofhud3_spr, [0,135/256], [170/256,45/256], hud_col, a, DRAWFLAG_ADDITIVE);
 	}
 #endif
 }

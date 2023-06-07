@@ -14,15 +14,6 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*QUAKED weapon_grapple (0 0 1) (-16 -16 0) (16 16 32)
-"model" "models/w_bgrap.mdl"
-
-HALF-LIFE: OPPOSING FORCE (1999) ENTITY
-
-Barnacle Grappling-Hook Weapon
-
-*/
-
 #ifdef CLIENT
 /* because some people apparently prefer the worse quality one */
 var int autocvar_cl_tonguemode = 0;
@@ -257,7 +248,7 @@ w_grapple_hudpic(player pl, int selected, vector pos, float a)
 		drawsubpic(
 			pos,
 			[170,45],
-			"sprites/640hudof02.spr_0.tga",
+			g_ofhud2_spr,
 			[0,45/256],
 			[170/256,45/256],
 			g_hud_color,
@@ -268,7 +259,7 @@ w_grapple_hudpic(player pl, int selected, vector pos, float a)
 		drawsubpic(
 			pos,
 			[170,45],
-			"sprites/640hudof01.spr_0.tga",
+			g_ofhud1_spr,
 			[0,45/256],
 			[170/256,45/256],
 			g_hud_color,

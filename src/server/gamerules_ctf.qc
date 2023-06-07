@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2020 Marco Cawthorne <marco@icculus.org>
+ * Copyright (c) 2023 Marco Cawthorne <marco@icculus.org>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -15,70 +15,35 @@
  */
 
 void
-OP4CTFRules::FrameStart(void)
+OP4CTFRules::OP4CTFRules(void)
 {
-	if (cvar("mp_timelimit"))
-	if (time >= (cvar("mp_timelimit") * 60)) {
-		IntermissionStart();
-	}
 }
 
 void
-OP4CTFRules::PlayerDeath(NSClientPlayer pp)
+OP4CTFRules::InitPostEnts(void)
 {
-	player pl = (player)pp;
-	FX_Corpse_Spawn((player)g_dmg_eAttacker, ANIM_DIESIMPLE);
+	/* Opfor CTF only has two teams. */
+	forceinfokey(world, "teams", "2");
+	forceinfokey(world, "team_1", "Black Mesa");
+	forceinfokey(world, "teamscore_1", "0");
+	forceinfokey(world, "team_2", "Opposing Force");
+	forceinfokey(world, "teamscore_2", "0");
 
-	/* obituary networking */
-	WriteByte(MSG_MULTICAST, SVC_CGAMEPACKET);
-	WriteByte(MSG_MULTICAST, EV_OBITUARY);
-	if (g_dmg_eAttacker.netname)
-		WriteString(MSG_MULTICAST, g_dmg_eAttacker.netname);
-	else
-		WriteString(MSG_MULTICAST, g_dmg_eAttacker.classname);
-	WriteString(MSG_MULTICAST, pl.netname);
-	WriteByte(MSG_MULTICAST, g_dmg_iWeapon);
-	WriteByte(MSG_MULTICAST, 0);
-	msg_entity = world;
-	multicast([0,0,0], MULTICAST_ALL);
+	forceinfokey(world, "ctfflag_1", "0");
+	forceinfokey(world, "ctfflag_2", "0");
 
-	/* death-counter */
-	pl.deaths++;
-	forceinfokey(pl, "*deaths", ftos(pl.deaths));
+	Sound_Precache("op4ctf_bm.flag_taken");
+	Sound_Precache("op4ctf_bm.flag_capture");
 
-	/* update score-counter */
-	if (pl.flags & FL_CLIENT || pl.flags & FL_MONSTER)
-	if (g_dmg_eAttacker.flags & FL_CLIENT) {
-		if (pl == g_dmg_eAttacker)
-			g_dmg_eAttacker.frags--;
-		else
-			g_dmg_eAttacker.frags++;
-	}
+	Sound_Precache("op4ctf_op4.flag_taken");
+	Sound_Precache("op4ctf_op4.flag_capture");
+}
 
-	/* in DM we only care about the frags */
-	if (cvar("mp_fraglimit"))
-	if (g_dmg_eAttacker.frags >= cvar("mp_fraglimit")) {
-		IntermissionStart();
-	}
-
-	weaponbox_spawn(pl);
-	pl.movetype = MOVETYPE_NONE;
-	pl.solid = SOLID_NOT;
-	pl.takedamage = DAMAGE_NO;
-	pl.gflags &= ~GF_FLASHLIGHT;
-	pl.armor = pl.activeweapon = pl.g_items = 0;
-
-	pl.think = PutClientInServer;
-	pl.nextthink = time + 4.0f;
-	Sound_Play(pl, CHAN_AUTO, "player.die");
-
-	if (pl.health < -50) {
-		pl.health = 0;
-		FX_GibHuman(pl.origin, vectoangles(pl.origin - g_dmg_eAttacker.origin), g_dmg_iDamage * 2.0f);
-		return;
-	}
-
-	pl.health = 0;
+void
+OP4CTFRules::PlayerDisconnect(NSClientPlayer pl)
+{
+	DropFlag(pl);
+	super::PlayerDisconnect(pl);
 }
 
 void
@@ -86,48 +51,201 @@ OP4CTFRules::PlayerSpawn(NSClientPlayer pp)
 {
 	player pl = (player)pp;
 
-	/* this is where the mods want to deviate */
-	entity spot;
+	/* not in a team yet, force them into spectator */
+	if (pl.team == 0) {
+		pl.MakeTempSpectator(); /* replace this with a non-spectator ghost */
+		Spawn_ObserverCam(pl);
+		return;
+	}
 
-	pl.classname = "player";
+	CharacterSpawn(pp, pl.m_oldModel);
+}
+
+void
+OP4CTFRules::CharacterSpawn(NSClientPlayer playerEnt, string playerModel)
+{
+	player pl = (player)playerEnt;
+
+	pl.m_oldModel = playerModel;
 	pl.health = pl.max_health = 100;
-	pl.takedamage = DAMAGE_YES;
-	pl.solid = SOLID_SLIDEBOX;
-	pl.movetype = MOVETYPE_WALK;
+	pl.SetTakedamage(DAMAGE_YES);
+	pl.SetSolid(SOLID_SLIDEBOX);
+	pl.SetMovetype(MOVETYPE_WALK);
+	pl.SetModel(playerModel);
+	pl.SetSize(VEC_HULL_MIN, VEC_HULL_MAX);
+	pl.ClearVelocity();
 	pl.flags = FL_CLIENT;
 	pl.viewzoom = 1.0;
-	pl.model = "models/player.mdl";
-	string mymodel = infokey(pl, "model");
 
-	if (mymodel) {
-		mymodel = sprintf("models/player/%s/%s.mdl", mymodel, mymodel);
-		if (whichpack(mymodel)) {
-			pl.model = mymodel;
-		}
-	}
-	setmodel(pl, pl.model);
-
-	setsize(pl, VEC_HULL_MIN, VEC_HULL_MAX);
-	pl.velocity = [0,0,0];
-	pl.gravity = __NULL__;
-	pl.frame = 1;
-	pl.SendFlags = UPDATE_ALL;
-	pl.customphysics = Empty;
 	pl.iBleeds = TRUE;
-	forceinfokey(pl, "*spec", "0");
-	forceinfokey(pl, "*deaths", ftos(pl.deaths));
+	pl.SetInfoKey("*spec", "0");
+	pl.SetInfoKey("*dead", "0");
 
-	LevelNewParms();
-	LevelDecodeParms(pl);
+	/* give inventory */
 	pl.g_items = ITEM_CROWBAR | ITEM_GLOCK | ITEM_SUIT;
 	pl.activeweapon = WEAPON_GLOCK;
 	pl.glock_mag = 18;
 	pl.ammo_9mm = 44;
 
-	spot = Spawn_SelectRandom("info_player_deathmatch");
-	setorigin(pl, spot.origin);
-	pl.angles = spot.angles;
+	entity spot = Spawn_SelectRandom(strcat("info_ctfspawn_", ftos(pl.team)));
+	pl.Transport(spot.origin, spot.angles);
 	Weapons_RefreshAmmo(pl);
-
 	Client_FixAngle(pl, pl.angles);
+}
+
+void
+OP4CTFRules::CaptureFlag(NSClientPlayer pp)
+{
+	player pl = (player)pp;
+	NSEntity enemyFlag;
+	string flagName;
+	string teamScore;
+	string captureSound;
+
+	/* detach flag */
+	pl.g_items &= ~ITEM_GOALITEM;
+	pl.flagmodel = 0;
+
+	if (pl.team == 1) {
+		flagName = "info_ctfflag_2";
+		teamScore = "teamscore_1";
+		captureSound = "op4ctf_bm.flag_capture";
+	} else {
+		flagName = "info_ctfflag_1";
+		teamScore = "teamscore_2";
+		captureSound = "op4ctf_op4.flag_capture";
+	}
+
+	/* increment score */
+	forceinfokey(world, teamScore, sprintf("%d", serverkeyfloat(teamScore) + 1));
+
+	enemyFlag = (NSEntity)find(world, ::classname, flagName);
+
+	if (!enemyFlag) {
+		error("What the hell? There's no flag back there!");
+		return;
+	}
+
+	enemyFlag.StartSoundDef(captureSound, CHAN_ITEM, true);
+	enemyFlag.Respawn();
+}
+
+void
+OP4CTFRules::PlayerDeath(NSClientPlayer pp)
+{
+	DropFlag(pp);
+	super::PlayerDeath(pp);
+}
+
+void
+OP4CTFRules::DropFlag(NSClientPlayer pp)
+{
+	player pl = (player)pp;
+	item_ctfflag targetFlag;
+	string flagName;
+
+	/* skip normal players */
+	if (!(pl.g_items & ITEM_GOALITEM))
+		return;
+
+	if (pl.team == 1) {
+		flagName = "info_ctfflag_2";
+	} else {
+		flagName = "info_ctfflag_1";
+	}
+
+	for (entity e = world; (e = find(e, ::classname, flagName));) {
+		targetFlag = (item_ctfflag)e;
+
+		/* item is still pick-upable */
+		if (targetFlag.GetSolid() != SOLID_NOT) {
+			print("the item is not picked up. \n");
+			continue;
+		}
+
+		/* that's us, yup */
+		if (targetFlag.m_eActivator == pl) {
+			targetFlag.FlagDrop(pl);
+			return;
+		}
+	}
+
+	print("^1WARNING: ^7Player marked as having impossible goal-item\n");
+}
+
+void
+CSEv_TeamJoin_f(float teamChoice)
+{
+	self.team = teamChoice;
+	forceinfokey(self, "*team", ftos(teamChoice));
+
+	/* they'll become spectator */
+	if (teamChoice == 0) {
+		OP4CTFRules rule = (OP4CTFRules)g_grMode;
+		rule.PlayerSpawn((NSClientPlayer)self);
+	}
+}
+
+void
+CSEv_ClassJoin_f(float classSelection)
+{
+	OP4CTFRules rule = (OP4CTFRules)g_grMode;
+	string playerModel;
+	player pl = (player)self;
+
+	/* random black mesa char */
+	if (classSelection == 0)
+		classSelection = floor(random(1, 7));
+	/* random opfor char */
+	if (classSelection == 13)
+		classSelection = floor(random(7, 13));
+
+	switch (classSelection) {
+	/* black mesa */
+	case 1:
+		playerModel = "models/player/ctf_barney/ctf_barney.mdl";
+		break;
+	case 2:
+		playerModel = "models/player/cl_suit/cl_suit.mdl";
+		break;
+	case 3:
+		playerModel = "models/player/ctf_gina/ctf_gina.mdl";
+		break;
+	case 4:
+		playerModel = "models/player/ctf_gordon/ctf_gordon.mdl";
+		break;
+	case 5:
+		playerModel = "models/player/otis/otis.mdl";
+		break;
+	case 6:
+		playerModel = "models/player/ctf_scientist/ctf_scientist.mdl";
+		break;
+	/* opfor */
+	case 7:
+		playerModel = "models/player/beret/beret.mdl";
+		break;
+	case 8:
+		playerModel = "models/player/drill/drill.mdl";
+		break;
+	case 9:
+		playerModel = "models/player/grunt/grunt.mdl";
+		break;
+	case 10:
+		playerModel = "models/player/recruit/recruit.mdl";
+		break;
+	case 11:
+		playerModel = "models/player/shephard/shephard.mdl";
+		break;
+	case 12:
+		playerModel = "models/player/tower/tower.mdl";
+		break;
+	}
+
+	/* if we're alive, kill them (we need to drop the flag anyhow */
+	if (pl.IsAlive()) {
+		pl.m_oldModel = playerModel;
+		rule.PlayerDeath(pl);
+	} else {
+		rule.CharacterSpawn((NSClientPlayer)self, playerModel);
+	}
 }

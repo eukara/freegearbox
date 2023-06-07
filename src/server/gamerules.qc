@@ -180,12 +180,41 @@ TriggerFlashlight(NSClient target)
 	self = oldself;
 }
 
+void
+DropCTFItem(NSClientPlayer pl)
+{
+	string item;
+
+	if (pl.classname != "player")
+		return;
+
+	if (pl.g_items & ITEM_CTF_JUMPPACK) {
+		item = "item_ctflongjump";
+		pl.g_items &= ~ ITEM_CTF_JUMPPACK;
+	} else if (pl.g_items & ITEM_CTF_SHIELD) {
+		item = "item_ctfportablehev";
+		pl.g_items &= ~ ITEM_CTF_SHIELD;
+	} else if (pl.g_items & ITEM_CTF_HEALTH) {
+		item = "item_ctfregeneration";
+		pl.g_items &= ~ ITEM_CTF_HEALTH;
+	} else if (pl.g_items & ITEM_CTF_DEATH) {
+		item = "item_ctfaccelerator";
+		pl.g_items &= ~ ITEM_CTF_DEATH;
+	} else if (pl.g_items & ITEM_CTF_BACKPACK) {
+		item = "item_ctfbackpack";
+		pl.g_items &= ~ ITEM_CTF_BACKPACK;
+	}
+}
+
 bool
 HLGameRules::ImpulseCommand(NSClient bp, float num)
 {
 	switch (num) {
 	case 100:
 		TriggerFlashlight(bp);
+		break;
+	case 205:
+		DropCTFItem((player)bp);
 		break;
 	default:
 		return super::ImpulseCommand(bp, num);

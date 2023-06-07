@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2023 Marco Cawthorne <marco@icculus.org>
+ * Copyright (c) 2016-2020 Marco Cawthorne <marco@icculus.org>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,15 +14,25 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-class OP4CTFRules:HLMultiplayerRules
+void VGUI_ChooseClass(float);
+
+int
+ClientGame_ConsoleCommand(void)
 {
-	void OP4CTFRules(void);
-
-	virtual void InitPostEnts(void);
-	virtual void PlayerSpawn(NSClientPlayer);
-	virtual void PlayerDeath(NSClientPlayer);
-
-	nonvirtual void CharacterSpawn(NSClientPlayer, string);
-	nonvirtual void CaptureFlag(NSClientPlayer);
-	nonvirtual void DropFlag(NSClientPlayer);
-};
+	switch(argv(0)) {
+	case "changeteam":
+		if (OP4_IsCTF()) {
+			VGUI_ChooseTeam();
+		} else {
+			sendevent("HLDM_Chooseteam", "s", argv(1));
+		}
+		break;
+	case "changeclass":
+		if (OP4_IsCTF())
+			VGUI_ChooseClass(0);
+		break;
+	default:
+		return (0);
+	}
+	return (1);
+}

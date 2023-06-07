@@ -14,15 +14,6 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*QUAKED weapon_displacer (0 0 1) (-16 -16 0) (16 16 32)
-"model" "models/w_displacer.mdl"
-
-HALF-LIFE: OPPOSING FORCE (1999) ENTITY
-
-Displacer Weapon
-
-*/
-
 enum
 {
 	DISP_IDLE1,
@@ -273,7 +264,7 @@ w_displacer_hud(player pl)
 	aicon_pos = g_hudmins + [g_hudres[0] - 48, g_hudres[1] - 42];
 
 	Cross_DrawSub(
-		"sprites/ofch1.spr_0.tga",
+		g_ofch1_spr,
 		[24,24],
 		[48/72,0],
 		[24/72,24/72]
@@ -321,7 +312,7 @@ w_displacer_hudpic(player pl, int selected, vector pos, float a)
 		drawsubpic(
 			pos,
 			[170,45],
-			"sprites/640hudof02.spr_0.tga",
+			g_ofhud2_spr,
 			[0,180/256],
 			[170/256,45/256],
 			hud_col,
@@ -332,7 +323,7 @@ w_displacer_hudpic(player pl, int selected, vector pos, float a)
 		drawsubpic(
 			pos,
 			[170,45],
-			"sprites/640hudof01.spr_0.tga",
+			g_ofhud1_spr,
 			[0,180/256],
 			[170/256,45/256],
 			hud_col,

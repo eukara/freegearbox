@@ -1,0 +1,23 @@
+op4ctf_bm.flag_taken
+{
+	attenuation none
+	sample "ctf/bm_flagtaken.wav"
+}
+
+op4ctf_bm.flag_capture
+{
+	attenuation none
+	sample "ctf/civ_flag_capture.wav"
+}
+
+op4ctf_op4.flag_taken
+{
+	attenuation none
+	sample "ctf/soldier_flagtaken.wav"
+}
+
+op4ctf_op4.flag_capture
+{
+	attenuation none
+	sample "ctf/marine_flag_capture.wav"
+}

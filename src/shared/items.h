@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2020 Marco Cawthorne <marco@icculus.org>
+ * Copyright (c) 2016-2023 Marco Cawthorne <marco@icculus.org>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -43,9 +43,17 @@
 
 #define ITEM_SHOCKRIFLE		0x01000000i
 #define ITEM_SPORELAUNCHER	0x02000000i
-#define ITEM_UNUSED27		0x04000000i
-#define ITEM_UNUSED28		0x08000000i
-#define ITEM_UNUSED29		0x10000000i
-#define ITEM_UNUSED30		0x20000000i
-#define ITEM_UNUSED31		0x40000000i
-#define ITEM_UNUSED32		0x80000000i
+#define ITEM_CTF_JUMPPACK		0x04000000i
+#define ITEM_CTF_SHIELD		0x08000000i
+#define ITEM_CTF_HEALTH		0x10000000i
+#define ITEM_CTF_DEATH		0x20000000i
+#define ITEM_CTF_BACKPACK		0x40000000i
+#define ITEM_GOALITEM		0x80000000i
+
+
+typedef enum
+{
+	CTFFLAG_IDLE = 0,
+	CTFFLAG_TAKEN,
+	CTFFlAG_MISSING
+} ctfflag_state;

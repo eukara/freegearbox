@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2020 Marco Cawthorne <marco@icculus.org>
+ * Copyright (c) 2016-2023 Marco Cawthorne <marco@icculus.org>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -18,3 +18,4 @@
 #include "gamerules_ctf.h"
 #include "../../../valve/src/server/items.h"
 #include "../../../valve/src/server/flashlight.h"
+#include "../../../valve/src/server/HLXenMonster.h"

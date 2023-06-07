@@ -14,15 +14,6 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*QUAKED weapon_pipewrench (0 0 1) (-16 -16 0) (16 16 32)
-"model" "models/w_pipe_wrench.mdl"
-
-HALF-LIFE: OPPOSING FORCE (1999) ENTITY
-
-Pipe-Wrench Weapon
-
-*/
-
 enum
 {
 	PIPE_IDLE1,
@@ -292,7 +283,7 @@ w_pipewrench_hudpic(player pl, int selected, vector pos, float a)
 		drawsubpic(
 			pos,
 			[170,45],
-			"sprites/640hudof02.spr_0.tga",
+			g_ofhud2_spr,
 			[0,0],
 			[170/256,45/256],
 			g_hud_color,
@@ -303,7 +294,7 @@ w_pipewrench_hudpic(player pl, int selected, vector pos, float a)
 		drawsubpic(
 			pos,
 			[170,45],
-			"sprites/640hudof01.spr_0.tga",
+			g_ofhud1_spr,
 			[0,0],
 			[170/256,45/256],
 			g_hud_color,

@@ -15,7 +15,7 @@
  */
 
 float(entity foo, float chanid) getchannellevel = #0;
-
+void VGUI_ChooseTeam(void);
 
 /*
 =================
@@ -27,12 +27,17 @@ Comparable to worldspawn in SSQC in that it's mostly used for precaches
 void
 ClientGame_Init(float apilevel, string enginename, float engineversion)
 {
+	registercommand("changeteam");
+	registercommand("changeclass");
 	Obituary_Init();
 }
 
 void
 ClientGame_InitDone(void)
 {
+	if (OP4_IsCTF()) {
+		VGUI_ChooseTeam();
+	}
 }
 
 void
@@ -49,15 +54,18 @@ ClientGame_RendererRestart(string rstr)
 	FX_Spark_Init();
 	FX_Impact_Init();
 
-	precache_model("sprites/640hudof01.spr");
-	precache_model("sprites/640hudof02.spr");
-	precache_model("sprites/640hudof03.spr");
-	precache_model("sprites/640hudof04.spr");
-	precache_model("sprites/640hudof05.spr");
-	precache_model("sprites/640hudof06.spr");
-	precache_model("sprites/ofch1.spr");
-	precache_model("sprites/ofch2.spr");
+	g_ofhud1_spr = spriteframe("sprites/640hudof01.spr", 0, 0.0f);
+	g_ofhud2_spr = spriteframe("sprites/640hudof02.spr", 0, 0.0f);
+	g_ofhud3_spr = spriteframe("sprites/640hudof03.spr", 0, 0.0f);
+	g_ofhud4_spr = spriteframe("sprites/640hudof04.spr", 0, 0.0f);
+	g_ofhud5_spr = spriteframe("sprites/640hudof05.spr", 0, 0.0f);
+	g_ofhud6_spr = spriteframe("sprites/640hudof06.spr", 0, 0.0f);
+	g_ofch1_spr = spriteframe("sprites/ofch1.spr", 0, 0.0f);
+	g_ofch2_spr = spriteframe("sprites/ofch2.spr", 0, 0.0f);
 	precache_model("sprites/320hudof01.spr");
+
+	g_ctfhud1_spr = spriteframe("sprites/ctf_hud1.spr", 0, 0.0f);
+	g_ctfhud2_spr = spriteframe("sprites/ctf_hud1.spr", 0, 0.0f);
 
 	/* there's also muzzleflash.spr, but that's just MUZZLE_SMALL again */
 	MUZZLE_RIFLE = (int)getmodelindex("sprites/muzzleflash1.spr");

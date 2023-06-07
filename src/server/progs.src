@@ -20,6 +20,7 @@ defs.h
 
 ../shared/include.src
 
+../../../valve/src/server/HLXenMonster.qc
 ../../../valve/src/server/monster_apache.qc
 ../../../valve/src/server/monster_alien_controller.qc
 ../../../valve/src/server/monster_alien_grunt.qc
@@ -72,6 +73,19 @@ monster_recruit.qc
 ../../../valve/src/server/xen_plantlight.qc
 ../../../valve/src/server/ammo.qc
 ammo_op4.qc
+
+ctfitem.qc
+item_ctfflag.qc
+item_ctfbase.qc
+info_ctfspawn.qc
+info_ctfdetect.qc
+item_ctflongjump.qc
+item_ctfportablehev.qc
+item_ctfregeneration.qc
+item_ctfaccelerator.qc
+item_ctfbackpack.qc
+info_ctfspawn_powerup.qc
+trigger_ctfgeneric.qc
 
 ../../../src/botlib/include.src
 
