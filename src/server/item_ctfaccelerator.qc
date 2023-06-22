@@ -45,6 +45,8 @@ void
 item_ctfaccelerator::Spawned(void)
 {
 	m_iItemID = ITEM_CTF_DEATH;
+	m_strScoreIcon = "score_ctfaccel";
+	m_vecScoreColor = [1,0,0];
 	model = "models/w_accelerator.mdl";
 	super::Spawned();
 }

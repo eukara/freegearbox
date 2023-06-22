@@ -31,12 +31,23 @@ OP4CTFRules::InitPostEnts(void)
 
 	forceinfokey(world, "ctfflag_1", "0");
 	forceinfokey(world, "ctfflag_2", "0");
+	forceinfokey(world, "scorepoints", "1");
 
 	Sound_Precache("op4ctf_bm.flag_taken");
 	Sound_Precache("op4ctf_bm.flag_capture");
 
 	Sound_Precache("op4ctf_op4.flag_taken");
 	Sound_Precache("op4ctf_op4.flag_capture");
+}
+
+void
+OP4CTFRules::PlayerConnect(NSClientPlayer pp)
+{
+	super::PlayerConnect(pp);
+	pp.frags = 0;
+	forceinfokey(pp, "*deaths", "0");
+	forceinfokey(pp, "*score", "0");
+	forceinfokey(pp, "*icon1", "");
 }
 
 void
@@ -105,6 +116,8 @@ OP4CTFRules::CaptureFlag(NSClientPlayer pp)
 	/* detach flag */
 	pl.g_items &= ~ITEM_GOALITEM;
 	pl.flagmodel = 0;
+	pl.score += 10;
+	forceinfokey(pl, "*icon1", "");
 
 	if (pl.team == 1) {
 		flagName = "info_ctfflag_2";

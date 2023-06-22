@@ -45,6 +45,8 @@ void
 item_ctfportablehev::Spawned(void)
 {
 	m_iItemID = ITEM_CTF_SHIELD;
+	m_strScoreIcon = "score_ctfphev";
+	m_vecScoreColor = [0.25,0.25,1];
 	model = "models/w_porthev.mdl";
 	super::Spawned();
 

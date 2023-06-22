@@ -42,6 +42,8 @@ void
 item_ctfregeneration::Spawned(void)
 {
 	m_iItemID = ITEM_CTF_HEALTH;
+	m_strScoreIcon = "score_ctfregen";
+	m_vecScoreColor = [0, 1, 0];
 	model = "models/w_health.mdl";
 	super::Spawned();
 }

@@ -87,8 +87,21 @@ item_ctfflag::Touch(entity eToucher)
 
 	m_eActivator = pl;
 	pl.g_items |= ITEM_GOALITEM;
+	forceinfokey(pl, "*icon1", "score_flag");
+
+	if (eToucher.team == 1) {
+		forceinfokey(pl, "*icon1_r", "0");
+		forceinfokey(pl, "*icon1_g", "1");
+		forceinfokey(pl, "*icon1_b", "0");
+	} else {
+		forceinfokey(pl, "*icon1_r", "1");
+		forceinfokey(pl, "*icon1_g", "1");
+		forceinfokey(pl, "*icon1_b", "0");
+	}
+
 	pl.flagmodel = GetModelindex();
 	pl.flagskin = GetSkin();
+	pl.score += 1;
 	FlagTaken();
 }
 

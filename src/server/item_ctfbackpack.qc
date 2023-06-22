@@ -45,6 +45,8 @@ void
 item_ctfbackpack::Spawned(void)
 {
 	m_iItemID = ITEM_CTF_BACKPACK;
+	m_strScoreIcon = "score_ctfbpack";
+	m_vecScoreColor = [1,1,0];
 	model = "models/w_backpack.mdl";
 	super::Spawned();
 }

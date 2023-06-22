@@ -40,12 +40,14 @@ ClientGame_InitDone(void)
 	}
 }
 
+void HLSprite_Init(void);
 void
 ClientGame_RendererRestart(string rstr)
 {
 	Nightvision_Init();
 	Obituary_Precache();
 	Damage_Precache();
+	HLSprite_Init();
 
 	FX_Blood_Init();
 	FX_BreakModel_Init();

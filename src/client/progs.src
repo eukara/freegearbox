@@ -32,6 +32,7 @@ cmds.qc
 ../../../valve/src/client/viewmodel.qc
 ../../../valve/src/client/view.qc
 ../../../valve/src/client/obituary.qc
+../../../valve/src/client/hud_sprite.qc
 ../../../valve/src/client/hud_ammonotify.qc
 ../../../valve/src/client/hud_dmgnotify.qc
 ../../../valve/src/client/hud_itemnotify.qc

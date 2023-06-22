@@ -33,9 +33,16 @@ When detected, will enable Capture The Flag on the map that it's on.
 This entity was introduced in Half-Life: Opposing Force (1999)
 */
 
-class info_ctfdetect
+class info_ctfdetect:NSEntity
 {
+public:
 	void info_ctfdetect(void);
+
+	virtual void SpawnKey(string, string);
+
+private:
+	string m_strScoreIconBM;
+	string m_strScoreIconOF;
 };
 info_ctfdetect g_ctf;
 
@@ -43,4 +50,17 @@ void
 info_ctfdetect::info_ctfdetect(void)
 {
 	g_ctf = this;
+}
+
+void
+info_ctfdetect::SpawnKey(string strKey, string strValue)
+{
+	switch (strKey) {
+	case "score_icon_namebm":
+		m_strScoreIconBM = ReadString(strValue);
+		break;
+	case "score_icon_nameof":
+		m_strScoreIconOF = ReadString(strValue);
+		break;
+	}
 }

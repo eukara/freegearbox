@@ -27,12 +27,17 @@ public:
 private:
 	int m_iItemID;
 	float m_iTeamID;
+	string m_strScoreIcon;
+	vector m_vecScoreColor;
 };
 
 void
 OP4CTFItem::OP4CTFItem(void)
 {
 	m_iItemID = 0i;
+	m_strScoreIcon = __NULL__;
+	m_iTeamID = 0;
+	m_vecScoreColor = [1,1,1];
 }
 
 void
@@ -73,6 +78,11 @@ OP4CTFItem::Touch(entity toucherEntity)
 		return;
 
 	pl.g_items |= m_iItemID; /* add to inventory */
+	
+	forceinfokey(pl, "*icon2", m_strScoreIcon);
+	forceinfokey(pl, "*icon2_r", ftos(m_vecScoreColor[0]));
+	forceinfokey(pl, "*icon2_g", ftos(m_vecScoreColor[1]));
+	forceinfokey(pl, "*icon2_b", ftos(m_vecScoreColor[2]));
 	Destroy();
 }
 

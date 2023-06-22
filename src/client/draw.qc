@@ -24,7 +24,7 @@ OP4CTF_DrawHud(player pl)
 	vector iconOP4Ofs;
 	bool myTeam = getplayerkeyfloat(player_localnum, "*team");
 
-	iconPos = g_hudmins + [16, g_hudres[1] - 128];
+	iconPos = g_hudmins + [16, g_hudres[1] - 142];
 
 	if (serverkeyfloat("ctfflag_1") == CTFFLAG_IDLE)
 		iconBMOfs = [67/256, 77/256];

@@ -45,6 +45,8 @@ void
 item_ctflongjump::Spawned(void)
 {
 	m_iItemID = ITEM_CTF_JUMPPACK;
+	m_strScoreIcon = "score_ctfljump";
+	m_vecScoreColor = [1,0.5,0];
 	model = "models/w_jumppack.mdl";
 	super::Spawned();
 }
