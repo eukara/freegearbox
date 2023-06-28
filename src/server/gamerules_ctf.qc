@@ -48,6 +48,7 @@ OP4CTFRules::PlayerConnect(NSClientPlayer pp)
 	forceinfokey(pp, "*deaths", "0");
 	forceinfokey(pp, "*score", "0");
 	forceinfokey(pp, "*icon1", "");
+	forceinfokey(pp, "*icon2", "");
 }
 
 void
