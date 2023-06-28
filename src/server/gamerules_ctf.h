@@ -23,6 +23,7 @@ class OP4CTFRules:HLMultiplayerRules
 	virtual void PlayerDeath(NSClientPlayer);
 	virtual void PlayerConnect(NSClientPlayer);
 	virtual void PlayerDisconnect(NSClientPlayer);
+	virtual bool ConsoleCommand(NSClientPlayer, string);
 
 	nonvirtual void CharacterSpawn(NSClientPlayer, string);
 	nonvirtual void CaptureFlag(NSClientPlayer);

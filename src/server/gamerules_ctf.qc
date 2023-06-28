@@ -73,6 +73,35 @@ OP4CTFRules::PlayerSpawn(NSClientPlayer pp)
 	CharacterSpawn(pp, pl.m_oldModel);
 }
 
+void CSEv_TeamJoin_f(float);
+void CSEv_ClassJoin_f(float);
+
+bool
+OP4CTFRules::ConsoleCommand(NSClientPlayer pp, string cmd)
+{
+	static void OP4CTFRules_BotJoin(void) {
+		float tag = (random() < 0.5) ? 1 : 2;
+		CSEv_TeamJoin_f(tag);
+		CSEv_ClassJoin_f(0);
+	}
+
+	tokenize(cmd);
+
+	switch (argv(0)) {
+	case "bot_add":
+		entity bot_ent = Bot_AddQuick();
+		if (bot_ent) {
+			bot_ent.think = OP4CTFRules_BotJoin;
+			bot_ent.nextthink = time;
+		}
+		break;
+	default:
+		return (false);
+	}
+
+	return (true);
+}
+
 void
 OP4CTFRules::CharacterSpawn(NSClientPlayer playerEnt, string playerModel)
 {
