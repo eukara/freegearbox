@@ -24,6 +24,7 @@ class OP4CTFRules:HLMultiplayerRules
 	virtual void PlayerConnect(NSClientPlayer);
 	virtual void PlayerDisconnect(NSClientPlayer);
 	virtual bool ConsoleCommand(NSClientPlayer, string);
+	virtual bool IsTeamplay(void);
 
 	nonvirtual void CharacterSpawn(NSClientPlayer, string);
 	nonvirtual void CaptureFlag(NSClientPlayer);

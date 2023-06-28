@@ -52,4 +52,5 @@ item_ctfbase::Respawn(void)
 	SetModel(GetSpawnModel());
 	SetSize([-16, -16, 0], [16, 16, 72]);
 	DropToFloor();
+	botinfo = BOTINFO_TEAM_GOALCAPTURE;
 }

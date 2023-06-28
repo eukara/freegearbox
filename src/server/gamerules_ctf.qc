@@ -73,6 +73,12 @@ OP4CTFRules::PlayerSpawn(NSClientPlayer pp)
 	CharacterSpawn(pp, pl.m_oldModel);
 }
 
+bool
+OP4CTFRules::IsTeamplay(void)
+{
+	return true;
+}
+
 void CSEv_TeamJoin_f(float);
 void CSEv_ClassJoin_f(float);
 
@@ -82,7 +88,7 @@ OP4CTFRules::ConsoleCommand(NSClientPlayer pp, string cmd)
 	static void OP4CTFRules_BotJoin(void) {
 		float tag = (random() < 0.5) ? 1 : 2;
 		CSEv_TeamJoin_f(tag);
-		CSEv_ClassJoin_f(0);
+		CSEv_ClassJoin_f(tag == 1 ? 0 : 13);
 	}
 
 	tokenize(cmd);
@@ -145,6 +151,7 @@ OP4CTFRules::CaptureFlag(NSClientPlayer pp)
 
 	/* detach flag */
 	pl.g_items &= ~ITEM_GOALITEM;
+	pl.flags &= ~FL_GOALITEM;
 	pl.flagmodel = 0;
 	pl.score += 10;
 	forceinfokey(pl, "*icon1", "");

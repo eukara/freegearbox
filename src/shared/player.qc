@@ -176,6 +176,7 @@ class player:NSClientPlayer
 	virtual void(void) PredictPreFrame;
 	virtual void(void) PredictPostFrame;
 	virtual void UpdateAliveCam(void);
+	virtual void OnRemoveEntity(void);
 #else
 	float m_flPickUpTime;
 	virtual void(void) EvaluateEntity;
@@ -296,6 +297,16 @@ player::UpdatePlayerAttachments(bool visible)
 void Weapons_AmmoUpdate(entity);
 void HUD_AmmoNotify_Check(player pl);
 void HUD_ItemNotify_Check(player pl);
+
+void
+player::OnRemoveEntity(void)
+{
+	super::OnRemoveEntity();
+
+	if (m_eFlag) {
+		m_eFlag.Destroy();
+	}
+}
 /*
 =================
 player::ReceiveEntity

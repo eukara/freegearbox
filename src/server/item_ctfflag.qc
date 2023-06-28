@@ -61,10 +61,13 @@ item_ctfflag::Respawn(void)
 	SetSolid(SOLID_TRIGGER);
 	DropToFloor();
 	SetFrame(4);
+	
+	botinfo = BOTINFO_TEAM_GOALITEM;
 
 	classname = strcat("info_ctfflag_", ftos(m_iTeamID));
 	forceinfokey(world, strcat("ctfflag_", ftos(m_iTeamID)), ftos(CTFFLAG_IDLE));
 	m_eActivator = __NULL__;
+	team = m_iTeamID;
 }
 
 void
@@ -87,6 +90,7 @@ item_ctfflag::Touch(entity eToucher)
 
 	m_eActivator = pl;
 	pl.g_items |= ITEM_GOALITEM;
+	pl.flags |= FL_GOALITEM;
 	forceinfokey(pl, "*icon1", "score_flag");
 
 	if (eToucher.team == 1) {
