@@ -77,9 +77,10 @@ int
 w_displacer_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
+	int addAmmo = (startammo == -1) ? 40 : startammo;
 
 	if (pl.ammo_uranium < MAX_A_URANIUM) {
-		pl.ammo_uranium = bound(0, pl.ammo_uranium + 40, MAX_A_URANIUM);
+		pl.ammo_uranium = bound(0, pl.ammo_uranium + addAmmo, MAX_A_URANIUM);
 	} else {
 		return (0);
 	}

@@ -28,8 +28,13 @@ player::PowerupThink(void)
 		health += 1;
 		m_flPickUpTime = time + 0.5f;
 	} else if (g_items & ITEM_CTF_BACKPACK) {
-		print("add ammo!\n");
-		m_flPickUpTime = time + 0.5f;
+		m_flPickUpTime = time + 1.0;
+
+		if (activeweapon) {
+			if (Weapons_AddItem(this, activeweapon, 1)) {
+				print("added ammo\n");
+			}
+		}
 	}
 }
 #endif

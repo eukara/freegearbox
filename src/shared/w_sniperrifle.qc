@@ -44,12 +44,13 @@ int
 w_sniperrifle_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
+	int addAmmo = (startammo == -1) ? 5 : startammo;
 
 	if (new) {
-		pl.sniper_mag = 5;
+		pl.sniper_mag = addAmmo;
 	} else {
 		if (pl.ammo_762 < MAX_A_762) {
-			pl.ammo_762 = bound(0, pl.ammo_762 + 5, MAX_A_762);
+			pl.ammo_762 = bound(0, pl.ammo_762 + addAmmo, MAX_A_762);
 		} else {
 			return (0);
 		}

@@ -180,12 +180,13 @@ int
 w_sporelauncher_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
+	int addAmmo = (startammo == -1) ? 5 : startammo;
 
 	if (new) {
-		pl.sporelauncher_mag = 5;
+		pl.sporelauncher_mag = addAmmo;
 	} else {
 		if (pl.ammo_spore < MAX_A_SPORE) {
-			pl.ammo_spore = bound(0, pl.ammo_spore + 5, MAX_A_SPORE);
+			pl.ammo_spore = bound(0, pl.ammo_spore + addAmmo, MAX_A_SPORE);
 		} else {
 			return (0);
 		}

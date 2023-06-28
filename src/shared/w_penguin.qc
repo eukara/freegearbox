@@ -28,9 +28,10 @@ int
 w_penguin_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
+	int addAmmo = (startammo == -1) ? 3 : startammo;
 
 	if (pl.ammo_penguin < MAX_A_PENGUIN) {
-		pl.ammo_penguin = bound(0, pl.ammo_penguin + 3, MAX_A_PENGUIN);
+		pl.ammo_penguin = bound(0, pl.ammo_penguin + addAmmo, MAX_A_PENGUIN);
 	} else {
 		return (0);
 	}

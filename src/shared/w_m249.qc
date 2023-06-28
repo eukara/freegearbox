@@ -45,12 +45,13 @@ int
 w_m249_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
+	int addAmmo = (startammo == -1) ? 50 : startammo;
 
 	if (new) {
-		pl.m249_mag = 50;
+		pl.m249_mag = addAmmo;
 	} else {
 		if (pl.ammo_556 < MAX_A_556) {
-			pl.ammo_556 = bound(0, pl.ammo_556 + 50, MAX_A_556);
+			pl.ammo_556 = bound(0, pl.ammo_556 + addAmmo, MAX_A_556);
 		} else {
 			return (0);
 		}

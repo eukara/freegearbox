@@ -20,41 +20,7 @@ defs.h
 
 ../shared/include.src
 
-../../../valve/src/server/HLXenMonster.qc
-../../../valve/src/server/monster_apache.qc
-../../../valve/src/server/monster_alien_controller.qc
-../../../valve/src/server/monster_alien_grunt.qc
-../../../valve/src/server/monster_alien_slave.qc
-../../../valve/src/server/monster_barnacle.qc
-../../../valve/src/server/monster_barney.qc
-../../../valve/src/server/monster_barney_dead.qc
-../../../valve/src/server/monster_bigmomma.qc
-../../../valve/src/server/monster_bloater.qc
-../../../valve/src/server/monster_bullchicken.qc
-../../../valve/src/server/monster_cockroach.qc
-../../../valve/src/server/monster_flyer_flock.qc
-../../../valve/src/server/monster_gargantua.qc
-../../../valve/src/server/monster_gman.qc
-../../../valve/src/server/monster_headcrab.qc
-../../../valve/src/server/monster_babycrab.qc
-../../../valve/src/server/monster_hevsuit_dead.qc
-../../../valve/src/server/monster_houndeye.qc
-../../../valve/src/server/monster_human_grunt.qc
-../../../valve/src/server/monster_hgrunt_dead.qc
-../../../valve/src/server/monster_human_assassin.qc
-../../../valve/src/server/monster_ichthyosaur.qc
-../../../valve/src/server/monster_leech.qc
-../../../valve/src/server/monster_miniturret.qc
-../../../valve/src/server/monster_nihilanth.qc
-../../../valve/src/server/monster_osprey.qc
-../../../valve/src/server/monster_rat.qc
-../../../valve/src/server/monster_scientist_dead.qc
-../../../valve/src/server/monster_sitting_scientist.qc
-../../../valve/src/server/monster_scientist.qc
-../../../valve/src/server/monster_sentry.qc
-../../../valve/src/server/monster_tentacle.qc
-../../../valve/src/server/monster_turret.qc
-../../../valve/src/server/monster_zombie.qc
+
 monster_drillsergeant.qc
 monster_recruit.qc
 

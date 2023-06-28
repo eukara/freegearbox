@@ -47,12 +47,13 @@ int
 w_eagle_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
+	int addAmmo = (startammo == -1) ? 7 : startammo;
 
 	if (new) {
-		pl.eagle_mag = 7;
+		pl.eagle_mag = addAmmo;
 	} else {
 		if (pl.ammo_357 < MAX_A_357) {
-			pl.ammo_357 = bound(0, pl.ammo_357 + 7, MAX_A_357);
+			pl.ammo_357 = bound(0, pl.ammo_357 + addAmmo, MAX_A_357);
 		} else {
 			return (0);
 		}
