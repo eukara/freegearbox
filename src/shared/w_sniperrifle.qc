@@ -210,7 +210,7 @@ w_sniperrifle_crosshair(player pl)
 		);
 	} else {
 		Cross_Draw(
-			g_ofch1_spr,
+			g_ofch2_spr,
 			[256,256]
 		);
 	}
