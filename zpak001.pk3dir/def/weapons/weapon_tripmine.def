@@ -8,7 +8,8 @@ entityDef weapon_tripmine
 
 	"spawnclass"		"NSItem"
 	"model"		"models/v_tripmine.mdl"
-	"body"		"2"
+	"body0"		"2"
+	"body1"		"2"
 	"frame"		"8"
 	"inv_item"		"17"
 	"snd_acquire"		"weapon.pickup"
