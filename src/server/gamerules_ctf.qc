@@ -240,7 +240,7 @@ void
 CSEv_ClassJoin_f(float classSelection)
 {
 	OP4CTFRules rule = (OP4CTFRules)g_grMode;
-	string playerModel;
+	string playerModel = "";
 	player pl = (player)self;
 
 	/* random black mesa char */
@@ -289,6 +289,10 @@ CSEv_ClassJoin_f(float classSelection)
 	case 12:
 		playerModel = "models/player/tower/tower.mdl";
 		break;
+	}
+
+	if (playerModel == "") {
+		error("invalid model selection, erroring out");
 	}
 
 	/* if we're alive, kill them (we need to drop the flag anyhow */

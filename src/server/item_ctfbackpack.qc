@@ -49,4 +49,6 @@ item_ctfbackpack::Spawned(void)
 	m_vecScoreColor = [1,1,0];
 	model = "models/w_backpack.mdl";
 	super::Spawned();
+
+	Sound_Precache("op4ctf_backpack.refresh");
 }

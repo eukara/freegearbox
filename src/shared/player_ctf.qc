@@ -32,7 +32,7 @@ player::PowerupThink(void)
 
 		if (activeweapon) {
 			if (Weapons_AddItem(this, activeweapon, 1)) {
-				print("added ammo\n");
+				StartSoundDef("op4ctf_backpack.refresh", CHAN_ITEM, false);
 			}
 		}
 	}

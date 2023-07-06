@@ -21,3 +21,9 @@ op4ctf_op4.flag_capture
 	attenuation none
 	sample "ctf/marine_flag_capture.wav"
 }
+
+op4ctf_backpack.refresh
+{
+	attenuation none
+	sample "buttons/blip1.wav"
+}
