@@ -8,7 +8,7 @@ entityDef weapon_pipewrench
 
 	"spawnclass"		"NSItem"
 	"model"		"models/w_pipe_wrench.mdl"
-	"inv_item"		"2"
+	"inv_item"		"$WEAPON_PIPEWRENCH"
 	"snd_acquire"		"weapon.pickup"
 	"snd_respawn"		"item.respawn"
 }

@@ -1,14 +1,15 @@
-entityDef weapon_sporelauncher
+entityDef weapon_shockrifle
 {
 	"editor_color"		".3 .3 1"
 	"editor_mins"		"-16 -16 -16"
 	"editor_maxs"		"16 16 16"
-	"editor_usage"		"Sporelauncher"
+	"editor_usage"		"Shockrifle"
 	"editor_rotatable"	"1"
 
 	"spawnclass"		"NSItem"
-	"model"		"models/w_spore_launcher.mdl"
-	"inv_item"		"23"
+	"model"		"models/w_shock.mdl"
+	"inv_item"		"$WEAPON_SHOCKRIFLE"
 	"snd_acquire"		"weapon.pickup"
 	"snd_respawn"		"item.respawn"
 }
+

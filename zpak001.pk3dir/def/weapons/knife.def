@@ -1,14 +1,14 @@
-entityDef weapon_penguin
+entityDef weapon_knife
 {
 	"editor_color"		".3 .3 1"
 	"editor_mins"		"-16 -16 -16"
 	"editor_maxs"		"16 16 16"
-	"editor_usage"		"Penguin"
+	"editor_usage"		"Knife"
 	"editor_rotatable"	"1"
 
 	"spawnclass"		"NSItem"
-	"model"		"models/w_penguinnest.mdl"
-	"inv_item"		"19"
+	"model"		"models/w_knife.mdl"
+	"inv_item"		"$WEAPON_KNIFE"
 	"snd_acquire"		"weapon.pickup"
 	"snd_respawn"		"item.respawn"
 }

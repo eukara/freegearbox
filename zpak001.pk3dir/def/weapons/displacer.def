@@ -1,19 +1,14 @@
-entityDef weapon_357
+entityDef weapon_displacer
 {
 	"editor_color"		".3 .3 1"
 	"editor_mins"		"-16 -16 -16"
 	"editor_maxs"		"16 16 16"
-	"editor_usage"		".367 Revolver"
+	"editor_usage"		"Displacer"
 	"editor_rotatable"	"1"
 
 	"spawnclass"		"NSItem"
-	"model"		"models/w_357.mdl"
-	"inv_item"		"6"
+	"model"		"models/w_displacer.mdl"
+	"inv_item"		"$WEAPON_DISPLACER"
 	"snd_acquire"		"weapon.pickup"
 	"snd_respawn"		"item.respawn"
-}
-
-entityDef weapon_python
-{
-	"spawnclass" "weapon_357"
 }

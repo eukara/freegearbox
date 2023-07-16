@@ -1,19 +1,14 @@
-entityDef weapon_9mmhandgun
+entityDef weapon_m249
 {
 	"editor_color"		".3 .3 1"
 	"editor_mins"		"-16 -16 -16"
 	"editor_maxs"		"16 16 16"
-	"editor_usage"		"9mm Handgun"
+	"editor_usage"		"M249"
 	"editor_rotatable"	"1"
 
 	"spawnclass"		"NSItem"
-	"model"		"models/w_9mmhandgun.mdl"
-	"inv_item"		"5"
+	"model"		"models/w_saw.mdl"
+	"inv_item"		"$WEAPON_M249"
 	"snd_acquire"		"weapon.pickup"
 	"snd_respawn"		"item.respawn"
-}
-
-entityDef weapon_glock
-{
-	"spawnclass" "weapon_9mmhandgun"
 }
