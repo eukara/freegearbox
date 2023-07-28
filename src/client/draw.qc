@@ -19,9 +19,10 @@ void HUD_DrawNums(float fNumber, vector vecPos, float fAlpha, vector vColor);
 void
 OP4CTF_DrawHud(player pl)
 {
-	vector iconPos;
-	vector iconBMOfs;
-	vector iconOP4Ofs;
+	vector iconPos = g_vec_null;
+	vector iconBMOfs = g_vec_null;
+	vector iconOP4Ofs = g_vec_null;
+
 	bool myTeam = getplayerkeyfloat(player_localnum, "*team");
 
 	iconPos = g_hudmins + [16, g_hudres[1] - 142];

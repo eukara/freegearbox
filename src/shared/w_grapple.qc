@@ -92,6 +92,7 @@ w_grapple_holster(player pl)
 }
 
 /* called once the tongue hits a wall */
+#ifdef SERVER
 void
 Grapple_Touch(void)
 {
@@ -100,8 +101,9 @@ Grapple_Touch(void)
 	pl.hook.touch = __NULL__;
 	pl.hook.velocity = [0,0,0];
 	pl.hook.solid = SOLID_NOT;
-	pl.a_ammo1 = 1;
+	pl.grapvelocity = (pl.hook.origin);
 }
+#endif
 
 #ifdef CLIENT
 /* draw the tongue from a to b */
@@ -136,12 +138,13 @@ grapple_predraw(void)
 void
 w_grapple_primary(player pl)
 {
-
+#ifdef SERVER
+	/* it's already been spawned. */
 	if (pl.hook != __NULL__) {
 		/* play the looping reel anim once */
 		if (pl.a_ammo1 == 1) {
 			pl.a_ammo1 = 2;
-			Weapons_ViewAnimation(pl, BARN_FIRETRAVEL);
+			//Weapons_ViewAnimation(pl, BARN_FIRETRAVEL);
 		} else if (pl.a_ammo1 == 2) {
 			pl.hook.skin = 1; /* grappled */
 		}
@@ -150,29 +153,18 @@ w_grapple_primary(player pl)
 			return;
 		}
 
-#ifdef SERVER
 		Weapons_MakeVectors(pl);
 		vector src = Weapons_GetCameraPos(pl);
 		traceline(src, src + (v_forward * 32), FALSE, pl);
 		if (trace_ent.takedamage == DAMAGE_YES && trace_ent.iBleeds) {
 			Damage_Apply(trace_ent, pl, 25, WEAPON_GRAPPLE, DMG_GENERIC);
 		}
-#endif
 		pl.w_attack_next = 0.5f;
 		return;
 	}
 
 	Weapons_MakeVectors(pl);
 	pl.hook = spawn();
-
-#ifdef CLIENT
-	/*setmodel(pl.hook, "models/v_bgrap_tonguetip.mdl");*/
-	pl.hook.drawmask = MASK_ENGINE;
-	pl.hook.predraw = grapple_predraw;
-#else
-	sound(pl, CHAN_WEAPON, "weapons/bgrapple_fire.wav", 1.0, ATTN_NORM);
-	sound(pl, CHAN_VOICE, "weapons/bgrapple_pull.wav", 1.0, ATTN_NORM);
-#endif
 	setorigin(pl.hook, Weapons_GetCameraPos(pl) + (v_forward * 16));
 	pl.hook.owner = self;
 	pl.hook.velocity = v_forward * 1500;
@@ -180,38 +172,48 @@ w_grapple_primary(player pl)
 	pl.hook.solid = SOLID_BBOX;
 	pl.hook.angles = vectoangles(pl.hook.velocity);
 	pl.hook.touch = Grapple_Touch;
+	setmodel(pl.hook, "models/hook.mdl");
 	setsize(pl.hook, [0,0,0], [0,0,0]);
+#endif
+
+	if (pl.w_attack_next > 0.0) {
+		return;
+	}
+
 	Weapons_ViewAnimation(pl, BARN_FIRE);
+	pl.w_attack_next = 1.0f;
 }
 
 /* let go, hang */
 void
 w_grapple_secondary(player pl)
 {
+#ifdef SERVER
 	if (pl.hook == __NULL__) {
 		return;
 	}
 
 	pl.hook.skin = 0; /* ungrappled */
+	pl.grapvelocity = g_vec_null;
+	pl.w_attack_next = 0.0f;
+#endif
 }
 
 /* de-spawn and play idle anims */
 void
 w_grapple_release(player pl)
 {
-
+#ifdef SERVER
 	if (pl.hook != __NULL__) {
 		pl.a_ammo1 = 0; /* cache */
 		pl.hook.skin = 0; /* ungrappled */
 		remove(pl.hook);
-#ifdef CLIENT
-		Weapons_ViewAnimation(pl, BARN_FIRERELEASE);
-#else
-		sound(pl, CHAN_VOICE, "weapons/bgrapple_release.wav", 1.0, ATTN_NORM);
-#endif
 		pl.w_idle_next = 1.0f;
 		pl.hook = __NULL__;
+		pl.grapvelocity = g_vec_null;
+		pl.w_attack_next = 0.0f;
 	}
+#endif
 
 	if (pl.w_idle_next > 0.0) {
 		return;

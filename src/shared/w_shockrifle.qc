@@ -107,7 +107,7 @@ w_shockrifle_shoothornet(player pl)
 		if (other.iBleeds) {
 			FX_Blood(trace_endpos, [1,0,0]);
 		} else {
-			FX_Spark(self.origin, trace_plane_normal);
+			pointparticles(particleeffectnum("fx_spark.main"), trace_endpos, trace_plane_normal, 1);
 		}
 		remove(self);
 	}

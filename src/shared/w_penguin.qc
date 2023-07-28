@@ -130,14 +130,9 @@ penguin_die(void)
 	self.health = 0;
 
 	/* now we can explodededededed */
-	FX_Explosion(self.origin);
-	Damage_Radius(self.origin, self.owner, 150, 150 * 2.5f, TRUE, WEAPON_PENGUIN);
-
-	if (random() < 0.5) {
-		sound(self, 1, "weapons/explode3.wav", 1.0f, ATTN_NORM);
-	} else {
-		sound(self, 1, "weapons/explode4.wav", 1.0f, ATTN_NORM);
-	}
+	pointparticles(particleeffectnum("fx_explosion.main"), self.origin, [0,0,0], 1);
+	Damage_Radius(self.origin, self.owner, 150, 150 * 2.5f, TRUE, WEAPON_HANDGRENADE);
+	Sound_Play(self, CHAN_VOICE, "fx.explosion");
 
 	remove(self);
 }

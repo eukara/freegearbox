@@ -50,11 +50,6 @@ ClientGame_RendererRestart(string rstr)
 	HLSprite_Init();
 
 	FX_Blood_Init();
-	FX_BreakModel_Init();
-	FX_Explosion_Init();
-	FX_GibHuman_Init();
-	FX_Spark_Init();
-	FX_Impact_Init();
 
 	g_ofhud1_spr = spriteframe("sprites/640hudof01.spr", 0, 0.0f);
 	g_ofhud2_spr = spriteframe("sprites/640hudof02.spr", 0, 0.0f);
