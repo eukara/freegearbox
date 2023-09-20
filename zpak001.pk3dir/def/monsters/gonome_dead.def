@@ -1,0 +1,23 @@
+entityDef monster_gonome_dead
+{
+	"spawnclass"	"NSMonster"
+	"netname"	"Dead Gonome"
+	"model"		"models/gonome.mdl"
+	"health"	"skill:gonome_health"
+	"mins"		"-16 -16 0"
+	"maxs"		"16 16 72"
+	"propdata"	"actor_alien"
+
+	"dead"		"1"
+	"frame"		"19"
+
+	// Back
+	when "pose" equals "1" {
+		"frame"	"20"
+	}
+
+	// Side
+	when "pose" equals "2" {
+		"frame"	"22"
+	}
+}

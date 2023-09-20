@@ -1,0 +1,88 @@
+entityDef monster_otis
+{
+	"spawnclass"		"NSTalkMonster"
+	"model"			"models/otis.mdl"
+	"netname"		"Otis"
+	"health"		"skill:otis_health"
+	"mins"			"-16 -16 0"
+	"maxs"			"16 16 72"
+	"eye_height"		"64"
+	"team"			"0"
+	"propdata"		"actor_human"
+
+	"def_attack_ranged"	"ranged_otis_shot"
+	"attack_ranged_range"	"1024"
+	"reload_count"		"18"
+	"follow_on_use"		"1"
+	"weapon_drawn"		"0"
+	"body_on_draw"		"1:2"
+	"speed_walk"		"64"
+	"speed_run"		"364"
+
+	"snd_pain"		"monster_otis.pain"
+	"snd_death"		"monster_otis.die"
+	"snd_ranged_attack"	"weapon_deagle.fire"
+	"snd_reload"		"monster_human_grunt.reload"
+	"snd_thud"		"monster_generic.thud"
+
+	"talk_answer"		"!OT_ANSWER"
+	"talk_ask"		"!OT_QUESTION"
+	"talk_ally_shoot"	"!OT_SHOOT"
+	"talk_idle"		"!OT_IDLE"
+	"talk_hearing"		"!OT_HEAR"
+	"talk_smelling"		"!OT_SMELL"
+	"talk_stare"		"!OT_STARE"
+	"talk_survived"		"!OT_MORTAL"
+	"talk_wounded"		"!OT_WOUND"
+	"talk_player_ask"	"!OT_QUESTION"
+	"talk_player_greet"	"!OT_HELLO"
+	"talk_player_idle"	"!OT_IDLE"
+	"talk_player_wounded1"	"!OT_CUREA"
+	"talk_player_wounded2"	"!OT_CUREB"
+	"talk_player_wounded3"	"!OT_CUREC"
+	"talk_unfollow"		"!OT_WAIT"
+	"talk_follow"		"!OT_OK"
+	"talk_stop_follow"	"!OT_STOP"
+	"talk_deny_follow"	"!OT_POK"
+
+	"head"			"-1"
+	"bodystate"		"-1"
+
+	// pre-disaster
+	when "spawnflags" equals "256" {
+		"follow_on_use"		"0"
+	}
+
+	// Heads
+	// Bald
+	when "head" equals 0 {
+		"body2" "2"
+	}
+
+	// Hair
+	when "head" equals 1 {
+		"body2" "0"
+	}
+
+	// Weapons
+	// Holstered
+	when "bodystate" equals 0 {
+		"body1" "1"
+	}
+
+	// Drawn
+	when "bodystate" equals 1 {
+		"body1" "2"
+	}
+
+	// Donut
+	when "bodystate" equals 3 {
+		"body1" "3"
+	}
+}
+
+entityDef ranged_otis_shot
+{
+	"damage"	"skill:otis_dmg_shot"
+	"delay"		"0.5"
+}

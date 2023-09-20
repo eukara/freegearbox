@@ -1,0 +1,38 @@
+weapon_deagle.fire
+{
+	alerts
+	sample "weapons/de_shot1.wav"
+}
+
+weapon_m249.fire
+{
+	alerts
+	sample "weapons/saw_fire1.wav"
+	sample "weapons/saw_fire2.wav"
+	sample "weapons/saw_fire3.wav"
+}
+
+weapon_pipewrench.big_hit
+{
+	alerts
+	pitch 1.2
+	sample "weapons/pwrench_big_hit1.wav"
+}
+
+weapon_pipewrench.hit
+{
+	alerts
+	sample "weapons/pwrench_hit1.wav"
+	sample "weapons/pwrench_hit2.wav"
+}
+
+weapon_sporelauncher.bounce
+{
+	sample "weapons/splauncher_bounce.wav"
+}
+
+weapon_sporelauncher.explode
+{
+	alerts
+	sample "weapons/splauncher_impact.wav"
+}

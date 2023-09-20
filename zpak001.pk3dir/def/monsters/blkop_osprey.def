@@ -1,0 +1,9 @@
+entityDef monster_blkop_osprey
+{
+	"spawnclass"	"NSTalkMonster"
+	"inherit"	"monster_osprey"
+	"model"	"models/blkop_osprey.mdl"
+	"netname"		"Black Ops Osprey"
+	"health"	"skill:blkop_osprey_health"
+}
+

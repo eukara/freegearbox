@@ -1,0 +1,183 @@
+entityDef monster_human_grunt_ally
+{
+	"spawnclass"		"NSTalkMonster"
+	"model"			"models/hgrunt_opfor.mdl"
+	"netname"		"Friendly Human Grunt"
+	"health"		"skill:hgrunt_ally_health"
+	"mins"			"-16 -16 0"
+	"maxs"			"16 16 72"
+	"eye_height"		"64"
+	"team"			"0"
+	"propdata"		"actor_human"
+
+	// melee attack
+	"def_attack_melee"	"melee_hgrunt_ally_kick"
+	"attack_melee_range"	"96"
+	"snd_melee_attack"	"monster_human_grunt_ally.kick"
+
+	"reload_count"		"18"
+	"follow_on_use"		"1"
+	"weapon_drawn"		"0"
+	"body_on_draw"		"1:2"
+	"speed_walk"		"64"
+	"speed_run"		"364"
+
+	"snd_pain"		"monster_human_grunt_ally.pain"
+	"snd_death"		"monster_human_grunt_ally.die"
+	"snd_ranged_attack"	"weapon_deagle.fire"
+	"snd_reload"		"monster_human_grunt.reload"
+	"snd_thud"		"monster_generic.thud"
+
+	"talk_alert"		"!FG_ALERT"
+	"talk_answer"		"!FG_ANSWER"
+	"talk_ask"		"!FG_QUESTION"
+	"talk_ally_shoot"	"!FG_SHOOT"
+	"talk_idle"		"!FG_IDLE"
+	"talk_hearing"		"!FG_HEAR"
+	"talk_smelling"		"!FG_SMELL"
+	"talk_stare"		"!FG_STARE"
+	"talk_survived"		"!FG_MORTAL"
+	"talk_wounded"		"!FG_WOUND"
+	"talk_player_ask"	"!FG_QUESTION"
+	"talk_player_greet"	"!FG_HELLO"
+	"talk_player_idle"	"!FG_IDLE"
+	"talk_player_wounded1"	"!FG_CUREA"
+	"talk_player_wounded2"	"!FG_CUREB"
+	"talk_player_wounded3"	"!FG_CUREC"
+	"talk_unfollow"		"!FG_WAIT"
+	"talk_follow"		"!FG_OK"
+	"talk_stop_follow"	"!FG_STOP"
+	"talk_deny_follow"	"!FG_POK"
+
+	"head"			"-1"
+	"weapons"		"3"
+
+	// pre-disaster
+	when "spawnflags" equals "256" {
+		"follow_on_use"		"0"
+	}
+
+	when "spawnflags" contains 32 {
+		"squad_leader" 		"1"
+	}
+
+	// Weapons
+	// None
+	when "weapons" equals 0 {
+		"body3" 		"4"
+		"reload_count" 		"0"
+		"def_attack_ranged"	""
+	}
+
+	// MP5
+	when "weapons" equals 1 {
+		"body3"			"0"
+		"def_attack_ranged"	"ranged_hgrunt_shot"
+		"snd_ranged_attack"	"weapon_mp5.shoot"
+		"attack_ranged_range"	"1024"
+		"reload_count"		"30"
+	}
+
+	// MP5 + hand grenade
+	when "weapons" equals 3 {
+		"body3"			"0"
+		"def_attack_ranged"	"ranged_hgrunt_shot"
+		"snd_ranged_attack"	"weapon_mp5.shoot"
+		"attack_ranged_range"	"1024"
+		"reload_count"		"30"
+		"def_attack_special_1"	"projectile_hgrunt_grenade"
+		"attack_special_range"	"1024"
+		"projectile_delay"	"1.0"
+	}
+
+	// MP5 + grenade launcher
+	when "weapons" contains 5 {
+		"body3"			"0"
+		"def_attack_ranged"	"ranged_hgrunt_shot"
+		"snd_ranged_attack"	"weapon_mp5.shoot"
+		"attack_ranged_range"	"1024"
+		"reload_count"		"30"
+		"def_attack_special_1"	"projectile_hgrunt_ARgrenade"
+	}
+
+	// Shotgun
+	when "weapons" equals 8 {
+		"body2"			"4"
+		"body3"			"2"
+		"def_attack_ranged"	"ranged_hgrunt_shot"
+		"snd_ranged_attack"	"weapon_shotgun.single"
+		"attack_ranged_range"	"1024"
+		"reload_count"		"8"
+	}
+
+	// Shotgun + hand grenade
+	when "weapons" equals 10 {
+		"body2"			"4"
+		"body3"			"2"
+		"def_attack_ranged"	"ranged_hgrunt_shot"
+		"snd_ranged_attack"	"weapon_shotgun.single"
+		"attack_ranged_range"	"1024"
+		"reload_count"		"8"
+		"def_attack_special_1"	"projectile_hgrunt_grenade"
+		"attack_special_range"	"1024"
+		"projectile_delay"	"1.0"
+	}
+
+	// M249
+	when "weapons" equals 16 {
+		"body2"			"2"
+		"body3" 		"3"
+		"def_attack_ranged"	"ranged_hgrunt_shot"
+		"snd_ranged_attack"	"weapon_m249.fire"
+		"attack_ranged_range"	"1024"
+		"reload_count"		"50"
+		"def_attack_ranged"	"ranged_hgrunt_shot"
+	}
+
+	// Heads
+	// Gas Mask
+	when "head" equals 0 {
+		"body1" "0"
+	}
+
+	// Beret (White)
+	when "head" equals 1 {
+		"body1" "2"
+	}
+
+	// Ops Mask
+	when "head" equals 2 {
+		"body1" "3"
+	}
+
+	// Bandana (White)
+	when "head" equals 3 {
+		"body1" "4"
+	}
+
+	// Bandana (Black)
+	when "head" equals 4 {
+		"body1" "5"
+	}
+
+	// MP
+	when "head" equals 5 {
+		"body1" "6"
+	}
+
+	// Major
+	when "head" equals 6 {
+		"body1" "7"
+	}
+
+	// Beret (Black)
+	when "head" equals 7 {
+		"body1" "8"
+	}
+}
+
+entityDef ranged_hgrunt_shot
+{
+	"damage"	"skill:hgrunt_ally_pellets"
+	"delay"		"0.5"
+}

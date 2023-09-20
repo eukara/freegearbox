@@ -1,0 +1,15 @@
+entityDef monster_shockroach
+{
+	"spawnclass"	"NSMonster"
+	"inherit"	"monster_headcrab"
+	"model"	"models/w_shock_rifle.mdl"
+	"netname"	"Shock Roach"
+	"health"	"skill:shockroach_health"
+	"leap_damage"	"skill:shockroach_dmg_bite"
+
+	events {
+		jump "AddVelocity" "512 0 250"
+		jump_variation1 "AddVelocity" "512 0 250"
+		jump_variation2 "AddVelocity" "512 0 250"
+	}
+}

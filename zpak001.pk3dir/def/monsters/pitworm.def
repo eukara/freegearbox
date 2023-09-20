@@ -1,0 +1,15 @@
+entityDef monster_pitworm
+{
+	"spawnclass"		"NSMonster"
+	"model"			"models/pit_worm_up.mdl"
+	"netname"		"Pit Worm"
+	"health"		"skill:pitworm_health"
+	"mins"			"-16 -16 0"
+	"maxs"			"16 16 72"
+	"eye_height"		"480"
+	"team"			"2"
+	"propdata"		"actor_alien"
+
+	"speed_walk"		"0"
+	"speed_run"		"0"
+}

@@ -30,6 +30,7 @@ w_m249_precache(void)
 {
 #ifdef SERVER
 	precache_model("models/w_saw.mdl");
+	Sound_Precache("weapon_m249.fire");
 	precache_sound("weapons/saw_fire1.wav");
 	precache_sound("weapons/saw_fire2.wav");
 	precache_sound("weapons/saw_fire3.wav");

@@ -1,0 +1,9 @@
+entityDef monster_blkop_apache
+{
+	"spawnclass"	"NSTalkMonster"
+	"inherit"	"monster_apache"
+	"model"	"models/blkop_apache.mdl"
+	"netname"		"Black Ops Apache"
+	"health"	"skill:blkop_apache_health"
+}
+

@@ -1,0 +1,9 @@
+entityDef monster_human_torch_ally
+{
+	"spawnclass"	"NSTalkMonster"
+	"inherit"	"monster_human_grunt_ally"
+	"model"		"models/hgrunt_torch.mdl"
+	"health"	"skill:torch_ally_health"
+
+}
+

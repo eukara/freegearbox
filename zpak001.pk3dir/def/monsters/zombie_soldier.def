@@ -1,0 +1,8 @@
+entityDef monster_zombie_soldier
+{
+	"spawnclass"	"NSMonster"
+	"inherit"	"monster_zombie"
+	"netname"	"Zombie Soldier"
+	"health"	"skill:zombie_soldier_health"
+	"model"		"models/zombie_soldier.mdl"
+}

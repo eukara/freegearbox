@@ -1,0 +1,32 @@
+entityDef monster_hevsuit_dead
+{
+	"spawnclass"	"NSMonster"
+	"model"		"models/deadhaz.mdl"
+	"body1"		"1"
+	"netname"	"Dead H.E.V. Scientist"
+	"health"	"50"
+	"mins"		"-16 -16 0"
+	"maxs"		"16 16 72"
+	"eye_height"	"64"
+	"team"		"0"
+	"propdata"	"actor_human"
+
+	"dead"		"1"
+	"frame"		"0"
+	"body1"		"1"
+
+	// Seated
+	when "pose" equals "1" {
+		"frame"	"1"
+	}
+
+	// Stomach
+	when "pose" equals "2" {
+		"frame"	"2"
+	}
+
+	// On Table
+	when "pose" equals "3" {
+		"frame"	"3"
+	}
+}

@@ -1,0 +1,7 @@
+entityDef monster_assassin_repel
+{
+	"spawnclass"	"NSTalkMonster"
+	"model"		"models/massn.mdl"
+	"inherit"	"monster_male_assassin"
+}
+

@@ -1,0 +1,21 @@
+entityDef monster_alien_voltigore
+{
+	"spawnclass"		"NSMonster"
+	"model"			"models/voltigore.mdl"
+	"netname"		"Voltigore"
+	"health"		"skill:voltigore_health"
+	"mins"			"-16 -16 0"
+	"maxs"			"16 16 72"
+	"eye_height"		"128"
+	"team"			"2"
+	"propdata"		"actor_alien"
+	"speed_walk"		"32"
+	"speed_run"		"72"
+
+	"attack_ranged_range"	"192"
+
+	"snd_sight"		"monster_alien_voltigore.alert"
+	"snd_idle"		"monster_alien_voltigore.idle"
+	"snd_pain"		"monster_alien_voltigore.pain"
+	"snd_death"		"monster_alien_voltigore.death"
+}

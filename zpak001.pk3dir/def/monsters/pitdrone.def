@@ -1,0 +1,108 @@
+entityDef monster_pitdrone
+{
+	"spawnclass"		"NSMonster"
+	"model"			"models/pit_drone.mdl"
+	"netname"		"Pit Drone"
+	"health"		"skill:pitdrone_health"
+	"mins"			"-16 -16 0"
+	"maxs"			"16 16 72"
+	"eye_height"		"64"
+	"team"			"2"
+	"propdata"		"actor_alien"
+	"speed_walk"		"46"
+	"speed_run"		"292"
+
+	"def_attack_melee"	"melee_pitdrone_punch"
+	"attack_melee_range"	"96"
+	"attack_ranged_range"	"384"
+
+	"snd_sight"		"monster_pitdrone.alert"
+	"snd_idle"		"monster_pitdrone.idle"
+	"snd_pain"		"monster_pitdrone.pain"
+	"snd_melee_attack"	"monster_pitdrone.attack"
+	"snd_melee_attack_hit"	"monster_zombie.attackhit"
+	"snd_melee_attack_miss"	"monster_zombie.attackmiss"
+	"snd_thud"		"monster_generic.thud"
+
+	// animation event callbacks
+	events {
+		1 "SpawnProjectileDef" "ranged_pitdrone_spike"
+		1 "StartSoundDef" "monster_pitdrone.shoot"
+	}
+
+	// Ammo
+	"reload_delay"		"1.5"
+	"initammo"		"6"	// Opfor Only
+	"reload_count"		"6"
+
+	// Spike Counter
+	when "initammo" equals 0 {
+		"body1" 		"0"
+		"ammo_start"		"0"
+		"reserve_ammo"		"0"
+	}	
+
+	when "initammo" equals 1 {
+		"body1" 		"7"
+		"ammo_start"		"1"
+	}
+
+	when "initammo" equals 2 {
+		"body1" 		"6"
+		"ammo_start"		"2"
+	}
+
+	when "initammo" equals 3 {
+		"body1" 		"5"
+		"ammo_start"		"3"
+	}
+
+	when "initammo" equals 4 {
+		"body1" 		"4"
+		"ammo_start"		"4"
+	}
+
+	when "initammo" equals 5 {
+		"body1" 		"3"
+		"ammo_start"		"5"
+	}
+
+	when "initammo" equals 6 {
+		"body1" 		"2"
+		"ammo_start"		"6"
+	}
+}
+
+entityDef melee_pitdrone_punch
+{
+	"damage"	"skill:pitdrone_dmg_bite"
+	"delay"		"1.0f"
+}
+
+
+entityDef ranged_pitdrone_spike
+{
+	"spawnclass"		"NSProjectile"
+	"model"			"models/pit_drone_spike.mdl"
+
+	"def_damage"		"damage_spikeDirect"
+
+	"health"		"0"
+	"velocity"		"1000"
+	"fuse"			"10"
+	"detonate_on_fuse"	"0"
+	"detonate_on_death"	"0"
+	"detonate_on_world"	"0"
+	"detonate_on_actor"	"1"
+	"impact_damage_effect"	"1"
+	"impact_gib"		"0"
+
+	"snd_explode"		"weapon_crossbow.hit"
+
+	// TODO need a sound bodyhit field
+}
+
+entityDef damage_spikeDirect
+{
+	damage "skill:pitdrone_dmg_spit"
+}

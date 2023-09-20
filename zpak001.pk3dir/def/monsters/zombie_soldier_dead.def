@@ -1,0 +1,18 @@
+entityDef monster_zombie_soldier_dead
+{
+	"spawnclass"	"NSMonster"
+	"netname"	"Dead Zombie Soldier"
+	"model"		"models/zombie_soldier.mdl"
+	"health"	"skill:zombie_soldier_health"
+	"mins"		"-16 -16 0"
+	"maxs"		"16 16 72"
+	"propdata"	"actor_alien"
+
+	"dead"		"1"
+	"frame"		"20"
+
+	// Stomach
+	when "pose" equals "1" {
+		"frame"	"21"
+	}
+}

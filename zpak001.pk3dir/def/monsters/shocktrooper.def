@@ -1,0 +1,99 @@
+entityDef monster_shocktrooper
+{
+	"spawnclass"		"NSTalkMonster"
+	"model"		"models/strooper.mdl"
+	"netname"		"Shock Trooper"
+	"health"		"skill:shocktrooper_health"
+	"mins"		"-16 -16 0"
+	"maxs"		"16 16 72"
+	"eye_height"		"64"
+	"team"		"1"
+	"propdata"		"actor_alien"
+	"speed_walk"		"41"
+	"speed_run"		"304"
+
+	// melee attack
+	"def_attack_melee"	"melee_shocktrooper_kick"
+	"attack_melee_range"	"96"
+	"snd_melee_attack"	"monster_human_grunt.kick"
+
+	// primary ranged attack
+	"def_attack_ranged"	"ranged_shocktrooper_mp5"
+	"snd_ranged_attack"	"weapon_mp5.shoot"
+	"attack_ranged_range"	"1024"
+	"reload_count"		"30"
+
+	// special attack
+	"def_attack_special_1"	"projectile_shocktrooper_grenade"
+	"attack_special_range"	"1024"
+	"projectile_delay"	"1.0"
+
+	"snd_pain"		"monster_shocktrooper.pain"
+	"snd_death"		"monster_shocktrooper.die"
+	"snd_thud"		"monster_generic.thud"
+
+	"talk_alert"		"!ST_ALERT"
+	"talk_idle"		"!ST_IDLE"
+
+
+	"weapons"		"3"
+
+	"squad_leader_body"	"1:2"
+
+	when "spawnflags" contains 32 {
+		"squad_leader" "1"
+	}
+}
+
+entityDef melee_shocktrooper_kick
+{
+	"damage"	"skill:shocktrooper_kick"
+	"delay"	"0.25"
+}
+
+entityDef ranged_shocktrooper_mp5
+{
+	"damage"	"skill:shocktrooper_pellets"
+	"burst"	"3"
+	"burst_delay"	"0.5"
+	"delay"	"0.1"
+}
+
+entityDef ranged_shocktrooper_shot
+{
+	"damage"	"skill:shocktrooper_shock"
+	"delay"	"1.0"
+}
+
+
+entityDef projectile_shocktrooper_grenade
+{
+	"spawnclass"		"NSProjectile"
+	"model"		"models/spore.mdl"
+
+	"def_splash_damage"	"damage_grenadeSplash"
+
+	"health"		"0"
+	"velocity"		"600 0 200"
+	"angular_velocity"	"300 300 300"
+	"fuse"		"4"
+	"bounce"		"1"
+	"detonate_on_fuse"	"1"
+	"detonate_on_death"	"1"
+	"detonate_on_world"	"0"
+	"detonate_on_actor"	"1"
+	"impact_damage_effect"	"1"
+	"impact_gib"		"1"
+
+	"model_detonate"	"fx_explosion.main"
+
+	"snd_explode"		"weapon_sporelauncher.explode"
+	"snd_bounce"		"weapon_sporelauncher.bounce"
+}
+
+entityDef damage_grenadeSplash
+{
+	"damage"	"150"
+	"radius"	"160"
+}
+

@@ -1,0 +1,15 @@
+entityDef monster_alien_babyvoltigore
+{
+	"spawnclass"		"NSMonster"
+	"inherit"		"monster_alien_voltigore"
+	"netname"		"Baby Voltigore"
+	"model"			"models/baby_voltigore.mdl"
+	"health"		"skill:babyvoltigore_health"
+	"eye_height"		"32"
+	"attack_ranged_range"	"192"
+
+	"snd_sight"		"monster_alien_babyvoltigore.alert"
+	"snd_idle"		"monster_alien_babyvoltigore.idle"
+	"snd_pain"		"monster_alien_babyvoltigore.pain"
+	"snd_death"		"monster_alien_babyvoltigore.death"
+}

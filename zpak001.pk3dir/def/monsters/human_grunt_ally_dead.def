@@ -1,0 +1,80 @@
+entityDef monster_human_grunt_ally_dead
+{
+	"spawnclass"	"NSMonster"
+	"model"		"models/hgrunt_opfor.mdl"
+	"netname"	"Dead Friendly Human Grunt"
+	"health"	"skill:hgrunt_ally_heath"
+	"mins"		"-16 -16 0"
+	"maxs"		"16 16 72"
+	"team"		"0"
+	"propdata"	"actor_human"
+
+	"dead"		"1"
+	"frame"		"41"
+
+	// Side
+	when "pose" equals "1" {
+		"frame"	"42"
+	}
+
+	// Seated
+	when "pose" equals "1" {
+		"frame"	"43"
+	}
+
+	// Back
+	when "pose" equals "1" {
+		"frame"	"44"
+	}
+
+	// Stomach
+	when "pose" equals "1" {
+		"frame"	"46"
+	}
+
+	// Head Crabbed
+	when "pose" equals "1" {
+		"frame"	"45"
+	}
+
+	// Heads
+	// Gas Mask
+	when "head" equals 0 {
+		"body1" "0"
+	}
+
+	// Beret
+	when "head" equals 1 {
+		"body1" "2"
+	}
+
+	// Ops Mask
+	when "head" equals 2 {
+		"body1" "3"
+	}
+
+	// Bandana (White)
+	when "head" equals 3 {
+		"body1" "4"
+	}
+
+	// Bandana (Black)
+	when "head" equals 4 {
+		"body1" "5"
+	}
+
+	// MP
+	when "head" equals 5 {
+		"body1" "6"
+	}
+
+	// Major
+	when "head" equals 6 {
+		"body1" "7"
+	}
+
+	// Beret (Black)
+	when "head" equals 7 {
+		"body1" "8"
+	}
+}

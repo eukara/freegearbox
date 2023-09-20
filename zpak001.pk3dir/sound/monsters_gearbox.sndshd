@@ -1,0 +1,163 @@
+monster_drillsergeant.die
+{
+	sample "fgrunt/death1.wav"
+	sample "fgrunt/death2.wav"
+	sample "fgrunt/death3.wav"
+}
+
+monster_drillsergeant.pain
+{
+	sample "fgrunt/pain1.wav"
+	sample "fgrunt/pain2.wav"
+	sample "fgrunt/pain3.wav"
+	sample "fgrunt/pain4.wav"
+	sample "fgrunt/pain5.wav"
+	sample "fgrunt/pain6.wav"
+}
+
+monster_gonome.alert
+{
+	pitch 0.9
+	sample "zombie/zo_alert10.wav"
+	sample "zombie/zo_alert20.wav"
+	sample "zombie/zo_alert30.wav"
+}
+
+monster_gonome.attack
+{
+	sample "gonome/gonome_melee1.wav"
+	sample "gonome/gonome_melee2.wav"
+}
+
+monster_gonome.attackhit
+{
+	sample "zombie/claw_strike1.wav"
+	sample "zombie/claw_strike2.wav"
+	sample "zombie/claw_strike3.wav"
+}
+
+monster_gonome.attackmiss
+{
+	sample "zombie/claw_miss1.wav"
+	sample "zombie/claw_miss2.wav"
+}
+
+monster_gonome.gutshit
+{
+	sample "bullchicken/bc_spithit1.wav"
+}
+
+
+monster_gonome.pain
+{
+	sample "gonome/gonome_pain1.wav"
+	sample "gonome/gonome_pain2.wav"
+	sample "gonome/gonome_pain3.wav"
+	sample "gonome/gonome_pain4.wav"
+}
+
+
+monster_human_grunt_ally.pain
+{
+	sample "fgrunt/pain1.wav"
+	sample "fgrunt/pain2.wav"
+	sample "fgrunt/pain3.wav"
+	sample "fgrunt/pain4.wav"
+	sample "fgrunt/pain5.wav"
+	sample "fgrunt/pain6.wav"
+}
+
+monster_human_grunt_ally.die
+{
+	sample "fgrunt/death1.wav"
+	sample "fgrunt/death2.wav"
+	sample "fgrunt/death3.wav"
+}
+
+monster_pitdrone.alert
+{
+	sample "pitdrone/pit_drone_alert1.wav"
+	sample "pitdrone/pit_drone_alert2.wav"
+	sample "pitdrone/pit_drone_alert3.wav"
+}
+
+monster_pitdrone.attack
+{
+	sample "pitdrone/pit_drone_melee_attack1.wav"
+	sample "pitdrone/pit_drone_melee_attack2.wav"
+}
+
+monster_pitdrone.communicate
+{
+	sample "pitdrone/pit_drone_melee_communicate1.wav"
+	sample "pitdrone/pit_drone_melee_communicate2.wav"
+	sample "pitdrone/pit_drone_melee_communicate3.wav"
+	sample "pitdrone/pit_drone_melee_communicate4.wav"
+}
+
+monster_pitdrone.eat
+{
+	sample "pitdrone/pit_drone_eat.wav"
+}
+
+monster_pitdrone.hunt
+{
+	sample "pitdrone/pit_drone_hunt1.wav"
+	sample "pitdrone/pit_drone_hunt2.wav"
+	sample "pitdrone/pit_drone_hunt3.wav"
+}
+
+monster_pitdrone.idle
+{
+	sample "pitdrone/pit_drone_idle1.wav"
+	sample "pitdrone/pit_drone_idle2.wav"
+	sample "pitdrone/pit_drone_idle3.wav"
+}
+
+monster_pitdrone.pain
+{
+	sample "pitdrone/pit_drone_pain1.wav"
+	sample "pitdrone/pit_drone_pain2.wav"
+	sample "pitdrone/pit_drone_pain3.wav"
+}
+
+monster_pitdrone.shoot
+{
+	sample "pitdrone/pit_drone_attack_spike1.wav"
+	sample "pitdrone/pit_drone_attack_spike2.wav"
+}
+
+
+monster_recruit.die
+{
+	sample "fgrunt/death1.wav"
+	sample "fgrunt/death2.wav"
+	sample "fgrunt/death3.wav"
+}
+
+monster_recruit.pain
+{
+	sample "fgrunt/pain1.wav"
+	sample "fgrunt/pain2.wav"
+	sample "fgrunt/pain3.wav"
+	sample "fgrunt/pain4.wav"
+	sample "fgrunt/pain5.wav"
+	sample "fgrunt/pain6.wav"
+}
+
+monster_shocktrooper.pain
+{
+	sample "shocktrooper/shock_trooper_pain1.wav"
+	sample "shocktrooper/shock_trooper_pain2.wav"
+	sample "shocktrooper/shock_trooper_pain3.wav"
+	sample "shocktrooper/shock_trooper_pain4.wav"
+	sample "shocktrooper/shock_trooper_pain5.wav"
+}
+
+monster_shocktrooper.die
+{
+	sample "shocktrooper/shock_trooper_die1.wav"
+	sample "shocktrooper/shock_trooper_die2.wav"
+	sample "shocktrooper/shock_trooper_die3.wav"
+	sample "shocktrooper/shock_trooper_die4.wav"
+}

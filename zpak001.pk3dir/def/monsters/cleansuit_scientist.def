@@ -1,0 +1,9 @@
+entityDef monster_cleansuit_scientist
+{
+	"spawnclass"	"NSTalkMonster"
+	"inherit"	"monster_scientist"
+	"netname"	"Cleansuit Scientist"
+	"model"		"models/cleansuit_scientist.mdl"
+	"health"	"skill:cleansuit_scientist_health"
+
+}

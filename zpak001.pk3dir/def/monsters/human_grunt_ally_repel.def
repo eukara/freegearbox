@@ -1,0 +1,9 @@
+entityDef monster_grunt_ally_repel
+{
+	"spawnclass"	"NSSquadMonster"
+	"model"		"models/hgrunt_opfor.mdl"
+	"inherit"	"monster_human_grunt_ally"
+}
+
+
+

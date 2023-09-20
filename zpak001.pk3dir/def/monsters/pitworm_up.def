@@ -1,0 +1,5 @@
+entityDef monster_pitworm_up
+{
+	"spawnclass"	"NSMonster"
+	"inherit"	"monster_pitworm"
+}
