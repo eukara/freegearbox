@@ -10,7 +10,7 @@ entityDef monster_human_grunt_ally_dead
 	"propdata"	"actor_human"
 
 	"dead"		"1"
-	
+
 	// Stomach
 	"frame"		"41"
 
@@ -37,6 +37,29 @@ entityDef monster_human_grunt_ally_dead
 	// Head Crabbed
 	when "pose" equals "5" {
 		"frame"	"45"
+	}
+
+	// Weapons
+	// None
+	when "weapons" equals 0 {
+		"body3" 		"4"
+	}
+
+	// MP5
+	when "weapons" equals 1 {
+		"body3"			"0"
+	}
+
+	// Shotgun
+	when "weapons" equals 8 {
+		"body2"			"4"
+		"body3"			"2"
+	}
+
+	// M249
+	when "weapons" equals 16 {
+		"body2"			"2"
+		"body3" 		"3"
 	}
 
 	// Heads
