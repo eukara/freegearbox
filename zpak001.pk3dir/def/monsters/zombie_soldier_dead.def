@@ -10,11 +10,11 @@ entityDef monster_zombie_soldier_dead
 
 	"dead"		"1"
 	
-	// Back
-	"frame"		"20"
-
 	// Stomach
+	"frame"		"21"
+
+	// Back
 	when "pose" equals "1" {
-		"frame"	"21"
+		"frame"	"20"
 	}
 }
