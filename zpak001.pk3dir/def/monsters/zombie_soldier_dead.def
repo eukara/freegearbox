@@ -9,6 +9,8 @@ entityDef monster_zombie_soldier_dead
 	"propdata"	"actor_alien"
 
 	"dead"		"1"
+	
+	// Back
 	"frame"		"20"
 
 	// Stomach

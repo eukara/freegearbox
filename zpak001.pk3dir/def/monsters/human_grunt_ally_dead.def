@@ -10,6 +10,8 @@ entityDef monster_human_grunt_ally_dead
 	"propdata"	"actor_human"
 
 	"dead"		"1"
+	
+	// Stomach
 	"frame"		"41"
 
 	// Side
@@ -18,22 +20,22 @@ entityDef monster_human_grunt_ally_dead
 	}
 
 	// Seated
-	when "pose" equals "1" {
+	when "pose" equals "2" {
 		"frame"	"43"
 	}
 
 	// Back
-	when "pose" equals "1" {
+	when "pose" equals "3" {
 		"frame"	"44"
 	}
 
 	// Stomach
-	when "pose" equals "1" {
+	when "pose" equals "4" {
 		"frame"	"46"
 	}
 
 	// Head Crabbed
-	when "pose" equals "1" {
+	when "pose" equals "5" {
 		"frame"	"45"
 	}
 

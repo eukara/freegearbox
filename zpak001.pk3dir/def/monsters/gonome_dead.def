@@ -9,6 +9,8 @@ entityDef monster_gonome_dead
 	"propdata"	"actor_alien"
 
 	"dead"		"1"
+	
+	// Stomach
 	"frame"		"19"
 
 	// Back

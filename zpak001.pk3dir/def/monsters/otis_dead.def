@@ -10,6 +10,8 @@ entityDef monster_otis_dead
 	"propdata"	"actor_human"
 
 	"dead"		"1"
+	
+	// Back
 	"frame"		"35"
 
 	// Side
@@ -18,17 +20,17 @@ entityDef monster_otis_dead
 	}
 
 	// Stomach
-	when "pose" equals "1" {
+	when "pose" equals "2" {
 		"frame"	"37"
 	}
 
 	// Stuffed in Vent
-	when "pose" equals "1" {
+	when "pose" equals "3" {
 		"frame"	"38"
 	}
 
 	// Sitting
-	when "pose" equals "1" {
+	when "pose" equals "4" {
 		"frame"	"39"
 	}
 }

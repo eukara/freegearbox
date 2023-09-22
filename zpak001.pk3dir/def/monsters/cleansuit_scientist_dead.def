@@ -9,6 +9,8 @@ entityDef monster_cleansuit_scientist_dead
 	"propdata"	"actor_human"
 
 	"dead"		"1"
+	
+	// Back
 	"frame"		"38"
 
 	// Stomach
@@ -17,28 +19,38 @@ entityDef monster_cleansuit_scientist_dead
 	}
 
 	// Sitting
-	when "pose" equals "1" {
+	when "pose" equals "2" {
 		"frame"	"40"
 	}
 
 	// Hanging
-	when "pose" equals "1" {
+	when "pose" equals "3" {
 		"frame"	"41"
 	}
 
 	// Table1
-	when "pose" equals "1" {
+	when "pose" equals "4" {
 		"frame"	"42"
 	}
 
 	// Table2
-	when "pose" equals "1" {
+	when "pose" equals "5" {
 		"frame"	"43"
 	}
 
 	// Table3
-	when "pose" equals "1" {
+	when "pose" equals "6" {
 		"frame"	"44"
+	}
+	
+	// Dead Pose
+	when "pose" equals "7" {
+		"frame"	"70"
+	}
+	
+	// Against Wall
+	when "pose" equals "8" {
+		"frame"	"72"
 	}
 
 	when "body" equals "1" {
