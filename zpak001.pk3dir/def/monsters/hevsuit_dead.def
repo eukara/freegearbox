@@ -2,7 +2,7 @@ entityDef monster_hevsuit_dead
 {
 	"spawnclass"	"NSMonster"
 	"model"		"models/deadhaz.mdl"
-	"body1"		"1"
+	"body1"		"2"
 	"netname"	"Dead H.E.V. Scientist"
 	"health"	"50"
 	"mins"		"-16 -16 0"
@@ -13,7 +13,6 @@ entityDef monster_hevsuit_dead
 
 	"dead"		"1"
 	"frame"		"0"
-	"body1"		"1"
 
 	// Seated
 	when "pose" equals "1" {
