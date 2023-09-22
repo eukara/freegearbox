@@ -14,6 +14,6 @@ entityDef monster_gman
 	"speed_run"		"364" // day one only
 	
 	when "body" equals "1" {
-		"body1"	"1"
+		"body1"	"2"
 	}
 }
