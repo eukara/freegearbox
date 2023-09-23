@@ -265,6 +265,13 @@ w_eagle_crosshair(player pl)
 			1.0f,
 			DRAWFLAG_ADDITIVE
 		);
+		
+		Cross_DrawSub(
+			g_ofch1_spr,
+			[24,24],
+			[0,0],
+			[24/72, 24/72]
+		);
 	} else {
 		Cross_DrawSub(
 			g_ofch1_spr,
