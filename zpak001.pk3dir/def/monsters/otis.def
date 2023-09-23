@@ -12,7 +12,7 @@ entityDef monster_otis
 
 	"def_attack_ranged"	"ranged_otis_shot"
 	"attack_ranged_range"	"1024"
-	"reload_count"		"18"
+	"reload_count"		"7"
 	"follow_on_use"		"1"
 	"weapon_drawn"		"0"
 	"body_on_draw"		"1:2"
@@ -61,7 +61,7 @@ entityDef monster_otis
 
 	// Hair
 	when "head" equals 1 {
-		"body2" "0"
+		"body2" "1"
 	}
 
 	// Weapons
