@@ -38,6 +38,12 @@ ClientGame_InitDone(void)
 	if (OP4_IsCTF()) {
 		VGUI_ChooseTeam();
 	}
+
+	bool gameTitle = serverkeyfloat("gametitle");
+
+	if (gameTitle == true) {
+		pSeatLocal->m_flTitleAlpha = 4.0f;
+	}
 }
 
 void HLSprite_Init(void);

@@ -83,6 +83,66 @@ ClientGame_PostDraw(void)
 {
 	Nightvision_PostDraw();
 
+	if (pSeatLocal->m_flTitleAlpha > 0.0) {
+		vector title1Pos = g_hudmins + (g_hudres / 2) + [-238,-31];
+		vector title2Pos = g_hudmins + (g_hudres / 2) + [18,-31];
+
+		float titleAlpha = pSeatLocal->m_flTitleAlpha;
+
+		if (titleAlpha > 3.0)
+			titleAlpha = 4.0 - titleAlpha;
+
+		if (titleAlpha > 1.0)
+			titleAlpha = 1.0f;
+
+		drawsubpic(
+			title1Pos,
+			[256, 30],
+			g_hud4_spr,
+			[0, 226/256],
+			[1, 30/256],
+			[1,1,1] * titleAlpha,
+			1.0,
+			DRAWFLAG_ADDITIVE
+		);
+
+		drawsubpic(
+			title2Pos,
+			[220, 30],
+			g_hud5_spr,
+			[0, 226/256],
+			[220/256, 30/256],
+			[1,1,1] * titleAlpha,
+			1.0f,
+			DRAWFLAG_ADDITIVE
+		);
+
+		/* opfor title */
+		drawsubpic(
+			title1Pos + [0, 30],
+			[256, 32],
+			g_ofhud5_spr,
+			[0, 0],
+			[1, 1],
+			[1,1,1] * titleAlpha,
+			1.0,
+			DRAWFLAG_ADDITIVE
+		);
+
+		drawsubpic(
+			title2Pos + [0, 30],
+			[256, 32],
+			g_ofhud6_spr,
+			[0, 0],
+			[1, 1],
+			[1,1,1] * titleAlpha,
+			1.0f,
+			DRAWFLAG_ADDITIVE
+		);
+
+		pSeatLocal->m_flTitleAlpha -= frametime;
+	}
+
 	/* CTF Power-Up icons */
 	{
 		player pl = (player)pSeat->m_ePlayer;
