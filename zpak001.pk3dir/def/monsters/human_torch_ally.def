@@ -5,5 +5,17 @@ entityDef monster_human_torch_ally
 	"model"		"models/hgrunt_torch.mdl"
 	"health"	"skill:torch_ally_health"
 
+	events {
+		// Show Gun
+		17 "SetBodyInGroup" "2 1"
+		// Spark effect
+		18 "TorchSpark" ""
+		// Hide Gun
+		19 "SetBodyInGroup" "2 3"
+		// Show Torch
+		20 "SetBodyInGroup" "2 2"
+		// Hide Torch ?
+		21 "SetBodyInGroup" "2 1"
+	}
 }
 

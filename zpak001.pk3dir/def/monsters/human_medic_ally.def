@@ -5,4 +5,15 @@ entityDef monster_human_medic_ally
 	"model"		"models/hgrunt_medic.mdl"
 	"health"	"skill:medic_ally_health"
 
+	events {
+		// Gun Away
+		15 "SetBodyInGroup" "3 4"
+		// Needle Out
+		16 "SetBodyInGroup" "3 3"
+		// Needle Away
+		17 "SetBodyInGroup" "3 0"
+		// Gun Out
+		18 "SetBodyInGroup" "3 1"
+	}
+
 }
