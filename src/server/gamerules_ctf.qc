@@ -14,6 +14,11 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+
+void CSEv_TeamJoin_f(float teamChoice);
+void CSEv_ClassJoin_f(float classSelection);
+void CSEv_JoinAuto(void);
+
 void
 OP4CTFRules::OP4CTFRules(void)
 {
@@ -26,8 +31,11 @@ OP4CTFRules::InitPostEnts(void)
 	forceinfokey(world, "teams", "2");
 	forceinfokey(world, "team_1", "Black Mesa");
 	forceinfokey(world, "teamscore_1", "0");
+	forceinfokey(world, "teamcolor_1", "1 1 0");
 	forceinfokey(world, "team_2", "Opposing Force");
 	forceinfokey(world, "teamscore_2", "0");
+	forceinfokey(world, "teamcolor_2", "0 1 0");
+	
 
 	forceinfokey(world, "ctfflag_1", "0");
 	forceinfokey(world, "ctfflag_2", "0");
@@ -49,6 +57,10 @@ OP4CTFRules::PlayerConnect(NSClientPlayer pp)
 	forceinfokey(pp, "*score", "0");
 	forceinfokey(pp, "*icon1", "");
 	forceinfokey(pp, "*icon2", "");
+
+	if (clienttype(pp) == CLIENTTYPE_BOT) {
+		pp.ScheduleThink(CSEv_JoinAuto, 1.0f);
+	}
 }
 
 void
@@ -85,22 +97,9 @@ void CSEv_ClassJoin_f(float);
 bool
 OP4CTFRules::ConsoleCommand(NSClientPlayer pp, string cmd)
 {
-	static void OP4CTFRules_BotJoin(void) {
-		float tag = (random() < 0.5) ? 1 : 2;
-		CSEv_TeamJoin_f(tag);
-		CSEv_ClassJoin_f(tag == 1 ? 0 : 13);
-	}
-
 	tokenize(cmd);
 
 	switch (argv(0)) {
-	case "bot_add":
-		entity bot_ent = Bot_AddQuick();
-		if (bot_ent) {
-			bot_ent.think = OP4CTFRules_BotJoin;
-			bot_ent.nextthink = time;
-		}
-		break;
 	default:
 		return (false);
 	}
@@ -133,6 +132,12 @@ OP4CTFRules::CharacterSpawn(NSClientPlayer playerEnt, string playerModel)
 	pl.activeweapon = WEAPON_GLOCK;
 	pl.glock_mag = 18;
 	pl.ammo_9mm = 44;
+
+	/* Just-In-Case (tm) */
+	pl.g_items &= ~ITEM_GOALITEM;
+	pl.flags &= ~FL_GOALITEM;
+	pl.flagmodel = 0;
+	pl.SetInfoKey("*icon1", "");
 
 	entity spot = Spawn_SelectRandom(strcat("info_ctfspawn_", ftos(pl.team)));
 	pl.Transport(spot.origin, spot.angles);
@@ -172,7 +177,7 @@ OP4CTFRules::CaptureFlag(NSClientPlayer pp)
 	enemyFlag = (NSEntity)find(world, ::classname, flagName);
 
 	if (!enemyFlag) {
-		error("What the hell? There's no flag back there!");
+		NSError("The flag spawnpoint cannot be found.");
 		return;
 	}
 
@@ -209,7 +214,7 @@ OP4CTFRules::DropFlag(NSClientPlayer pp)
 
 		/* item is still pick-upable */
 		if (targetFlag.GetSolid() != SOLID_NOT) {
-			print("the item is not picked up. \n");
+			NSLog("the item is not picked up.");
 			continue;
 		}
 
@@ -220,7 +225,7 @@ OP4CTFRules::DropFlag(NSClientPlayer pp)
 		}
 	}
 
-	print("^1WARNING: ^7Player marked as having impossible goal-item\n");
+	NSWarning("Player marked as having impossible goal-item.");
 }
 
 void
@@ -292,7 +297,7 @@ CSEv_ClassJoin_f(float classSelection)
 	}
 
 	if (playerModel == "") {
-		error("invalid model selection, erroring out");
+		NSError("invalid model selection, erroring out");
 	}
 
 	/* if we're alive, kill them (we need to drop the flag anyhow */
@@ -302,4 +307,12 @@ CSEv_ClassJoin_f(float classSelection)
 	} else {
 		rule.CharacterSpawn((NSClientPlayer)self, playerModel);
 	}
+}
+
+void
+CSEv_JoinAuto(void)
+{
+	float teamChoice = random() < 0.5 ? 1 : 2;
+	CSEv_TeamJoin_f(teamChoice);
+	CSEv_ClassJoin_f(teamChoice == 1 ? 0 : 13);
 }

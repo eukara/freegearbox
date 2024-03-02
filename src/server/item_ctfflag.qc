@@ -44,12 +44,19 @@ class item_ctfflag:OP4CTFItem
 	nonvirtual void FlagTaken(void);
 	nonvirtual void FlagDrop(NSClientPlayer);
 	nonvirtual void FlagReturns(void);
+	nonvirtual void _AfterSpawn(void);
 };
 
 void
 item_ctfflag::item_ctfflag(void)
 {
 	m_eActivator = __NULL__;
+}
+
+void
+item_ctfflag::_AfterSpawn(void)
+{
+	classname = strcat("info_ctfflag_", ftos(m_iTeamID));
 }
 
 void
@@ -64,10 +71,10 @@ item_ctfflag::Respawn(void)
 	
 	botinfo = BOTINFO_TEAM_GOALITEM;
 
-	classname = strcat("info_ctfflag_", ftos(m_iTeamID));
 	forceinfokey(world, strcat("ctfflag_", ftos(m_iTeamID)), ftos(CTFFLAG_IDLE));
 	m_eActivator = __NULL__;
 	team = m_iTeamID;
+	ScheduleThink(_AfterSpawn, 0.0f);
 }
 
 void
@@ -80,12 +87,18 @@ item_ctfflag::Touch(entity eToucher)
 	if (eToucher.team == 0)
 		return;
 	if (eToucher.team == m_iTeamID) {
-		if (m_eActivator == __NULL__) /* only on flags that haven't been dropped */
-		if (pl.g_items & ITEM_GOALITEM) {
-			OP4CTFRules rule = (OP4CTFRules)g_grMode;
-			rule.CaptureFlag((NSClientPlayer)pl);
+		if (m_eActivator == __NULL__) { /* only on flags that haven't been dropped */
+			if (pl.g_items & ITEM_GOALITEM) {
+				OP4CTFRules rule = (OP4CTFRules)g_grMode;
+				rule.CaptureFlag((NSClientPlayer)pl);
+			}
+			return;
+		} else {
+			/* return the flag, give 1 point */
+			FlagReturns();
+			pl.score += 1;
+			return;
 		}
-		return;
 	}
 
 	m_eActivator = pl;
@@ -137,6 +150,7 @@ item_ctfflag::FlagDrop(NSClientPlayer pp)
 	pl.flagmodel = 0;
 	m_eActivator = pp; /* to mark that who this was dropped by */
 	forceinfokey(world, strcat("ctfflag_", ftos(m_iTeamID)), ftos(CTFFlAG_MISSING));
+	forceinfokey(pl, "*icon1", "");
 
 	/* return after N secs */
 	ScheduleThink(FlagReturns, 30.0f);

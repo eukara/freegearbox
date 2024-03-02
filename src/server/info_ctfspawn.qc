@@ -32,6 +32,8 @@ info_ctfspawn:NSEntity
 
 	virtual void Respawn(void);
 	virtual void SpawnKey(string, string);
+
+	nonvirtual void _AfterSpawn(void);
 };
 
 void
@@ -53,10 +55,15 @@ info_ctfspawn::SpawnKey(string strKey, string strValue)
 }
 
 void
+info_ctfspawn::_AfterSpawn(void)
+{
+	classname = strcat("info_ctfspawn_", ftos(team));
+}
+
+void
 info_ctfspawn::Respawn(void)
 {
 	SetOrigin(GetSpawnOrigin());
 	SetSolid(SOLID_NOT);
-
-	classname = strcat("info_ctfspawn_", ftos(team));
+	ScheduleThink(_AfterSpawn, 0.0f);
 }
