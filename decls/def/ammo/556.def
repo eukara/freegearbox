@@ -1,0 +1,6 @@
+entityDef ammo_556
+{
+	"inherit"			"ammo_base"
+	"model"				"models/w_saw_clip.mdl"
+	"inv_ammo_556"		"50"
+}

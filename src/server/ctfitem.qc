@@ -14,7 +14,7 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-class OP4CTFItem:NSRenderableEntity
+class OP4CTFItem:ncRenderableEntity
 {
 public:
 	void OP4CTFItem(void);
@@ -45,8 +45,8 @@ OP4CTFItem::Respawn(void)
 {
 	SetSolid(SOLID_TRIGGER);
 	SetMovetype(MOVETYPE_NONE);
-	SetOrigin(GetSpawnOrigin());
-	SetModel(GetSpawnModel());
+	SetOrigin(GetSpawnVector("origin"));
+	SetModel(GetSpawnString("model"));
 	SetSize([-16, -16, 0], [16, 16, 72]);
 	DropToFloor();
 }
@@ -66,7 +66,7 @@ OP4CTFItem::SpawnKey(string strKey, string strValue)
 void
 OP4CTFItem::Touch(entity toucherEntity)
 {
-	player pl = (player)toucherEntity;
+	OP4Player pl = (OP4Player)toucherEntity;
 
 	if (!m_iItemID)
 		return;
@@ -89,7 +89,7 @@ OP4CTFItem::Touch(entity toucherEntity)
 bool
 OP4CTFItem::CanPlayerGrabPowerup(entity playerEntity)
 {
-	player pl = (player)playerEntity;
+	OP4Player pl = (OP4Player)playerEntity;
 
 	if (pl.g_items & ITEM_CTF_JUMPPACK)
 		return false;

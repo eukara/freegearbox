@@ -30,6 +30,8 @@ ClientGame_Init(float apilevel, string enginename, float engineversion)
 	registercommand("changeteam");
 	registercommand("changeclass");
 	Obituary_Init();
+
+	pSeatLocal->weaponSelectionHUD = spawn(HLWeaponSelect);
 }
 
 void
@@ -54,8 +56,6 @@ ClientGame_RendererRestart(string rstr)
 	Obituary_Precache();
 	Damage_Precache();
 	HLSprite_Init();
-
-	FX_Blood_Init();
 
 	g_ofhud1_spr = spriteframe("sprites/640hudof01.spr", 0, 0.0f);
 	g_ofhud2_spr = spriteframe("sprites/640hudof02.spr", 0, 0.0f);

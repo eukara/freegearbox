@@ -1,0 +1,91 @@
+entityDef weapon_sporelauncher
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Spore Launcher"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"			"models/w_spore_launcher.mdl"
+	"model_view"		"models/v_spore_launcher.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	// NSWeapon specific
+	"def_fireInfo"		"fireInfo_spore"
+	"def_altFireInfo"	"fireInfo_fastspore"
+	"inv_name"		"Spore Launcher"
+	"inv_ammo_spore"	"5"
+
+	"actFire"		"5"
+	"actHolster"		"6"
+	"actReloadStart"	"2"
+	"actReload"		"3"
+	"actReloadEnd"		"4"
+	"actDraw"		"7"
+	"actIdle"		"0,1,8"
+
+	// HLWeapon specific
+	"hudSlot"		"4"
+	"hudSlotPos"		"0"
+	"weight"		"5"
+}
+
+entityDef fireInfo_spore
+{
+	"def_projectile"	"projectile_spore"
+	"ammoType"		"ammo_spore"
+	"ammoRequired"		"1"
+	"ammoPerShot"		"1"
+	"fireRate"		"0.75"
+	"punchAngle"		"-2 0 0"
+}
+
+entityDef fireInfo_fastspore
+{
+	"def_projectile"	"projectile_fastspore"
+	"ammoType"		"ammo_spore"
+	"ammoRequired"		"1"
+	"ammoPerShot"		"1"
+	"fireRate"		"1.0"
+	"punchAngle"		"-2 0 0"
+}
+
+
+entityDef projectile_spore
+{
+	"spawnclass"		"NSProjectile"
+	"model"			"models/spore.mdl"
+	"frame"			"1"
+	"fuse"			"4"
+	"detonate_on_fuse"	"1"
+	"bounce"		"1"
+	"angular_velocity"	"-2000 0 0"
+	"model_detonate"	"fx_explosion.main"
+	"snd_explode"		"fx.explosion"
+	"snd_bounce"		"weapon_sporelauncher.bounce"
+	"smoke_fly"		"weapon_rpg.trail"
+	"decal_detonate"	"ExplosionScorch"
+
+	"def_damage"		"damage_sporeDirect"
+	"def_splash_damage"	"damage_sporeSplash"
+}
+
+entityDef projectile_fastspore
+{
+	inherit "projectile_spore"
+	"angular_velocity"	"-4000 0 0"
+}
+
+entityDef damage_sporeDirect
+{
+	"damage"	"1"
+	"damage"	"skill:plr_spore_launcher"
+}
+
+entityDef damage_sporeSplash
+{
+	"damage"	"skill:plr_spore_launcher"
+	"radius"	"250"
+}

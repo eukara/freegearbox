@@ -1,0 +1,6 @@
+entityDef ammo_spore
+{
+	"inherit"			"ammo_base"
+	"model"				"models/spore_ammo.mdl"
+	"inv_ammo_spore"	"1"
+}

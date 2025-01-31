@@ -17,7 +17,7 @@
 void HUD_DrawNums(float fNumber, vector vecPos, float fAlpha, vector vColor);
 
 void
-OP4CTF_DrawHud(player pl)
+OP4CTF_DrawHud(HLPlayer pl)
 {
 	vector iconPos = g_vec_null;
 	vector iconBMOfs = g_vec_null;
@@ -145,7 +145,7 @@ ClientGame_PostDraw(void)
 
 	/* CTF Power-Up icons */
 	{
-		player pl = (player)pSeat->m_ePlayer;
+		HLPlayer pl = (HLPlayer)pSeat->m_ePlayer;
 		vector pickupPos;
 		pickupPos = g_hudmins + [16, (g_hudres[1] / 2) - 32];
 

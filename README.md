@@ -1,5 +1,5 @@
-# FreeGearbox
-Clean-room reimplementation of Opposing Force in QuakeC.
+# Rad-Therapy: Boot Camp
+Port of Half-Life: Opposing Force (1999) to Nuclide.
 
 ![Preview 1](img/preview1.jpg)
 ![Preview 2](img/preview2.jpg)
@@ -7,14 +7,8 @@ Clean-room reimplementation of Opposing Force in QuakeC.
 ![Preview 4](img/preview4.jpg)
 
 ## Building
-Clone the repository into the Nuclide-SDK:
 
-> git clone REPOURL gearbox
-
-then either run Nuclide's ./build_game.sh shell script, or issue 'make' inside
-./gearbox/src!
-
-Obviously make sure that Nuclide has fteqw and fteqcc set-up for building.
+Same steps as for Rad-Therapy. Just pass `GAME=gearbox` instead of `GAME=valve`.
 
 ## Community
 
@@ -32,7 +26,7 @@ We've had people ask in the oddest of places for help, please don't do that.
 ## License
 ISC License
 
-Copyright (c) 2016-2021 Marco Hladik <marco@icculus.org>
+Copyright (c) 2016-2025 Marco "eukara" Cawthorne <marco@icculus.org>
 
 Permission to use, copy, modify, and distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

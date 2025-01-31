@@ -1,71 +1,27 @@
-
 #pragma target fte_5768
 //#pragma flag enable assumeint
-#pragma progs_dat  "../../progs.dat"
+#pragma progs_dat  "../../zpak001.pk3dir/progs.dat"
+#pragma forcecrc 54730
 
 #define QWSSQC
 #define SERVER
 #define GEARBOX
+#define MAX_AMMO_TYPES 18i
 
 #includelist
 ../../../src/shared/fteextensions.qc
 ../../../src/shared/defs.h
 ../../../src/server/defs.h
 ../../../src/botlib/botinfo.h
-
 ../../../src/gs-entbase/server.src
 ../../../src/gs-entbase/shared.src
-
 defs.h
-
 ../shared/include.src
-
-
-monster_drillsergeant.qc
-monster_recruit.qc
-
-../../../valve/src/server/player.qc
-../../../valve/src/server/items.qc
-../../../valve/src/server/item_longjump.qc
-../../../valve/src/server/item_suit.qc
-../../../valve/src/server/item_healthkit.qc
-../../../valve/src/server/item_battery.qc
-../../../valve/src/server/item_weaponbox.qc
-../../../valve/src/server/world_items.qc
-../../../valve/src/server/xen_spore_small.qc
-../../../valve/src/server/xen_spore_medium.qc
-../../../valve/src/server/xen_spore_large.qc
-../../../valve/src/server/xen_hair.qc
-../../../valve/src/server/xen_plantlight.qc
-../../../valve/src/server/ammo.qc
-ammo_op4.qc
-
-ctfitem.qc
-item_ctfflag.qc
-item_ctfbase.qc
-info_ctfspawn.qc
-info_ctfdetect.qc
-item_ctflongjump.qc
-item_ctfportablehev.qc
-item_ctfregeneration.qc
-item_ctfaccelerator.qc
-item_ctfbackpack.qc
-info_ctfspawn_powerup.qc
-trigger_ctfgeneric.qc
-
+../../../valve/src/server/HLScientist.qc
+../../../valve/src/server/HLSuit.qc
+../../../valve/src/server/XenDecore.qc
 ../../../src/botlib/include.src
-
-gamerules.qc
-../../../valve/src/server/gamerules_singleplayer.qc
-../../../valve/src/server/gamerules_multiplayer.qc
-gamerules_ctf.qc
-server.qc
-../../../valve/src/server/damage.qc
-../../../valve/src/server/flashlight.qc
-../../../valve/src/server/modelevent.qc
-
-../../../valve/src/server/spawn.qc
-
+../../../valve/src/server/server.qc
 ../../../src/server/include.src
 ../../../src/shared/include.src
 #endlist

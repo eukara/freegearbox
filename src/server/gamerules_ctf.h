@@ -19,14 +19,14 @@ class OP4CTFRules:HLMultiplayerRules
 	void OP4CTFRules(void);
 
 	virtual void InitPostEnts(void);
-	virtual void PlayerSpawn(NSClientPlayer);
-	virtual void PlayerDeath(NSClientPlayer);
-	virtual void PlayerConnect(NSClientPlayer);
-	virtual void PlayerDisconnect(NSClientPlayer);
-	virtual bool ConsoleCommand(NSClientPlayer, string);
+	virtual void PlayerSpawn(ncPlayer);
+	virtual void PlayerDeath(ncPlayer);
+	virtual void PlayerConnect(ncPlayer);
+	virtual void PlayerDisconnect(ncPlayer);
+	virtual bool ConsoleCommand(ncPlayer, string);
 	virtual bool IsTeamplay(void);
 
-	nonvirtual void CharacterSpawn(NSClientPlayer, string);
-	nonvirtual void CaptureFlag(NSClientPlayer);
-	nonvirtual void DropFlag(NSClientPlayer);
+	nonvirtual void CharacterSpawn(ncPlayer, string);
+	nonvirtual void CaptureFlag(ncPlayer);
+	nonvirtual void DropFlag(ncPlayer);
 };

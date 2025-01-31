@@ -35,40 +35,44 @@ Nightvision_Init(void)
 void
 Nightvision_PreDraw(void) 
 {
+#if 0
 	player pl = (player)pSeat->m_ePlayer;
 
 	if (!(pl.gflags & GF_FLASHLIGHT))
 		return;
 
 	dynamiclight_add(pSeat->m_vecPredictedOrigin, 768, [0.35,0.35,0.35]);
+#endif
 }
 
 void
 Nightvision_PostDraw(void)
 {
+#if 0
 	player pl = (player)pSeat->m_ePlayer;
 
 	if (!(pl.gflags & GF_FLASHLIGHT))
 		return;
 
-	drawpic(video_mins, "fade_modulate", video_res, [0,1,0], 1.0f, 0);
+	drawpic(video_mins, "fade_modulate", g_vidsize, [0,1,0], 1.0f, 0);
 
 	int r = (time * 10) % 4;
 
 	switch (r) {
 	case 1:
-		drawpic(video_mins, g_nightvision_a, video_res, [0,1,0], 0.2f, 1);
+		drawpic(video_mins, g_nightvision_a, g_vidsize, [0,1,0], 0.2f, 1);
 		break;
 	case 2:
-		drawpic(video_mins, g_nightvision_b, video_res, [0,1,0], 0.2f, 1);
+		drawpic(video_mins, g_nightvision_b, g_vidsize, [0,1,0], 0.2f, 1);
 		break;
 	case 3:
-		drawpic(video_mins, g_nightvision_c, video_res, [0,1,0], 0.2f, 1);
+		drawpic(video_mins, g_nightvision_c, g_vidsize, [0,1,0], 0.2f, 1);
 		break;
 	default:
-		drawpic(video_mins, g_nightvision_d, video_res, [0,1,0], 0.2f, 1);
+		drawpic(video_mins, g_nightvision_d, g_vidsize, [0,1,0], 0.2f, 1);
 		break;
 	}
 
-	drawpic(video_mins, g_nightvision_i, video_res, [0,1,0], 0.05f, 1);
+	drawpic(video_mins, g_nightvision_i, g_vidsize, [0,1,0], 0.05f, 1);
+#endif
 }

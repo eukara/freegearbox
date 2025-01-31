@@ -51,13 +51,13 @@ OP4Char_Init(void)
 
 }
 
-static VGUIWindow winCharSelection;
-static VGUIPic imgCharPreview;
-static VGUILabel lblCharTitle;
-static VGUILabel lblCharDescription;
-static VGUILabel lblCharCounter;
+static vguiWindow winCharSelection;
+static vguiPic imgCharPreview;
+static vguiLabel lblCharTitle;
+static vguiLabel lblCharDescription;
+static vguiLabel lblCharCounter;
 
-class OP4CharButton:VGUIButton
+class OP4CharButton:vguiButton
 {
 	void OP4CharButton(void);
 
@@ -204,8 +204,8 @@ VGUI_ChooseClass(float teamChoice)
 {
 	static int initialized;
 	static OP4CharButton *btns;
-	static VGUILabel lblSelectChar;
-	static VGUIFrame frmCharInfo;
+	static vguiLabel lblSelectChar;
+	static vguiFrame frmCharInfo;
 
 	if (!teamChoice)
 		teamChoice = getplayerkeyfloat(player_localnum, "*team");
@@ -216,33 +216,33 @@ VGUI_ChooseClass(float teamChoice)
 
 		OP4Char_Init();
 
-		winCharSelection = spawn(VGUIWindow);
+		winCharSelection = spawn(vguiWindow);
 		winCharSelection.SetSize([640, 480]);
-		winCharSelection.SetStyleMask(VGUIWindowBorderless | VGUIWindowFullscreen);
+		winCharSelection.SetStyleMask(vguiWindowBorderless | vguiWindowFullscreen);
 
-		lblSelectChar = spawn(VGUILabel);
+		lblSelectChar = spawn(vguiLabel);
 		lblSelectChar.SetTitle(Titles_GetTextBody("CTFTitle_SelectYourCharacter"));
 		lblSelectChar.SetTextSize(19);
 		lblSelectChar.SetPos([40, 38]);
 		lblSelectChar.SetSize([400, 24]);
 
-		frmCharInfo = spawn(VGUIFrame);
+		frmCharInfo = spawn(vguiFrame);
 		frmCharInfo.SetPos([176, 80]);
 		frmCharInfo.SetSize([424, 312]);
 
-		imgCharPreview = spawn(VGUIPic);
+		imgCharPreview = spawn(vguiPic);
 		imgCharPreview.SetPos([190, 90]);
 
-		lblCharTitle = spawn(VGUILabel);
+		lblCharTitle = spawn(vguiLabel);
 		lblCharTitle.SetPos([338, 90]);
 		lblCharTitle.SetTextSize(19);
 		lblCharTitle.SetSize([320, 24]);
 
-		lblCharCounter = spawn(VGUILabel);
+		lblCharCounter = spawn(vguiLabel);
 		lblCharCounter.SetPos([338, 90 + 32]);
 		lblCharCounter.SetSize([320, 18]);
 
-		lblCharDescription = spawn(VGUILabel);
+		lblCharDescription = spawn(vguiLabel);
 		lblCharDescription.SetPos([338, 90 + 32 + 32]);
 		lblCharDescription.SetSize([250, 240]);
 
@@ -300,5 +300,5 @@ VGUI_ChooseClass(float teamChoice)
 	}
 
 	winCharSelection.Show();
-	winCharSelection.SetPos((video_res / 2) - (winCharSelection.GetSize() / 2));
+	winCharSelection.SetPos((g_vidsize / 2) - (winCharSelection.GetSize() / 2));
 }

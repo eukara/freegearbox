@@ -48,8 +48,8 @@ item_ctfbase::item_ctfbase(void)
 void
 item_ctfbase::Respawn(void)
 {
-	SetOrigin(GetSpawnOrigin());
-	SetModel(GetSpawnModel());
+	SetOrigin(GetSpawnVector("origin"));
+	SetModel(GetSpawnString("model"));
 	SetSize([-16, -16, 0], [16, 16, 72]);
 	DropToFloor();
 	botinfo = BOTINFO_TEAM_GOALCAPTURE;

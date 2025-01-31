@@ -1,0 +1,62 @@
+entityDef weapon_pipewrench
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Pipe Wrench"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"			"models/w_pipe_wrench.mdl"
+	"model_view"		"models/v_pipe_wrench.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	// weapon specific
+	"def_melee"		"damage_pipewrench"
+	//"def_meleeAlt"		"damage_charge" // TODO
+	"melee_distance"	"32"
+	"inv_name"		"Pipe Wrench"
+	"clipSize"		""
+	"ammoType"		""
+	"ammoRequired"		"0"
+	"clipSize"		"0"
+	"silent_fire"		"1"
+
+	"meleeRateMiss"		"0.7"
+	"meleeRateHit"		"0.53"
+
+	"actIdle"		"0,1,2"
+	"actDraw"		"3"
+	"actHolster"		"4"
+	"actMeleeMiss"		"6,8,10"
+	"actMeleeHit"		"5,7,9"
+	// "actMeleeAlt"		"11" // TODO
+	// "actMeleeAltHit"		"12" // TODO
+	// "actMeleeAltMiss"		"13" // TODO
+
+	// HLWeapon specific
+	"hudSlot"		"0"
+	"hudSlotPos"		"1"
+	"weight"		"0"
+}
+
+entityDef damage_pipewrench
+{
+	"damage"			"skill:plr_pipewrench"
+	"gib"				"1"
+
+	"snd_hit"			"weapon_pipewrench.hit"
+	"snd_miss"			"weapon_pipewrench.miss"
+}
+
+
+// TODO
+entityDef damage_charge
+{
+	"damage"			"skill:plr_pipewrench"
+	"gib"				"1"
+
+	"snd_hit"			"weapon_pipewrench.hit"
+	"snd_miss"			"weapon_pipewrench.miss"
+}

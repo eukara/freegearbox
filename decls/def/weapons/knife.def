@@ -1,0 +1,49 @@
+entityDef weapon_knife
+{
+	"editor_color"			".3 .3 1"
+	"editor_mins"			"-16 -16 -16"
+	"editor_maxs"			"16 16 16"
+	"editor_usage"			"Knife"
+	"editor_rotatable"		"1"
+
+	"spawnclass"			"HLWeapon"
+	"model"					"models/w_knife.mdl"
+	"model_view"			"models/v_knife.mdl"
+	"snd_acquire"			"weapon.pickup"
+	"snd_respawn"			"item.respawn"
+
+	// weapon specific
+	"def_melee"				"damage_knife"
+	"melee_distance"		"32"
+	"inv_name"				"Knife"
+	"clipSize"				""
+	"ammoType"				""
+	"ammoRequired"			"0"
+	"clipSize"				"0"
+	"silent_fire"			"1"
+
+	"meleeRateMiss"			"0.5"
+	"meleeRateHit"			"0.25"
+
+	"actIdle"				"0,9,10"
+	"actDraw"				"1"
+	"actHolster"			"2"
+	"actMeleeMiss"			"4,6,8"
+	"actMeleeHit"			"3,5,7"
+	// "actMeleeAlt"		"11" // Cut secondary attack
+	// "actMeleeAltHit"		"12" // Cut secondary attack
+
+	// HLWeapon specific
+	"hudSlot"				"0"
+	"hudSlotPos"			"2"
+	"weight"				"0"
+}
+
+entityDef damage_knife
+{
+	"damage"			"skill:plr_knife"
+	"gib"				"1"
+
+	"snd_hit"			"weapon_knife.hit"
+	"snd_miss"			"weapon_knife.miss"
+}

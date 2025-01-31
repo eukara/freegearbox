@@ -1,0 +1,61 @@
+entityDef weapon_sniperrifle
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Sniper Rifle"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"			"models/w_m40a1.mdl"
+	"model_view"		"models/v_m40a1.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	// weapon specific
+	"def_fireInfo"		"fireInfo_sniperrifle"
+	"inv_name"		"M40A1 Sniper Rifle"
+	"clipSize"		"5"
+
+	"actFire"		"2"
+	"actFireLast"		"3"
+	"actHolster"		"8"
+	"actReload"		"6"
+	"actReloadEmpty"	"4+5"
+	"actDraw"		"0"
+	"actIdle"		"1,7"
+
+	"snd_fire"		"weapon_sniperrifle.shoot"
+	"snd_empty"		"weapon_sniperrifle.empty"
+	"snd_reload"		"weapon_sniperrifle.reload"
+
+	// HLWeapon specific
+	"hudSlot"		"1"
+	"hudSlotPos"		"1"
+	"weight"		"15"
+}
+
+entityDef projectile_sniperrifle
+{
+	"inherit"		"projectile_bullet_base"
+	"damage"	"skill:plr_sniperrifle_bullet"
+}
+
+entityDef fireInfo_sniperrifle
+{
+	"def_projectile"	"projectile_sniperrifle"
+	"ammoType"		"ammo_762"
+	"inv_ammo_762"		"5"
+	"ammoRequired"		"1"
+	"ammoPerShot"		"1"
+	"fireRate"		"1.75"
+	"punchAngle"		"-10 0 0"
+	"model_flash"		"sprites/muzzleflash2.spr" // TODO check this
+}
+
+entityDef fireInfo_zoom
+{
+	// TODO need zoom working
+	"fov"			"0.25"
+	"accuracy"		"1.0" // perfect with zoom
+}

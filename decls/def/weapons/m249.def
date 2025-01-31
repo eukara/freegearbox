@@ -1,0 +1,52 @@
+entityDef weapon_m249
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"M249"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"				"models/w_saw.mdl"
+	"model_view"		"models/v_saw.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	// NSWeapon specific
+	"def_fireInfo"		"fireInfo_m249"
+	"inv_name"			"M249"
+	"clipSize"			"50"
+
+	"actFire"			"6,7,8"
+	"actHolster"		"4"
+	"actReload"			"2+3"
+	"actDraw"			"5"
+	"actIdle"			"0,1"
+
+	"snd_fire"			"weapon_m249.shoot"
+	"snd_empty"			"weapon_m249.empty"
+
+	// HLWeapon specific
+	"hudSlot"			"2"
+	"hudSlotPos"		"0"
+	"weight"			"15"
+}
+
+entityDef projectile_m249
+{
+	"inherit"		"projectile_bullet_base"
+	"damage"		"skill:m249_bullet"
+}
+
+entityDef fireInfo_m249
+{
+	"def_projectile"	"projectile_m249"
+	"ammoType"			"ammo_556"
+	"inv_ammo_556"		"50"
+	"ammoRequired"		"1"
+	"ammoPerShot"		"1"
+	"fireRate"			"0.075"
+	"punchAngle"		"-2 0 0"
+	"knockback"			"64"
+	"model_flash"		"sprites/muzzleflash1.spr"
+}

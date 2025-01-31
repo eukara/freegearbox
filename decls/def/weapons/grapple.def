@@ -1,0 +1,68 @@
+entityDef weapon_grapple
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Barnacle Grappling-Hook"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"				"models/w_bgrap.mdl"
+	"model_view"		"models/v_bgrap.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	// NSWeapon specific
+	"def_fireInfo"		"fireInfo_grapple"
+	"inv_name"			"Barnacle Grappling-Hook"
+	"clipSize"			"1"
+
+	"actFire"			"6"
+	// TODO 7 = Fire Loop, 8 = Grab Loop (on ground), 9 Grap Loop (in Air), 10 Release
+	"actHolster"		"4"
+	"actDraw"			"5"
+	"actIdle"			"0,1,2,3"
+
+	"snd_fire"			"weapon_grapple.shoot"
+	"snd_empty"			"weapon_grapple.miss"
+
+	// HLWeapon specific
+	"hudSlot"			"3"
+	"hudSlotPos"		"0"
+	"weight"			"15"
+}
+
+entityDef fireInfo_grapple
+{
+	"def_projectile"	"projectile_tongue"
+	"ammoType"			""
+	"ammoRequired"		"0"
+	"fireRate"			"0.5"
+	"punchAngle"		"0 0 0" // TODO
+}
+
+// TODO Needs actual grapple hook functionality
+entityDef projectile_tongue
+{
+	"spawnclass"			"NSProjectile"
+	"model"					"models/v_bgrap_tonguetip.mdl"
+
+	"def_damage"			"damage_tongueTouch"
+
+	"health"				"0"
+	"velocity"				"250" // TODO Values here aren't accurate
+	"angular_velocity"		"0 0 200"
+	"impact_damage_effect"	"1"
+	"impact_gib"			"1"
+
+	"thrust"				"2000"
+	"thrust_start"			"0.1"
+	"thrust_end"			"2"
+
+	"smoke_fly"				"tongue.trail" // TODO sprites/tongue.spr
+}
+
+entityDef damage_tongueTouch
+{
+	"damage"	"skill:plr_grapple"
+}

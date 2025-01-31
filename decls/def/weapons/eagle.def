@@ -1,0 +1,63 @@
+entityDef weapon_eagle
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Desert Eagle"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"				"models/w_desert_eagle.mdl"
+	"model_view"		"models/v_desert_eagle.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	// weapon specific
+	"def_fireInfo"		"fireInfo_eagle"
+	"def_altFireInfo"	"fireInfo_laser"
+	"inv_name"			"Desert Eagle"
+	"clipSize"			"7"
+	"model_flash"		"sprites/muzzleflash2.spr"
+	"ammoType"			"ammo_357"
+	"ammoRequired"		"1"
+	"ammoPerShot"		"1"
+	"inv_ammo_357"		"7"
+
+	"actFire"			"5"
+	"actFireLast"		"6"
+	"actHolster"		"10"
+	"actReload"			"8"
+	"actReloadEmpty"	"7"
+	"actDraw"			"9"
+	"actIdle"			"0,1,2,3,4"
+
+	"snd_fire"		"weapon_eagle.shoot"
+	"snd_empty"		"weapon_eagle.empty"
+	"snd_reload"	"weapon_eagle.reload"
+
+	// HLWeapon specific
+	"hudSlot"		"1"
+	"hudSlotPos"	"1"
+	"weight"		"15"
+	"altLaser"		"1"
+}
+
+entityDef projectile_eagle
+{
+	"inherit"	"projectile_bullet_base"
+	"damage"	"skill:plr_eagle_bullet"
+}
+
+entityDef fireInfo_eagle
+{
+	"def_projectile"	"projectile_eagle"
+	"fireRate"			"0.2"
+	"punchAngle"		"-10 0 0"
+}
+
+entityDef fireInfo_laser
+{
+	"def_projectile"	"projectile_eagle"
+	"fireRate"			"0.5" // slower with laser on
+	"punchAngle"		"-10 0 0"
+}

@@ -1,0 +1,77 @@
+entityDef weapon_shockrifle
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Shock Roach"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"			"models/w_shock.mdl"
+	"model_view"		"models/v_shock.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	// NSWeapon specific
+	"def_fireInfo"		"fireInfo_shock"
+	"def_altFireInfo"	"fireInfo_fastshock"
+	"inv_name"		"Shock Roach"
+	"inv_ammo_shock"	"8"
+
+	"actFire"		"1"
+	"actHolster"		"3"
+	"actDraw"		"2"
+	"actIdle"		"0,4"
+
+	// HLWeapon specific
+	"hudSlot"		"4"
+	"hudSlotPos"		"0"
+	"weight"		"5"
+}
+
+// TODO sprites/muzzle_shock.spr
+
+entityDef fireInfo_shock
+{
+	"def_projectile"	"projectile_shock"
+	"ammoType"		"ammo_shock"
+	"ammoRequired"		"1"
+	"ammoPerShot"		"1"
+	"fireRate"		"0.35"
+	"punchAngle"		"-2 0 0"
+}
+
+entityDef fireInfo_fastshock
+{
+	"def_projectile"	"projectile_shock"
+	"ammoType"		"ammo_shock"
+	"ammoRequired"		"1"
+	"ammoPerShot"		"1"
+	"fireRate"		"0.1"
+	"punchAngle"		"-2 0 0"
+}
+
+
+entityDef projectile_shock
+{
+	"spawnclass"		"NSProjectile"
+	"model"			"sprites/spike_trail.spr"
+	"frame"			"1"
+	"fuse"			"4"
+	"detonate_on_fuse"	"1"
+	"bounce"		"1"
+	"angular_velocity"	"-2000 0 0"
+	"model_detonate"	"fx_explosion.main"
+	"snd_explode"		"fx.explosion"
+	"snd_bounce"		"weapon_shockrifle.bounce"
+	"smoke_fly"		"weapon_rpg.trail"
+	"decal_detonate"	"ExplosionScorch"
+
+	"def_damage"		"damage_shockDirect"
+}
+
+entityDef damage_shockDirect
+{
+	"damage"	"1"
+	"damage"	"skill:plr_shockrifle"
+}

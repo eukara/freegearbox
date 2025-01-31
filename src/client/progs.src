@@ -1,11 +1,13 @@
 #pragma target fte_5768
 //#pragma flag enable assumeint
-#pragma progs_dat  "../../csprogs.dat"
+#pragma progs_dat  "../../zpak001.pk3dir/csprogs.dat"
+#pragma forcecrc 54730
 
 #define CSQC
 #define CLIENT
 #define GEARBOX
 #define CLASSIC_VGUI
+#define MAX_AMMO_TYPES 18i
 
 #includelist
 ../../../src/shared/fteextensions.qc
@@ -13,13 +15,10 @@
 ../../../valve/src/client/defs.h
 ../../../src/client/defs.h
 defs_op4.h
-
 ../../../src/vgui/include.src
-
 ../../../src/gs-entbase/client.src
 ../../../src/gs-entbase/shared.src
 ../shared/include.src
-
 flashlight.qc
 nightvision.qc
 ../../../valve/src/client/damage.qc
@@ -36,9 +35,9 @@ cmds.qc
 ../../../valve/src/client/hud_dmgnotify.qc
 ../../../valve/src/client/hud_itemnotify.qc
 ../../../valve/src/client/hud.qc
-hud_weaponselect.qc
+../../../valve/src/client/HLWeaponSelect.qc
+../../../valve/src/client/hud_weaponselect.qc
 ../../../valve/src/client/scoreboard.qc
-
 ../../../src/client/include.src
 vgui_changechar.qc
 vgui_chooseteam.qc

@@ -42,7 +42,7 @@ class item_ctfflag:OP4CTFItem
 	virtual void Touch(entity);
 
 	nonvirtual void FlagTaken(void);
-	nonvirtual void FlagDrop(NSClientPlayer);
+	nonvirtual void FlagDrop(ncPlayer);
 	nonvirtual void FlagReturns(void);
 	nonvirtual void _AfterSpawn(void);
 };
@@ -62,8 +62,8 @@ item_ctfflag::_AfterSpawn(void)
 void
 item_ctfflag::Respawn(void)
 {
-	SetOrigin(GetSpawnOrigin());
-	SetModel(GetSpawnModel());
+	SetOrigin(GetSpawnVector("origin"));
+	SetModel(GetSpawnString("model"));
 	SetSize([-16, -16, 0], [16, 16, 72]);
 	SetSolid(SOLID_TRIGGER);
 	DropToFloor();
@@ -80,7 +80,7 @@ item_ctfflag::Respawn(void)
 void
 item_ctfflag::Touch(entity eToucher)
 {
-	player pl = (player)eToucher;
+	OP4Player pl = (OP4Player)eToucher;
 
 	if (!(eToucher.flags & FL_CLIENT))
 		return;
@@ -90,7 +90,7 @@ item_ctfflag::Touch(entity eToucher)
 		if (m_eActivator == __NULL__) { /* only on flags that haven't been dropped */
 			if (pl.g_items & ITEM_GOALITEM) {
 				OP4CTFRules rule = (OP4CTFRules)g_grMode;
-				rule.CaptureFlag((NSClientPlayer)pl);
+				rule.CaptureFlag((ncPlayer)pl);
 			}
 			return;
 		} else {
@@ -103,7 +103,7 @@ item_ctfflag::Touch(entity eToucher)
 
 	m_eActivator = pl;
 	pl.g_items |= ITEM_GOALITEM;
-	pl.flags |= FL_GOALITEM;
+	pl.AddVFlags(VFL_GOALITEM);
 	forceinfokey(pl, "*icon1", "score_flag");
 
 	if (eToucher.team == 1) {
@@ -135,9 +135,9 @@ item_ctfflag::FlagTaken(void)
 }
 
 void
-item_ctfflag::FlagDrop(NSClientPlayer pp)
+item_ctfflag::FlagDrop(ncPlayer pp)
 {
-	player pl = (player)pp;
+	OP4Player pl = (OP4Player)pp;
 
 	/* make it available again, put it exactly where we died */
 	Respawn();

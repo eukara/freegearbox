@@ -1,0 +1,39 @@
+entityDef weapon_penguin
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Penguin"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"				"models/w_penguinnest.mdl"
+	"model_view"		"models/v_penguin.mdl"
+	"frame"				"1"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	"inv_name"			"Penguin"
+	"inv_weapon"		"weapon_penguin"
+	"inv_ammo_penguin"	"5"
+	"def_projectile"	"projectile_penguin"
+	"ammoType"			"ammo_penguin"
+	"ammoRequired"		"1"
+	"silent_fire"		"1"
+	"primed_fuse"		"4"
+
+	"actIdle"			"0,1,2"
+	"actDraw"			"4"
+	"actHolster"		"3"
+	"actThrow"			"5"
+
+	// HLWeapon specific
+	"hudSlot"			"4"
+	"hudSlotPos"		"3"
+	"weight"			"5"
+}
+
+entityDef projectile_penguin
+{
+	"spawnclass"		"monster_penguin"
+}

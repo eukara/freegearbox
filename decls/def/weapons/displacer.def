@@ -1,0 +1,91 @@
+entityDef weapon_displacer
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Displacer"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"				"models/w_displacer.mdl"
+	"model_view"		"models/v_displacer.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	// weapon specific
+	"def_fireInfo"		"fireInfo_displacer"
+	"inv_name"			"Displacer"
+	"inv_ammo_uranium"	"40"
+
+	"actFire"			"4"
+	//"actFireSpin"		"2,3"
+	"actHolster"		"6"
+	"actDraw"			"5"
+	"actIdle"			"0,1"
+
+	"snd_fire"			"weapon_displacer.fire"
+	"snd_empty"			"weapon_displacer.empty"
+	"snd_reload"		"weapon_displacer.reload"
+
+	// HLWeapon specific
+	"hudSlot"			"3"
+	"hudSlotPos"		"0"
+	"weight"			"20"
+}
+
+entityDef projectile_portal
+{
+	"spawnclass"				"NSProjectile"
+	"model"						"sprites/exit1.spr"
+
+	"def_damage"				"damage_portalDirect"
+	"def_splash_damage"			"damage_portalSplash"
+
+	"health"					"0"
+	"velocity"					"250"
+	"angular_velocity"			"0 0 200"
+	"fuse"						"10"
+	"detonate_on_fuse"			"0"
+	"detonate_on_death"			"1"
+	"detonate_on_world"			"1"
+	"detonate_on_actor"			"1"
+	"impact_damage_effect"		"1"
+	"impact_gib"				"1"
+
+	"thrust"					"1000"
+	"thrust_start"				"0.1"
+	"thrust_end"				"2"
+
+	"model_detonate"			"fx_explosion.main"
+	"light_color"				"0.15 1 0"
+	"light_radius"				"160"
+	"light_offset"				"0 0 0"
+
+	"explode_light_color"		"0.25 1 0"
+	"explode_light_radius"		"320"
+	"explode_light_fadetime"	"0.5"
+
+	"snd_explode"				"fx_portal.touch"
+}
+
+entityDef fireInfo_displacer
+{
+	"def_projectile"	"projectile_portal"
+	"ammoType"			"ammo_uranium"
+	"ammoRequired"		"20"
+	"ammoPerShot"		"20"
+	"fireRate"			"3.0"
+	"punchAngle"		"-2 0 0"
+}
+
+entityDef damage_portalDirect
+{
+	"damage"			"skill:plr_displacer_impact"
+	"damage_random"		"skill:plr_displacer_impact_rand"
+}
+
+entityDef damage_portalSplash
+{
+	"damage"	"skill:plr_displacer"
+	"radius"	"250"
+}

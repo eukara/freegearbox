@@ -33,7 +33,7 @@ When detected, will enable Capture The Flag on the map that it's on.
 This entity was introduced in Half-Life: Opposing Force (1999)
 */
 
-class info_ctfdetect:NSEntity
+class info_ctfdetect:ncEntity
 {
 public:
 	void info_ctfdetect(void);

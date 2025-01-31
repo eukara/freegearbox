@@ -16,7 +16,7 @@
 
 #ifdef SERVER
 void
-player::PowerupThink(void)
+OP4Player::PowerupThink(void)
 {
 	if (m_flPickUpTime > time)
 		return;
@@ -31,9 +31,11 @@ player::PowerupThink(void)
 		m_flPickUpTime = time + 1.0;
 
 		if (activeweapon) {
+			#if 0
 			if (Weapons_AddItem(this, activeweapon, 1)) {
 				StartSoundDef("op4ctf_backpack.refresh", CHAN_ITEM, false);
 			}
+			#endif
 		}
 	}
 }

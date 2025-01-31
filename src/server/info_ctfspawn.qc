@@ -26,7 +26,7 @@ This entity was introduced in Half-Life: Opposing Force (1999)
 */
 
 class
-info_ctfspawn:NSEntity
+info_ctfspawn:ncEntity
 {
 	void info_ctfspawn(void);
 
@@ -63,7 +63,7 @@ info_ctfspawn::_AfterSpawn(void)
 void
 info_ctfspawn::Respawn(void)
 {
-	SetOrigin(GetSpawnOrigin());
+	SetOrigin(GetSpawnVector("origin"));
 	SetSolid(SOLID_NOT);
 	ScheduleThink(_AfterSpawn, 0.0f);
 }

@@ -49,7 +49,7 @@ OP4CTFRules::InitPostEnts(void)
 }
 
 void
-OP4CTFRules::PlayerConnect(NSClientPlayer pp)
+OP4CTFRules::PlayerConnect(ncPlayer pp)
 {
 	super::PlayerConnect(pp);
 	pp.frags = 0;
@@ -64,16 +64,16 @@ OP4CTFRules::PlayerConnect(NSClientPlayer pp)
 }
 
 void
-OP4CTFRules::PlayerDisconnect(NSClientPlayer pl)
+OP4CTFRules::PlayerDisconnect(ncPlayer pl)
 {
 	DropFlag(pl);
 	super::PlayerDisconnect(pl);
 }
 
 void
-OP4CTFRules::PlayerSpawn(NSClientPlayer pp)
+OP4CTFRules::PlayerSpawn(ncPlayer pp)
 {
-	player pl = (player)pp;
+	OP4Player pl = (OP4Player)pp;
 
 	/* not in a team yet, force them into spectator */
 	if (pl.team == 0) {
@@ -95,7 +95,7 @@ void CSEv_TeamJoin_f(float);
 void CSEv_ClassJoin_f(float);
 
 bool
-OP4CTFRules::ConsoleCommand(NSClientPlayer pp, string cmd)
+OP4CTFRules::ConsoleCommand(ncPlayer pp, string cmd)
 {
 	tokenize(cmd);
 
@@ -108,9 +108,9 @@ OP4CTFRules::ConsoleCommand(NSClientPlayer pp, string cmd)
 }
 
 void
-OP4CTFRules::CharacterSpawn(NSClientPlayer playerEnt, string playerModel)
+OP4CTFRules::CharacterSpawn(ncPlayer playerEnt, string playerModel)
 {
-	player pl = (player)playerEnt;
+	OP4Player pl = (OP4Player)playerEnt;
 
 	pl.m_oldModel = playerModel;
 	pl.health = pl.max_health = 100;
@@ -128,35 +128,33 @@ OP4CTFRules::CharacterSpawn(NSClientPlayer playerEnt, string playerModel)
 	pl.SetInfoKey("*dead", "0");
 
 	/* give inventory */
-	pl.g_items = ITEM_CROWBAR | ITEM_GLOCK | ITEM_SUIT;
-	pl.activeweapon = WEAPON_GLOCK;
-	pl.glock_mag = 18;
-	pl.ammo_9mm = 44;
+	pl.GiveItem("item_suit");
+	pl.GiveItem("weapon_9mmhandgun");
+	pl.GiveItem("weapon_crowbar");
 
 	/* Just-In-Case (tm) */
 	pl.g_items &= ~ITEM_GOALITEM;
-	pl.flags &= ~FL_GOALITEM;
+	pl.RemoveVFlags(VFL_GOALITEM);
 	pl.flagmodel = 0;
 	pl.SetInfoKey("*icon1", "");
 
 	entity spot = Spawn_SelectRandom(strcat("info_ctfspawn_", ftos(pl.team)));
 	pl.Transport(spot.origin, spot.angles);
-	Weapons_RefreshAmmo(pl);
 	Client_FixAngle(pl, pl.angles);
 }
 
 void
-OP4CTFRules::CaptureFlag(NSClientPlayer pp)
+OP4CTFRules::CaptureFlag(ncPlayer pp)
 {
-	player pl = (player)pp;
-	NSEntity enemyFlag;
+	OP4Player pl = (OP4Player)pp;
+	ncEntity enemyFlag;
 	string flagName;
 	string teamScore;
 	string captureSound;
 
 	/* detach flag */
 	pl.g_items &= ~ITEM_GOALITEM;
-	pl.flags &= ~FL_GOALITEM;
+	pl.RemoveVFlags(VFL_GOALITEM);
 	pl.flagmodel = 0;
 	pl.score += 10;
 	forceinfokey(pl, "*icon1", "");
@@ -174,7 +172,7 @@ OP4CTFRules::CaptureFlag(NSClientPlayer pp)
 	/* increment score */
 	forceinfokey(world, teamScore, sprintf("%d", serverkeyfloat(teamScore) + 1));
 
-	enemyFlag = (NSEntity)find(world, ::classname, flagName);
+	enemyFlag = (ncEntity)find(world, ::classname, flagName);
 
 	if (!enemyFlag) {
 		NSError("The flag spawnpoint cannot be found.");
@@ -186,16 +184,16 @@ OP4CTFRules::CaptureFlag(NSClientPlayer pp)
 }
 
 void
-OP4CTFRules::PlayerDeath(NSClientPlayer pp)
+OP4CTFRules::PlayerDeath(ncPlayer pp)
 {
 	DropFlag(pp);
 	super::PlayerDeath(pp);
 }
 
 void
-OP4CTFRules::DropFlag(NSClientPlayer pp)
+OP4CTFRules::DropFlag(ncPlayer pp)
 {
-	player pl = (player)pp;
+	OP4Player pl = (OP4Player)pp;
 	item_ctfflag targetFlag;
 	string flagName;
 
@@ -237,7 +235,7 @@ CSEv_TeamJoin_f(float teamChoice)
 	/* they'll become spectator */
 	if (teamChoice == 0) {
 		OP4CTFRules rule = (OP4CTFRules)g_grMode;
-		rule.PlayerSpawn((NSClientPlayer)self);
+		rule.PlayerSpawn((ncPlayer)self);
 	}
 }
 
@@ -246,7 +244,7 @@ CSEv_ClassJoin_f(float classSelection)
 {
 	OP4CTFRules rule = (OP4CTFRules)g_grMode;
 	string playerModel = "";
-	player pl = (player)self;
+	OP4Player pl = (OP4Player)self;
 
 	/* random black mesa char */
 	if (classSelection == 0)
@@ -305,7 +303,7 @@ CSEv_ClassJoin_f(float classSelection)
 		pl.m_oldModel = playerModel;
 		rule.PlayerDeath(pl);
 	} else {
-		rule.CharacterSpawn((NSClientPlayer)self, playerModel);
+		rule.CharacterSpawn((ncPlayer)self, playerModel);
 	}
 }
 

@@ -1,0 +1,67 @@
+entityDef monster_gonome
+{
+	"spawnclass"		"NSMonster"
+	"model"			"models/gonome.mdl"
+	"netname"		"Gonome"
+	"health"		"skill:gonome_health"
+	"mins"			"-16 -16 0"
+	"maxs"			"16 16 72"
+	"eye_height"		"96"
+	"team"			"2"
+	"propdata"		"actor_alien"
+	"speed_walk"		"72"
+	"speed_run"		"350"
+
+	"attack_melee_range"	"86"	
+	"attack_ranged_range"	"512"
+	"def_attack_melee"	"melee_gonome_stab"
+
+	"snd_sight"		"monster_gonome.alert"
+	"snd_death"		"monster_gonome.death"
+	"snd_melee_attack"	"monster_gonome.attack"
+	"snd_melee_attack_hit"	"monster_gonome.attackhit"
+	"snd_melee_attack_miss"	"monster_gonome.attackmiss"
+	"snd_thud"		"monster_generic.thud"
+
+	events {
+		4 "SpawnProjectileDef" "ranged_gonome_guts"
+	}
+
+	// TODO
+	// Needs to play different run anims based on dist
+	// Needs to prefer melee attack
+	// Blend the gut sprite
+}
+
+entityDef melee_gonome_stab
+{
+	"damage"	"skill:gonome_dmg_one_slash"
+	"delay"		"0.25f"
+	"wait"		"0.5"
+	"attempts"	"2"
+}
+
+entityDef ranged_gonome_guts
+{
+	"spawnclass"		"NSProjectile"
+	"model"			"sprites/blood_chnk.spr"
+
+	"def_damage"		"damage_gutsDirect"
+
+	"health"		"0"
+	"velocity"		"900"
+	"fuse"			"10"
+	"detonate_on_fuse"	"0"
+	"detonate_on_death"	"0"
+	"detonate_on_world"	"1"
+	"detonate_on_actor"	"1"
+	"impact_damage_effect"	"1"
+	"impact_gib"		"0"
+
+	"snd_explode"		"monster_gonome.gutshit"
+}
+
+entityDef damage_gutsDirect
+{
+	damage "skill:gonome_dmg_guts"
+}
